@@ -1,0 +1,50 @@
+nav{
+    display: flex;
+    position: relative;
+    top: -1.25rem;
+    left: 75px;
+    box-shadow: 3px 5px 20px 0px rgba(0,0,0,0.50);
+    justify-content: space-between;
+    background-color: white;
+    width: 70%;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    margin-block: none;
+    margin-inline: auto;
+    font-weight: 500;
+}
+
+nav .logo{
+    position: absolute;
+    bottom: -19px;
+    left: -150px;
+    height: auto;
+    width: 300px;
+}
+
+nav .lang{
+    border-radius: 0.5rem;
+    border: 3px solid white;
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin-left: 150px;
+    margin-block: auto;
+    width: 100%;
+    padding-inline: 0.5rem;
+}
+
+nav a{
+    color: $mainLight;
+    text-decoration: none;
+    transition: all 200ms;
+}
+
+nav a:hover{
+    cursor: pointer;
+    transform: scale(1.03);
+    color: $mainBold;
+}

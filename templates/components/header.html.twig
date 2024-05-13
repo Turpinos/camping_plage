@@ -1,0 +1,13 @@
+<header>
+    <div class="banner">
+
+        <h1 class="mobile">{{ title }}</h1>
+
+    </div>
+    
+        {% block navbar %}
+            {{ component('navbar') }}
+        {% endblock %}
+
+        <h1 class="desk">{{ title }}</h1>
+</header>
