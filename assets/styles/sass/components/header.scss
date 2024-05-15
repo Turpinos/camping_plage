@@ -1,4 +1,27 @@
 .banner{
+    background-color: $mainBold;
+}
+
+.mobile{
+    font-size: 1.8rem;
+    background: linear-gradient(170deg, rgba(167,178,196,1) 18%, rgba(233,218,189,1) 76%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0px;
+    padding: 1rem 0.5rem 2rem 0.5rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.desk{
+    display: none;
+    text-transform: uppercase;
+}
+
+
+
+@media screen and ( min-width: 860px ){
+.banner{
     background-image: url('/assets/images/slide_camping.jpg');
     background-position: center;
     background-size: cover;
@@ -8,4 +31,16 @@
 
 .mobile{
     display: none;
+}
+
+.desk{
+    display: block;
+    color: $mainBold;
+    font-size: 2rem;
+    margin: 0px auto;
+    width: 60%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 }
