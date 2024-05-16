@@ -67,6 +67,43 @@ nav{
     .lang{
         border-radius: 0.5rem;
         border: 3px solid white;
+        transition: all 200ms;
+
+        &:hover{
+            cursor: pointer;
+        }
+
+        &:active{
+            transform: scale(0.9);
+        }
+    }
+
+    .choiceLang{
+        position: absolute;
+        background-color: white;
+        box-shadow: 3px 10px 20px 0px rgba(0,0,0,0.50);
+        border-radius: 0.5rem;
+        display: none;
+        flex-direction: column;
+        right: 0px;
+        top: 2.1rem;
+        img{
+            box-sizing: border-box;
+            height: 2rem;
+            margin-inline: 0px;
+            margin-block: 0.1rem;
+            border-radius: 0.5rem;
+            border: 3px solid white;
+            transition: all 200ms;
+
+            &:hover{
+                cursor: pointer;
+            }
+
+            &:active{
+                transform: scale(0.9);
+            }
+        }
     }
 }
 
@@ -74,14 +111,106 @@ nav{
     display: none;
 }
 
+@keyframes opacity {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from{
+        transform: translateX(-100%);
+    }
+    to{
+        transform: translateX(0%);
+    }
+}
+
 .back{
     position: fixed;
+    display: flex;
+    flex-direction: row;
+    z-index: 11;
     top: 0px;
     left: 0px;
     width: 100%;
     height: 100vh;
     backdrop-filter: blur(5px);
     background-color: rgba(0, 0, 0, 0.5);
+    animation-name: opacity;
+    animation-duration: 200ms;
+    animation-delay: 200ms;
+    animation-fill-mode: backwards;
+    
+
+    .pop-up{
+        background-color: white;
+        height: 100vh;
+        width: 40%;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+        padding-inline: 0.5rem;
+        animation-name: slideIn;
+        animation-duration: 200ms;
+        animation-delay: 200ms;
+        animation-fill-mode: backwards;
+        animation-timing-function: ease;
+
+        .headNav{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: auto;
+            width: 100%;
+            padding-block: 1rem;
+            border-bottom: 1px solid $mainBold;
+
+            img:first-of-type{
+                width: 200px;
+            }
+
+            img:last-of-type{
+                width: 30px;
+                transition: all 200ms;
+                &:active{
+                    transform: scale(0.9);
+                }
+            }
+        }
+
+        ul{
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+
+            li{
+                padding-block: 1rem;
+                border-bottom: 1px solid $mainBold;
+                text-indent: 0.5rem;
+
+                a{
+                    display: block;
+                    color: $mainLight;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    width: 100%;
+                    transition: all 200ms;
+                    &:active{
+                        text-indent: 1rem;
+                    }
+                }
+            }
+        }
+        
+    }
+
+    
 }
 
 @media screen and ( min-width: 860px){
@@ -141,6 +270,14 @@ nav{
         
         .hamburger{
             display: none;
+        }
+
+        .choiceLang{
+            top: 2.6rem;
+
+            img{
+                height: 2.5rem; 
+            }
         }
     }
 
