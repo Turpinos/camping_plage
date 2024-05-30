@@ -1,5 +1,9 @@
 twig_component:
     anonymous_template_directory: 'components/'
     defaults:
+        #        App\Twig\Components\Alert => Alert
+        #        App\Twig\Components\Button\Primary => Button:Primary
+        #    - templates will live in "components/"
+        #        Alert => templates/components/Alert.html.twig
         # Namespace & directory for components
-        App\Twig\Components\: 'components/'
+        App\Twig\: 'components/'

@@ -1,0 +1,18 @@
+.map-container{
+    position: relative;
+
+    img{
+        width: 100%;
+        height: auto;
+        
+    }
+
+    .ping{
+        position: absolute;
+        transform: translate(-50%, -100%) scale(0.8);
+        margin: 0px;
+        width: 1rem;
+        padding-block: auto;
+        text-align: center;
+    }
+}

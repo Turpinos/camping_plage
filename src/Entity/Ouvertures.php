@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\TypeLocatifsRepository;
+use App\Repository\OuverturesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TypeLocatifsRepository::class)]
-class TypeLocatifs
+#[ORM\Entity(repositoryClass: OuverturesRepository::class)]
+class Ouvertures
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,8 +16,8 @@ class TypeLocatifs
     #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $url_image = null;
+    #[ORM\Column(nullable: true)]
+    private ?bool $actif = null;
 
     #[ORM\Column(length: 50)]
     private ?string $slug = null;
@@ -39,14 +39,14 @@ class TypeLocatifs
         return $this;
     }
 
-    public function getUrlImage(): ?string
+    public function isActif(): ?bool
     {
-        return $this->url_image;
+        return $this->actif;
     }
 
-    public function setUrlImage(string $url_image): static
+    public function setActif(?bool $actif): static
     {
-        $this->url_image = $url_image;
+        $this->actif = $actif;
 
         return $this;
     }

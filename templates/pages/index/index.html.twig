@@ -1,9 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-    {{ component('header', {'title' : page.title }) }}
+    {{ component('Header', {'title' : page.title }) }}
 {% endblock %}
 
 {% block body %}
-    <p>Test header</p>
+    <main>
+        <section class="map-interactive">
+            <div class="container-select-map">
+                <div class="select-map">
+                    <img class="logo-select" src="{{ asset('/images/logos/logo_cabanes.png')}}" alt="Cabanes"/>
+                    <p>php cabane dans les arbres</p>
+                    <input type='checkbox'/>
+                </div>
+                <div class="select-map">
+                    <img class="logo-select" src="{{ asset('/images/logos/logo_chalets.png')}}" alt="Chalets"/>
+                    <p>php chalets et 1 chalet-gîte</p>
+                    <input type='checkbox'/>
+                </div>
+                <div class="select-map">
+                    <img class="logo-select" src="{{ asset('/images/logos/logo_camping.png')}}" alt="Camping"/>
+                    <p>Plus de 100 emplacements de camping</p>
+                    <input type='checkbox'/>
+                </div>
+                <div class="select-map">
+                    <img class="logo-select" src="{{ asset('/images/logos/logo_roulottes.png')}}" alt="Roulottes"/>
+                    <p>php roulottes</p>
+                    <input type='checkbox'/>
+                </div>
+            </div>
+            {{ component('Map', {'libelle' : page.libelle}) }}
+        </section>
+    </main>
 {% endblock %}

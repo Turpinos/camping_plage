@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Twig\Components;
+namespace App\Twig;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent]
-class HeaderController{
-
-    private string $title;
+class Navbar{
 
 }

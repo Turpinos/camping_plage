@@ -1,8 +1,26 @@
-body{
-    background-color: white;
+p{
+    font-size: 0.9rem;
+}
+.map-interactive{
+    display: flex;
+    flex-direction: column-reverse;
+    .container-select-map{
+        .select-map{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 5rem;
+            padding-inline: 0.5rem;
+            text-align: center;
+
+            .logo-select{
+                height: 90%;
+                width: auto;
+            }
+        }
+    }
 }
 
-p{
-    margin-block: 30rem;
-    font-size: 1rem;
+@media screen and ( min-width: 860px){
+
 }

@@ -51,7 +51,7 @@ window.addEventListener('scroll', function(){
         if(window.screen.availWidth >= 860){
             banner.style.marginBottom = `${valueHeightNav}px`;
         }else if(window.screen.availWidth < 860){
-            banner.style.marginBottom = `${0}px`;
+            banner.style.marginBottom = `${0 + valueHeightNav}px`;
         }
         isActive = true;
         console.log('true');
