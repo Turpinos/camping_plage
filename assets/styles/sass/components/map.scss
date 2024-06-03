@@ -9,10 +9,21 @@
 
     .ping{
         position: absolute;
-        transform: translate(-50%, -100%) scale(0.8);
+        transform: translate(-50%, -100%) scale(0.7);
         margin: 0px;
         width: 1rem;
         padding-block: auto;
         text-align: center;
+    }
+    .hidden{
+        opacity: 0;
+    }
+}
+
+@media screen and ( min-width: 860px){
+    .map-container{
+        .ping{
+            transform: translate(-50%, -100%) scale(1);
+        }
     }
 }

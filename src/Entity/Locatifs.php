@@ -38,7 +38,7 @@ class Locatifs
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?tarifs $tarifs = null;
+    private ?Tarifs $tarifs = null;
 
     #[ORM\Column(length: 50)]
     private ?string $slug = null;

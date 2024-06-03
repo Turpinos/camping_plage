@@ -10,26 +10,26 @@
             <div class="container-select-map">
                 <div class="select-map">
                     <img class="logo-select" src="{{ asset('/images/logos/logo_cabanes.png')}}" alt="Cabanes"/>
-                    <p>php cabane dans les arbres</p>
-                    <input type='checkbox'/>
+                    <p>{{ countCabanes }} cabane dans les arbres</p>
+                    <p class="input-container" data-id="1"></p>
                 </div>
                 <div class="select-map">
                     <img class="logo-select" src="{{ asset('/images/logos/logo_chalets.png')}}" alt="Chalets"/>
-                    <p>php chalets et 1 chalet-gîte</p>
-                    <input type='checkbox'/>
+                    <p>{{ countChalets }} chalets dont 1 chalet-gîte</p>
+                    <p class="input-container" data-id="2"></p>
+                </div>
+                <div class="select-map">
+                    <img class="logo-select" src="{{ asset('/images/logos/logo_roulottes.png')}}" alt="Roulottes"/>
+                    <p>{{ countRoulottes }} roulottes</p>
+                    <p class="input-container" data-id="4"></p>
                 </div>
                 <div class="select-map">
                     <img class="logo-select" src="{{ asset('/images/logos/logo_camping.png')}}" alt="Camping"/>
                     <p>Plus de 100 emplacements de camping</p>
-                    <input type='checkbox'/>
-                </div>
-                <div class="select-map">
-                    <img class="logo-select" src="{{ asset('/images/logos/logo_roulottes.png')}}" alt="Roulottes"/>
-                    <p>php roulottes</p>
-                    <input type='checkbox'/>
+                    <p class="hidden-p"></p>
                 </div>
             </div>
-            {{ component('Map', {'libelle' : page.libelle}) }}
+            {{ component('Map', {'libelle' : page.libelle, 'coordonnee' : coordonnee, 'isPmr' : isPmr}) }}
         </section>
     </main>
 {% endblock %}

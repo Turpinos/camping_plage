@@ -4,6 +4,7 @@ p{
 .map-interactive{
     display: flex;
     flex-direction: column-reverse;
+    width: 100%;
     .container-select-map{
         .select-map{
             display: flex;
@@ -12,10 +13,34 @@ p{
             height: 5rem;
             padding-inline: 0.5rem;
             text-align: center;
+            color: $mainBold;
+            font-weight: 600;
 
             .logo-select{
                 height: 90%;
                 width: auto;
+            }
+
+            .input-container{
+                margin-right: 0.5rem;
+                width: 0.8rem;
+                height: 0.8rem;
+                border: 1px solid $mainBold;
+                border-radius: 3px;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+
+            .check{
+                background-color: $mainBold;
+            }
+
+            .hidden-p{
+                margin-right: 0.5rem;
+                width: 0.8rem;
+                height: 0.8rem;
+                opacity: 0;
             }
         }
     }
@@ -23,4 +48,42 @@ p{
 
 @media screen and ( min-width: 860px){
 
+    .map-interactive{
+        margin-top: 3rem;
+        flex-direction: row;
+        width: 100%;
+        height: fit-content;
+        .map-container{
+            width: 60%;
+        }
+        .container-select-map{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 8px;
+            width: 40%;
+        }
+    }
+}
+
+@media screen and ( min-width: 1024px){
+    .map-interactive{
+        .container-select-map{
+            .select-map{
+                height: 7rem;
+            }
+        }
+    }
+    
+}
+
+@media screen and ( min-width: 1340px){
+    .map-interactive{
+        .container-select-map{
+            .select-map{
+                height: 9rem;
+            }
+        }
+    }
+    
 }

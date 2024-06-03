@@ -53,12 +53,12 @@ class CoordonneesMap
         return $this;
     }
 
-    public function getSvg(): ?string
+    public function getPosition(): ?string
     {
         return $this->position;
     }
 
-    public function setSvg(?string $position): static
+    public function setPosition(?string $position): static
     {
         $this->position = $position;
 
