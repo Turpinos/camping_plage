@@ -2,16 +2,34 @@
 
 namespace App\Controller;
 
+use App\Entity\AccesPmr;
+use App\Repository\AccesPmrRepository;
 use App\Repository\CoordonneesMapRepository;
+use App\Repository\HorairesRepository;
+use App\Repository\InformationsRepository;
 use App\Repository\LocatifsRepository;
+use App\Repository\OuverturesRepository;
+use App\Repository\SaisonsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController{
 
     #[Route('/', name:'app_home')]
-    public function index(CoordonneesMapRepository $coordonneMap, LocatifsRepository $locatifs)
+    public function index(CoordonneesMapRepository $coordonneMap, LocatifsRepository $locatifs, InformationsRepository $info, AccesPmrRepository $pmrItems, SaisonsRepository $saisonsRepository, OuverturesRepository $ouverturesRepository, HorairesRepository $horairesRepository)
     {
+        //info section horaire..
+        $saisons = $saisonsRepository->findAll();
+        $ouvertures = $ouverturesRepository->findAll();
+        $horaire = $horairesRepository->findOneBy(['slug' => 'ouverture']);
+
+        //info section pmr..
+        $itemsPmr = $pmrItems->findAll();
+
+        //information du camping..
+        $tel = $info->findOneBy(['slug' => 'telephone']);
+
+        //Recuperation infos des locs..
         $listLocatifs = $locatifs->findAll();
         $listCoordonnee = $coordonneMap->findAll();
         $isPmr = [];
@@ -78,7 +96,12 @@ class IndexController extends AbstractController{
             'isPmr' => $isPmr,
             'countChalets' => $countChalets,
             'countCabanes' => $countCabanes,
-            'countRoulottes' => $countRoulottes
+            'countRoulottes' => $countRoulottes,
+            'tel' => $tel,
+            'itemsPmr' => $itemsPmr,
+            'saisons' => $saisons,
+            'ouvertures' => $ouvertures,
+            'horaire' => $horaire
             
         ]);
     }

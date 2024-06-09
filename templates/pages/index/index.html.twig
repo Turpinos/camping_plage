@@ -31,5 +31,89 @@
             </div>
             {{ component('Map', {'libelle' : page.libelle, 'coordonnee' : coordonnee, 'isPmr' : isPmr}) }}
         </section>
+        <section class="contact-rapide">
+            <div>
+                <a href="{{ path('app_home') }}">Faire un devis ou réserver</a>
+                <p></p>
+                <a href="tel:{{ tel.contenu }}">Appeler-nous au {{ tel.contenu }}</a>
+            </div>
+        </section>
+        <section class="point-clef">
+            <h2>3 étoiles à votre service</h2>
+            <figure class="f1">
+                <img src="{{ asset('/images/slider_epiceriev2.jpg') }}" alt="Epicerie"/>
+                <figcaption>Une épicerie qui propose des produits d’alimentation locaux et bio mais aussi des articles de plage, des souvenir, les journaux et même un dépôt de pain.</figcaption>
+            </figure>
+            <p></p>
+            <figure class="f2">
+                <img src="{{ asset('/images/cityv2.jpg') }}" alt="City"/>
+                <figcaption>Un espace de jeux pour les petits et les grands, pour le plaisir de jouer entre amis ou en famille.</figcaption>
+            </figure>
+            <p></p>
+            <figure class="f3">
+                <img src="{{ asset('/images/piscinev2.jpg') }}" alt="Piscine"/>
+                <figcaption>Une piscine couverte et chauffée avec sa propre terrasse pour se prélasser au soleil.</figcaption>
+            </figure>
+            <p></p>
+            <figure class="f4">
+                <img src="{{ asset('/images/saunav2.jpg') }}" alt="Sauna"/>
+                <figcaption>Un chalet dédié au « bien-être écologique » avec sauna, hammam, terrasse solarium, douche et tisanerie.</figcaption>
+            </figure>
+            <p></p>
+            <figure class="f5">
+                <img src="{{ asset('/images/barv2.jpg') }}" alt="Bar"/>
+                <figcaption>Profitez d’une boisson au bar ou sur la terrasse au bord du lac.</figcaption>
+            </figure>
+        </section>
+        <section class="activite">
+            <h2>Nos prestations</h2>
+            <article>
+                <p>-Soirées dansantes les mercredis et samedis en haute saison.</p>
+                <p>-Initiation & promenade accompagnée en Gyropodes électriques.</p>
+                <p>-Location de pédalos.</p>
+                <p>-Piscine & bain à bulles couverts & chauffés.</p>
+                <p>-City Stade Agorespace, ping-pong, billard, babyfoot, fléchette, terrain de pétanque.</p>
+                <p>-2 barbecues collectifs.</p>
+                <p>-Spot Wifi gratuit uniquement au bar et en terrasse.</p>
+                <p>-Des sanitaires, douches & salle de bain bébé chauffés.</p>
+                <p>-Snack restauration (hamburgers, sandwiches, salades, frites, gaufres, glaces).</p>
+                <p>-Laverie (Lave-linge et sèche-linge).</p>
+                <p>-Service courrier à l’accueil, ouvert de 9h à 20h.</p>
+                <p>-Les propriétaires sont sur place jour et nuit et parlent anglais.</p>
+            </article>
+            <article>
+                <h3>Autour du camping:</h3>
+                <p>-Bateau promenade « Les Settons » (tour du lac commenté).</p>
+                <p>-Base nautique Activital : Voile, Canoë et Kayak, Paddle. Nos résidents bénéficient d’un Pass réduction sur ces activités nautiques.</p>
+                <p>-Vélo.</p>
+                <p>-Pêche.</p>
+                <p>-À 10 minutes du lac, Cap Xtrem : rando quads et 4×4, parcours aventure, rafting.</p>
+                <p>-Suivez la ligne rouge autour du Lac des Settons, un sentier pédestre de 15 kilomètres (environ 4 heures de marche) qui vous entraînera dans une aventure où vous découvrirez la faune, la flore et les paysages idylliques au cœur du Morvan.</p>
+            </article>
+            <div class="pmr">
+                <img src="{{ asset('/images/logo_pmr.jpg') }}" alt="Pmr" />
+                {% for itemPmr in itemsPmr %}
+                    <p>{{ itemPmr.quantite }} {{ itemPmr.libelle }}</p>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="horaire">
+            <article class="saisons">
+                {% for saison in saisons %}
+                    <div>
+                        {% if saison.slug == "saison_d_hiver" %}
+                            <img src="{{ asset('/images/logos/flocon-de-neige.png') }}" alt="saison d'hiver"/>
+                        {% elseif saison.slug == "basse_saison" %}
+                            <img src="{{ asset('/images/logos/feuille-derable.png') }}" alt="basse saison"/>
+                        {% elseif saison.slug == "haute_saison" %}
+                            <img src="{{ asset('/images/logos/soleil.png') }}" alt="haute saison"/>
+                        {% endif %}
+                        <p>{{ saison.libelle }}: {{ saison.datedebut|date('d/m/Y') }} au {{ saison.datefin|date('d/m/Y') }}</p>
+                    </div>
+                {% endfor %}
+                <p></p>
+            </article>
+            <article class="ouvertures"></article>
+        </section>
     </main>
 {% endblock %}

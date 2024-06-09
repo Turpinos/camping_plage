@@ -1,4 +1,4 @@
-p{
+p, a{
     font-size: 0.9rem;
 }
 .map-interactive{
@@ -46,6 +46,159 @@ p{
     }
 }
 
+.contact-rapide{
+    padding-block: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        a{
+            color: $mainLight;
+            transition: all 200ms;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 600;
+            padding-inline: 0.5rem;
+            &:hover{
+                color: $secondaryBold;
+            }
+        }
+
+        p{
+            height: 0px;
+            width: 60%;
+            border: 1px solid $mainBold;
+        }
+    }
+}
+
+h2{
+    color: $secondaryBold;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0px;
+    position: absolute;
+    top: 0rem;
+    transform: translateY(-50%);
+    left: 0px;
+    background-color: white;
+    padding-inline: 0.3rem;
+}
+
+.point-clef{
+    border-top: 2px solid $secondaryBold;
+    position: relative;
+    padding-block: 1.5rem;
+    figure{
+        width: 85%;
+        margin-inline: auto;
+        img{
+            width: 100%;
+            box-shadow: 3px 5px 20px 0px rgba(0,0,0,0.50);
+        }
+        figcaption{
+            color: $mainBold;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+    }
+
+    p{
+        height: 0px;
+        width: 85%;
+        border-top: 1px solid $mainLight;
+        margin-block: 3rem;
+        margin-inline: auto;
+    }
+}
+
+.activite{
+    border-top: 2px solid $secondaryBold;
+    border-bottom: 2px solid $secondaryBold;
+    position: relative;
+    padding-bottom: 5rem;
+    article{
+        box-shadow: 3px 5px 20px 0px rgba(0,0,0,0.50);
+        margin-inline: auto;
+        margin-block: 3rem;
+        width: 90%;
+        p{
+            margin: 0px;
+            padding: 0.8rem 0.5rem;
+            text-indent: 0.3rem;
+            color: $mainBold;
+        }
+
+        p::first-letter{
+            color: $mainLight;
+            font-weight: 700;
+        }
+
+        h3{
+            margin: 0px;
+            padding: 1rem 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: $mainLight;
+        }
+    }
+    .pmr{
+        position: absolute;
+        bottom: 0px;
+        right: 10px;
+        transform: translateY(40%);
+        border: 3px solid #3A53A5;
+        border-radius: 10px;
+        background-color: white;
+        padding-inline: 0.5rem;
+        img{
+            width: 50px;
+            height: auto;
+            transform: translate(-50%, -50%)
+        }
+        p{
+            color: #3A53A5;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+        p:first-of-type{
+            margin-top: 0px;
+        }
+    }
+}
+
+.horaire{
+    padding-block: 4rem;
+    background-color: $background;
+    background-image: url('/assets/images/montre-bracelet2.png');
+    background-position: center;
+    article{
+        padding-inline: 0.5rem;
+        div{
+            display: flex;
+            
+            img{
+                margin-block: auto;
+                width: 30px;
+                height: 30px;
+            }
+            p{
+                margin-left: 1rem;
+                font-size: 0.8rem;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
 @media screen and ( min-width: 860px){
 
     .map-interactive{
@@ -64,8 +217,74 @@ p{
             width: 40%;
         }
     }
+
+    .contact-rapide{
+        justify-content: flex-end;
+        div{
+            width: 60%;
+            flex-direction: row;
+            a{
+                font-size: 1.2rem;
+            }
+            p{
+                height: 1.5rem;
+                width: 0px;
+                margin: 0px;
+            }
+        }
+    }
+
+    h2{
+        font-size: 1.5rem;
+        padding-inline: 0.5rem;
+    }
+
+    .point-clef{
+        padding-block: 3rem;
+        figure{
+            display: flex;
+            align-items: center;
+            img{
+                width: 300px;
+            }
+            figcaption{
+                margin-top: 0px;
+                margin-inline: auto;
+                padding-inline: 1rem;
+                font-size: 1rem;
+                font-weight: 500;
+            }
+        }
+        .f2, .f4{
+            flex-direction: row-reverse;
+        }
+        p{
+            width: 50%;
+        }
+    }
+
+    .activite{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding-bottom: 0px;
+        article{
+            width: 40%;
+            p{
+                font-size: 1rem;
+            }
+        }
+        .pmr{
+            transform: translateY(20%);
+            p{
+                font-size: 1.2rem;
+            }
+        }
+    }
 }
 
+/* Style les selecteurs de la map interactive */
 @media screen and ( min-width: 1024px){
     .map-interactive{
         .container-select-map{
