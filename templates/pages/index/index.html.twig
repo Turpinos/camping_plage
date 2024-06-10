@@ -111,9 +111,54 @@
                         <p>{{ saison.libelle }}: {{ saison.datedebut|date('d/m/Y') }} au {{ saison.datefin|date('d/m/Y') }}</p>
                     </div>
                 {% endfor %}
-                <p></p>
+                <p>Ouverture de {{ horaire.horairedebut|date('H:i') }} à {{ horaire.horairefin|date('H:i') }}</p>
             </article>
-            <article class="ouvertures"></article>
+            <article class="ouvertures">
+                {% for ouverture in ouvertures %}
+                    <div>
+                        {% if ouverture.actif == "1" %}
+                            <img src="{{ asset('/images/logos/bouton_vert.png') }}" alt="actif"/>
+                            {% if ouverture.slug == "accueil_&_bar" %}
+                                <p>{{ ouverture.libelle }}: {{ "ouverts toute l'année" }}.</p>
+                            {% elseif ouverture.slug == "piscine_chauffee" or ouverture.slug == "epicerie" %}
+                                <p>{{ ouverture.libelle }}: {{ "ouverte" }}.</p>
+                            {% elseif ouverture.slug == "snack" %}
+                                <p>{{ ouverture.libelle }}: {{ "ouvert" }}.</p>
+                            {% elseif ouverture.slug == "sauna_&_hammam" %}
+                                <p>{{ ouverture.libelle }}: {{ "ouverts" }}.</p>
+                            {% endif %}
+                        {% elseif ouverture.actif == "0" %}
+                            <img src="{{ asset('/images/logos/bouton_rouge.png') }}" alt="inactif"/>
+                            {% if ouverture.slug == "accueil_&_bar" or ouverture.slug == "sauna_&_hammam" %}
+                                <p>{{ ouverture.libelle }}: {{ "actuellement fermés" }}.</p>
+                            {% elseif ouverture.slug == "piscine_chauffee" or ouverture.slug == "epicerie" %}
+                                <p>{{ ouverture.libelle }}: {{ "actuellement fermée" }}.</p>
+                            {% elseif ouverture.slug == "snack" %}
+                                <p>{{ ouverture.libelle }}: {{ "actuellement fermé" }}.</p>
+                            {% endif %}
+                        {% elseif ouverture.actif == null %}
+                            <img src="{{ asset('/images/logos/bouton_orange.png') }}" alt="non-defini"/>
+                            <p>{{ ouverture.libelle }}: {{ "sur réservation" }}.</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </article>
+        </section>
+        <section class="logo-partenaires">
+            <div class="logo-carre">
+                <img src="{{ asset('/images/logo_encart/epicerie.jpg') }}" alt="epicerie" />
+                <img src="{{ asset('/images/logo_encart/snack.png') }}" alt="snack" />
+                <img src="{{ asset('/images/logo_encart/sauna_hammam.jpg') }}" alt="sauna hammam" />
+                <img src="{{ asset('/images/logo_encart/wifi_gratuite.png') }}" alt="wifi gratuite" />
+                <img src="{{ asset('/images/logo_encart/piscine_chauffee.png') }}" alt="piscine chauffee" />
+                <img src="{{ asset('/images/logo_encart/massage.jpg') }}" alt="massage" />
+                <img src="{{ asset('/images/logo_encart/picto_camping.jpg') }}" alt="camping" />
+                <img src="{{ asset('/images/logo_encart/logo_cabannes_france.jpg') }}" alt="logo cabannes france" />
+                <img src="{{ asset('/images/logo_encart/cle_verte.jpg') }}" alt="cle verte" />
+                <img src="{{ asset('/images/logo_encart/com_com.jpg') }}" alt="communauté de communes" />
+            </div>
+            <div class="logo-rect">
+            </div>
         </section>
     </main>
 {% endblock %}
