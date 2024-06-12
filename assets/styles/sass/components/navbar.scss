@@ -231,6 +231,11 @@ nav{
             width: 300px;
         }
 
+        .logo-accueil{
+            margin: 0px;
+            padding: 0px;
+        }
+
         ul{
             display: flex;
             justify-content: space-around;
@@ -247,9 +252,6 @@ nav{
                 padding-inline: 0.3rem;
                 transition: all 150ms;
 
-                &:hover{
-                    transform: scale(1.02);
-                }
             }
         }
 

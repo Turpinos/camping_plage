@@ -1,6 +1,7 @@
 p, a{
     font-size: 0.9rem;
 }
+
 .map-interactive{
     display: flex;
     flex-direction: column-reverse;
@@ -177,7 +178,8 @@ h2{
 }
 
 .horaire{
-    padding-block: 4rem;
+    margin-block: 2rem;
+    padding-block: 2rem;
     background-color: $background;
     background-image: url('/assets/images/clock-regular.svg');
     background-size: cover;
@@ -229,6 +231,17 @@ h2{
 
 .logo-partenaires{
     .logo-carre{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        img{
+            height: 100px;
+            width: auto;
+            margin: 0.5rem;
+        }
+    }
+    .logo-rect{
         display: flex;
         justify-content: space-around;
         align-items: center;

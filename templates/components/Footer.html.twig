@@ -1,0 +1,31 @@
+<footer>
+    <div class="informations">
+        <h4>Informations</h4>
+        <p>Camping adhérent à la Fédération Nationale de l'Hôtellerie de Plein Air et à la Charte de qualité + de Bourgogne mise en place en partenariat avec Le CRT Bourgogne, le CDT Nièvre.</p>
+        {% for inf in this.info %}
+            {% if inf.slug == "adresse" %}
+                <p>{{ inf.contenu }}</p>
+            {% elseif inf.slug == "telephone" %}
+                <p><span>Téléphone:</span> {{ inf.contenu }}</p>
+            {% elseif inf.slug == "gps" %}
+                <p><span>GPS:</span> {{ inf.contenu }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="menu">
+        <h4>Menu</h4>
+        <ul>
+            <li><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li><a href="{{ path('app_home') }}">Réglement intérieur</a></li>
+            <li><a href="{{ path('app_home') }}">Liens utiles</a></li>
+            <li><a href="{{ path('app_home') }}">Devis / Réservation</a></li>
+            <li><a href="{{ path('app_home') }}">Contact</a></li>
+            
+        </ul>
+        {% for inf in this.info %}
+            {% if inf.slug == "coordonnees_pro" %}
+                <p class="important">{{ inf.contenu }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</footer>

@@ -1,3 +1,7 @@
+const main =  document.getElementById('index');
+
+if(main != undefined){
+
 const mapInteractive = document.querySelector('.map-interactive');
 const mapContainer = document.querySelector('.map-container');
 const inputContainer = document.querySelectorAll('.input-container');
@@ -36,3 +40,5 @@ mapContainer.addEventListener('mousemove', function(e){
     let height = mapContainer.clientHeight;
     console.log('Y:' + Math.round(y*100/height) + '-' + ' X:' + Math.round(x*100/width));
 });
+
+}

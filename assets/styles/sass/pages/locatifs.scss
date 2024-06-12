@@ -1,0 +1,158 @@
+.main-locatifs{
+    margin-top: 3rem;
+}
+
+.barre-tri{
+    display: flex;
+    justify-content: space-between;
+    border-block: 2px solid $mainBold;
+    .select-categories{
+        background-color: $mainBold;
+        padding-block: 0.8rem;
+        padding-inline: 1.5rem;
+        color: white;
+        text-transform: capitalize;
+        font-weight: 600;
+        border: none;
+        option{
+            //text-transform: capitalize;
+            background-color: white;
+            color: $mainLight;
+            font-weight: 600;
+        }
+
+    }
+
+    .container-tri{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 1rem;
+        color: $mainBold;
+        img{
+            height: 30px;
+            margin-right: 0.3rem;
+        }
+        .select-tri{
+            padding-block: 0.8rem;
+            font-weight: 600;
+            border: 0px;
+            color: $mainBold;
+        }
+        label{
+            display: none;
+        }
+    }
+}
+
+.liste-article{
+    width: 100%;
+    padding-block: 2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    article{
+        width: 300px;
+        box-shadow: 3px 5px 15px 0px rgba(0,0,0,0.30);
+        figure{
+            width: 100%;
+            min-height: 250px;
+            max-height: 300px;
+            margin: 0px;
+            position: relative;
+            img{
+                width: 100%;
+                overflow: hidden;
+            }
+            figcaption{
+                position: absolute;
+                width: 100%;
+                bottom: 0px;
+                left: 0px;
+                transform: translateY(50%);
+                text-align: center;
+                background-color: $mainBold;
+                color: white;
+                padding-block: 0.8rem;
+
+            }
+        }
+        .infos{
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .libelle-emplacement, .libelle-capacite{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-inline: 0.5rem;
+                h5{
+                    color: $mainBold;
+                    font-weight: 600;
+                    margin-block: 0.5rem;
+                }
+                img{
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+            .contenu-emplacement{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-wrap: wrap;
+                .pastille{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0.5rem;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 15px;
+                    background-color: $mainBold;
+                    color: white;
+                    p{
+                        text-align: center;
+                    }
+                }
+            }
+            .contenu-capacite{
+                p{
+                    text-align: center;
+                }
+            }
+            a{
+                margin: 1.5rem auto;
+                padding: 0.5rem 1rem;
+                text-decoration: none;
+                background-color: $mainBold;
+                color: white;
+                font-weight: 600;
+                border: 1px solid $mainBold;
+                transition: all 200ms;
+                &:hover{
+                    background-color: white;
+                    color: $mainBold;
+                }
+            }
+        }
+        
+    }
+}
+
+@media screen and ( min-width: 860px){
+    .barre-tri{
+        .select-categories{
+            padding-inline: 2.5rem;
+        }
+        .container-tri{
+            label{
+                display:initial;
+                font-weight: 600;
+            }
+        }
+    }
+    
+}

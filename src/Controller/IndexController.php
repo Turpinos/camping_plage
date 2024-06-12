@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\AccesPmr;
 use App\Repository\AccesPmrRepository;
 use App\Repository\CoordonneesMapRepository;
 use App\Repository\HorairesRepository;

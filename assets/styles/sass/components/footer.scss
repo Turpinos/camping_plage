@@ -1,0 +1,42 @@
+footer{
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: $backgroundLight;
+    h4{
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-indent: 0.3rem;
+    }
+    div{
+        width: 90%;
+        margin-inline: auto;
+        margin-block: 1rem;
+        span, .important{
+            font-weight: 600;
+        }
+        a{
+            text-decoration: none;
+            transition: all 200ms;
+            &:hover{
+                color: $secondaryBold;
+            }
+
+            &:visited{
+                color: black;
+            }
+        }
+    }
+    
+}
+
+@media screen and ( min-width: 860px){
+
+    footer{
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        div{
+            width: 40%;
+        }
+    }
+}

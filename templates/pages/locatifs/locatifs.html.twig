@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    {{ component('Header', {'title' : page.title }) }}
+{% endblock %}
+{% block body %}
+    <main id="locatifs" class="main-locatifs">
+        <section class="liste-locatifs">
+            <div class="barre-tri">
+                <select class="select-categories">
+                    <option data-cate="all">Catégories locatifs</option>
+                    {% for type in typeLocatifs %}
+                        <option data-cate="type.id" >{{ type.libelle }}</option>
+                    {% endfor %}
+                </select>
+                <div class="container-tri">
+                    <img src="{{ asset('/images/logos/trier-par-ordre-croissant.png') }}" />
+                    <label for="select-tri">Trier par: </label>
+                    <select class="select-tri" id="select-tri">
+                        <option data-tri="a-z">A-Z</option>
+                    </select>
+                </div>
+            </div>
+            <div class="liste-article">
+                <article>
+                    <figure>
+                        <img src="{{ asset('/images/locations/chalet_new_samoa_plan.jpg') }}" alt="chalet new samoa"/>
+                        <figcaption>Chalet new samoa</figcaption>
+                    </figure>
+                    <div class="infos">
+                        <div class="libelle-emplacement">
+                            <h5>Emplacements:</h5>
+                            <img src="{{ asset('/images/logos/adresse.png')}}" alt='plan' />
+                        </div>
+                        <div class="contenu-emplacement">
+                            <div class="pastille">
+                                <p>12</p>
+                            </div>
+                        </div>
+                        <div class="libelle-capacite">
+                            <h5>Capacité:</h5>
+                            <img src="{{ asset('/images/logo_pmr.jpg')}}" alt='pmr' />
+                        </div>
+                        <div class="contenu-capacite">
+                            <p>Idéal pour 4 - 6 personnes</p>
+                        </div>
+                        <a href="" >Voir les détails</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+{% block footer %}
+    {{ component('Footer') }}
+{% endblock %}
