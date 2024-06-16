@@ -23,12 +23,12 @@
 <div id="background" class="disabled">
     <div id="nav" class="disabled">
         <div class="headNav">
-            <img class="logo" src="{{ asset('/images/logos/logo_PlageDuMidi.png') }}" alt="Camping Plage"/>
+            <a href="{{ path('app_home') }}" class="logo-accueil"><img class="logo" src="{{ asset('/images/logos/logo_PlageDuMidi.png') }}" alt="Camping Plage"/></a>
             <img class="close" src="{{ asset('/images/logos/fermer-la-croix.png') }}" alt="Fermer"/>
         </div>
         <ul>
-            <li><a href="{{ path('app_home') }}">Locations</a></li>
-            <li><a href="{{ path('app_home') }}">Locations d'hiver</a></li>
+            <li><a href="{{ path('locatifs') }}">Locations</a></li>
+            <li><a href="{{ path('locatifs', {slug: "hiver"}) }}">Locations d'hiver</a></li>
             <li><a href="{{ path('app_home') }}">Activités</a></li>
             <li><a href="{{ path('app_home') }}">Photo & Vidéo</a></li>
             <li><a href="{{ path('app_home') }}">Devis & Réservation</a></li>

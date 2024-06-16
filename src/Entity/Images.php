@@ -20,6 +20,9 @@ class Images
     #[ORM\Column(length: 100)]
     private ?string $img_url = null;
 
+    #[ORM\Column]
+    private ?bool $isPicture = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class Images
     public function setImgUrl(string $img_url): static
     {
         $this->img_url = $img_url;
+
+        return $this;
+    }
+
+    public function isIsPicture(): ?bool
+    {
+        return $this->isPicture;
+    }
+
+    public function setIsPicture(bool $isPicture): static
+    {
+        $this->isPicture = $isPicture;
 
         return $this;
     }

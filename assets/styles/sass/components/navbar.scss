@@ -47,6 +47,10 @@ nav{
         height: auto;
         width: 200px;
     }
+    .logo-accueil{
+        margin: 0px;
+        padding: 0px;
+    }
 
     .hamburger{
         margin-left: 110px;
@@ -169,10 +173,16 @@ nav{
             width: 100%;
             padding-block: 1rem;
             border-bottom: 1px solid $mainBold;
-
-            img:first-of-type{
+            .logo-accueil{
+                margin: 0px;
+                padding: 0px;
                 width: 200px;
+                .logo{
+                    width: 200px;
+                }
             }
+
+            
 
             img:last-of-type{
                 width: 30px;
@@ -229,11 +239,6 @@ nav{
             bottom: -19px;
             left: -150px;
             width: 300px;
-        }
-
-        .logo-accueil{
-            margin: 0px;
-            padding: 0px;
         }
 
         ul{

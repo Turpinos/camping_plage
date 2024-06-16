@@ -1,5 +1,8 @@
 .main-locatifs{
     margin-top: 3rem;
+    .hidden{
+        display: none;
+    }
 }
 
 .barre-tri{
@@ -8,20 +11,70 @@
     border-block: 2px solid $mainBold;
     .select-categories{
         background-color: $mainBold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
         padding-block: 0.8rem;
         padding-inline: 1.5rem;
         color: white;
         text-transform: capitalize;
         font-weight: 600;
-        border: none;
-        option{
-            //text-transform: capitalize;
+        p{
+            margin: 0px 0.3rem 0px 0px;
+        }
+        .rotate{
+            margin: 0rem;
+            transform: rotate(90deg);
+            transition: all 200ms;
+        }
+        .ul-select{
+            position: absolute;
+            top: 3rem;
+            left: 0px;
+            right: 0px;
             background-color: white;
             color: $mainLight;
             font-weight: 600;
+            padding-left: 0px;
+            margin: 2px 0px 0px 0px;
+            z-index: 2;
+            li{
+                list-style: none;
+                border-inline: 1px solid $mainBold;
+                border-bottom: 1px solid $mainBold;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-block: 0.5rem;
+                label{
+                    margin-left: 1rem;
+                }
+                input{
+                    margin-right: 1rem;
+                }
+            }
+            li:last-of-type{
+                justify-content: center;
+            }
+            button{
+                color: white;
+                font-weight: 600;
+                background-color: $mainBold;
+                padding: 0.5rem 0.8rem;
+                margin-block: 0.3rem;
+                border: 1px solid $mainBold;
+                transition: all 200ms;
+                &:hover{
+                    background-color: white;
+                    color: $mainBold;
+                }
+            }
         }
 
     }
+
 
     .container-tri{
         display: flex;
@@ -54,11 +107,15 @@
     flex-wrap: wrap;
     article{
         width: 300px;
+        margin-block: 2rem;
+        margin-inline: 0.2rem;
         box-shadow: 3px 5px 15px 0px rgba(0,0,0,0.30);
         figure{
             width: 100%;
-            min-height: 250px;
-            max-height: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin: 0px;
             position: relative;
             img{
@@ -72,6 +129,7 @@
                 left: 0px;
                 transform: translateY(50%);
                 text-align: center;
+                text-transform: uppercase;
                 background-color: $mainBold;
                 color: white;
                 padding-block: 0.8rem;
@@ -103,11 +161,12 @@
                 justify-content: flex-start;
                 align-items: center;
                 flex-wrap: wrap;
+                min-height: 5rem;
                 .pastille{
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    margin: 0.5rem;
+                    margin: 0.2rem;
                     width: 30px;
                     height: 30px;
                     border-radius: 15px;
@@ -116,6 +175,11 @@
                     p{
                         text-align: center;
                     }
+                }
+                .non-spe{
+                    margin-left: 0.5rem;
+                    color: $mainBold;
+                    font-weight: 500;
                 }
             }
             .contenu-capacite{
@@ -139,6 +203,38 @@
             }
         }
         
+    }
+}
+
+@keyframes opacity {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.background-map{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5);
+    animation-name: opacity;
+    animation-duration: 200ms;
+    animation-fill-mode: backwards;
+    .close{
+        width: 30px;
+        position: absolute;
+        top: 15px;
+        right: 15px;
     }
 }
 

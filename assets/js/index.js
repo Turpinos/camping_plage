@@ -1,6 +1,6 @@
-const main =  document.getElementById('index');
+const mainIndex =  document.getElementById('index');
 
-if(main != undefined){
+if(mainIndex != undefined){
 
 const mapInteractive = document.querySelector('.map-interactive');
 const mapContainer = document.querySelector('.map-container');

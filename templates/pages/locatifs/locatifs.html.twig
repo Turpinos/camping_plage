@@ -7,12 +7,18 @@
     <main id="locatifs" class="main-locatifs">
         <section class="liste-locatifs">
             <div class="barre-tri">
-                <select class="select-categories">
-                    <option data-cate="all">Catégories locatifs</option>
-                    {% for type in typeLocatifs %}
-                        <option data-cate="type.id" >{{ type.libelle }}</option>
-                    {% endfor %}
-                </select>
+                <div class="select-categories">
+                    <p>Catégories locatifs</p><div class="rotate">></div>
+                    <ul id="ul-select" class="hidden">
+                        {% for type in typeLocatifs %}
+                            <li>
+                                <label for="{{type.id}}">{{ type.libelle }}</label>
+                                <input data-cate="{{type.id}}" id="{{type.id}}" type="checkbox"/>
+                            </li>
+                        {% endfor %}
+                        <li><button>Valider</button></li>
+                    </ul>
+                </div>
                 <div class="container-tri">
                     <img src="{{ asset('/images/logos/trier-par-ordre-croissant.png') }}" />
                     <label for="select-tri">Trier par: </label>
@@ -22,32 +28,58 @@
                 </div>
             </div>
             <div class="liste-article">
-                <article>
-                    <figure>
-                        <img src="{{ asset('/images/locations/chalet_new_samoa_plan.jpg') }}" alt="chalet new samoa"/>
-                        <figcaption>Chalet new samoa</figcaption>
-                    </figure>
-                    <div class="infos">
-                        <div class="libelle-emplacement">
-                            <h5>Emplacements:</h5>
-                            <img src="{{ asset('/images/logos/adresse.png')}}" alt='plan' />
-                        </div>
-                        <div class="contenu-emplacement">
-                            <div class="pastille">
-                                <p>12</p>
+                {% for locatif in locatifs %}
+                    <article data-cate="{{locatif.getIdTypeLocatifs().getId()}}">
+                        <figure>
+                            {% for image in images %}
+                                {% if image.getIdLocatifs().getId() == locatif.id %}
+                                    {% if image.ispicture == true %}
+                                        <img src="{{ asset('/images/locations/' ~ image.imgurl) }}" alt="{{ locatif.libelle }}"/>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            <figcaption>{{ locatif.libelle }}</figcaption>
+                        </figure>
+                        <div class="infos">
+                            <div class="libelle-emplacement">
+                                <h5>Emplacements:</h5>
+                                <img data-id="{{ locatif.id }}" src="{{ asset('/images/logos/adresse.png')}}" alt='plan' />
                             </div>
+                            <div class="contenu-emplacement">
+                            {% if locatif.slug != "camping" %}
+                                {% for coordonnee in coordonneesMap %}
+                                    {% if coordonnee.getIdLocatifs.getId() == locatif.id %}
+                                        <div class="pastille">
+                                        <p>{{coordonnee.emplacement != null ? coordonnee.emplacement : "N" }}</p>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <p class="non-spe">Non spécifié</p>
+                            {% endif %}
+                            </div>
+                            <div class="libelle-capacite">
+                                <h5>Capacité:</h5>
+                                {% if locatif.ispmr == true %}
+                                    <img src="{{ asset('/images/logo_pmr.jpg')}}" alt='pmr' />
+                                {% endif %}
+                            </div>
+                            <div class="contenu-capacite">
+                                {% if locatif.slug != "camping" %}
+                                    <p>Idéal pour {{ locatif.capacite }} personnes</p>
+                                {% else %}
+                                    <p>Non spécifié</p>
+                                {% endif %}
+                            </div>
+                            <a href="" >Voir les détails</a>
                         </div>
-                        <div class="libelle-capacite">
-                            <h5>Capacité:</h5>
-                            <img src="{{ asset('/images/logo_pmr.jpg')}}" alt='pmr' />
-                        </div>
-                        <div class="contenu-capacite">
-                            <p>Idéal pour 4 - 6 personnes</p>
-                        </div>
-                        <a href="" >Voir les détails</a>
-                    </div>
-                </article>
+                    </article>
+                {% endfor %}
             </div>
+        </section>
+        <section id="background-map" class="hidden">
+            <img class="close" src="{{ asset('/images/logos/fermer-la-croix.png') }}" alt="fermer" />
+            {{ component('Map', {'libelle' : page.libelle, 'coordonnee' : coordonneesMap, 'isPmr' : isPmr}) }}
         </section>
     </main>
 {% endblock %}
