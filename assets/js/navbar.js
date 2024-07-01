@@ -54,7 +54,6 @@ window.addEventListener('scroll', function(){
             banner.style.marginBottom = `${0 + valueHeightNav}px`;
         }
         isActive = true;
-        console.log('true');
 
     }else if((initPosNav >= posScreen) && scroll == 'asc' && isActive != false){
         navbarContainer.style.position = 'relative';
@@ -62,7 +61,6 @@ window.addEventListener('scroll', function(){
         banner.style.marginBottom = '0px';
         navbarContainer.classList.remove('anim');
         isActive = false;
-        console.log('false');
 
     }
 

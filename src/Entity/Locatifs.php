@@ -43,6 +43,9 @@ class Locatifs
     #[ORM\Column(length: 50)]
     private ?string $slug = null;
 
+    #[ORM\Column]
+    private ?bool $ouverture_hivernale = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -152,6 +155,18 @@ class Locatifs
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function isOuvertureHivernale(): ?bool
+    {
+        return $this->ouverture_hivernale;
+    }
+
+    public function setOuvertureHivernale(bool $ouverture_hivernale): static
+    {
+        $this->ouverture_hivernale = $ouverture_hivernale;
 
         return $this;
     }

@@ -1,0 +1,92 @@
+.main-locatifs-details{
+    .informations-principales{
+        margin-inline: auto;
+        width: 95%;
+        border: 1px solid $mainLight;
+        padding-block: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .premiere-partie{
+            margin-inline: auto;
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid $mainLight;
+
+            h2{
+                font-weight: 700;
+                color: $mainBold;
+                text-transform: uppercase;
+                font-size: 1.5rem;
+                text-align: center;
+            }
+    
+            .img{
+                display: initial;
+                width: 300px;
+                max-width: 100%;
+                height: auto;
+            }
+            .hidden{
+                display: none;
+            }
+    
+            .select-container{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-block: 2rem;
+            }
+    
+            .pastille-select{
+                margin: 0.2rem;
+                width: 0.5rem;
+                height: 0.5rem;
+                border-radius: 0.5rem;
+                border: 2px solid $mainBold;
+                background-color: white;
+                transition: all 150ms;
+            }
+
+            .active{
+                background-color: $mainBold;
+                transition: all 150ms;
+            }
+
+            .grille-tarifs{
+                color: white;
+                background-color: $secondaryBold;
+                padding: 0.5rem;
+                margin-bottom: 2rem;
+                p{
+                    font-size: 0.8rem;
+                    text-align: center;
+                    margin-block: 1rem;
+                }
+
+                span{
+                    font-weight: 600;
+                }
+            }
+
+        }
+
+        .derniere-partie{
+            width: 95%;
+            p{
+                color: $mainBold;
+                width: 100%;
+                span{
+                    font-weight: 600;
+                }
+            }
+        }
+
+    }
+}

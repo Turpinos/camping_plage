@@ -88,9 +88,14 @@
         }
         .select-tri{
             padding-block: 0.8rem;
+            max-width: 4rem;
             font-weight: 600;
             border: 0px;
+            text-transform: uppercase;
             color: $mainBold;
+            option{
+                overflow: hidden;
+            }
         }
         label{
             display: none;
@@ -132,6 +137,7 @@
                 text-transform: uppercase;
                 background-color: $mainBold;
                 color: white;
+                font-weight: 600;
                 padding-block: 0.8rem;
 
             }
@@ -247,6 +253,9 @@
             label{
                 display:initial;
                 font-weight: 600;
+            }
+            .select-tri{
+                max-width: none;
             }
         }
     }

@@ -8,7 +8,7 @@
         <section class="liste-locatifs">
             <div class="barre-tri">
                 <div class="select-categories">
-                    <p>Catégories locatifs</p><div class="rotate">></div>
+                    <p>Catégories locatifs</p><span class="rotate">></span>
                     <ul id="ul-select" class="hidden">
                         {% for type in typeLocatifs %}
                             <li>
@@ -23,13 +23,15 @@
                     <img src="{{ asset('/images/logos/trier-par-ordre-croissant.png') }}" />
                     <label for="select-tri">Trier par: </label>
                     <select class="select-tri" id="select-tri">
-                        <option data-tri="a-z">A-Z</option>
+                        <option value="ordre alphabetique">Ordre alphabétique</option>
+                        <option value="capacite croissante">Capacité croissante</option>
+                        <option value="capacite decroissante">Capacité décroissante</option>
                     </select>
                 </div>
             </div>
             <div class="liste-article">
                 {% for locatif in locatifs %}
-                    <article data-cate="{{locatif.getIdTypeLocatifs().getId()}}">
+                    <article data-cate="{{ locatif.getIdTypeLocatifs().getId() }}" data-capacite="{{ locatif.capacite }}" data-slug="{{ locatif.slug }}">
                         <figure>
                             {% for image in images %}
                                 {% if image.getIdLocatifs().getId() == locatif.id %}
@@ -71,7 +73,7 @@
                                     <p>Non spécifié</p>
                                 {% endif %}
                             </div>
-                            <a href="" >Voir les détails</a>
+                            <a href="{{ path('locatifs_details', { 'slug' : locatif.slug }) }}" >Voir les détails</a>
                         </div>
                     </article>
                 {% endfor %}

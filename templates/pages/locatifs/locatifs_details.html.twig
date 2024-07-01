@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    {{ component('Header', {'title' : page.title }) }}
+{% endblock %}
+{% block body %}
+    <main id="locatifs-details" class="main-locatifs-details">
+        <section class="informations-principales">
+            <div class="premiere-partie">
+                <h2>{{ locatif.libelle }}</h2>
+
+                {% for image in images %}
+                    {% if loop.first %}
+                        <img class="img" data-id="{{loop.index0}}" src="{{ asset('/images/locations/' ~ image.imgurl) }}" alt='{{ locatif.slug }}'>
+                    {% else %}
+                        <img class="img hidden" data-id="{{loop.index0}}" src="{{ asset('/images/locations/' ~ image.imgurl) }}" alt='{{ locatif.slug }}'>
+                    {% endif %}
+                {% endfor %}
+                <div class="select-container">
+                    {% for image in images %}
+                        {% if loop.first %}
+                            <div class="pastille-select active" data-id="{{loop.index0}}"></div>
+                        {% else %}
+                            <div class="pastille-select" data-id="{{loop.index0}}"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="grille-tarifs">
+                    {% if tarifs.hssemaine != null %}
+                        <p><span>Tarif haute saison:</span> {{ tarifs.hssemaine }}€ par semaine</p>
+                    {% endif %}
+                    {% if tarifs.bssemaine != null %}
+                        <p><span>Tarifs basse saison:</span> {{ tarifs.bsnuitee }}€ par nuitée | {{ tarifs.bssemaine }}€ par semaine</p>
+                    {% endif %}
+                    {% if tarifs.hvsemaine != null %}
+                        <p><span>Tarifs en hiver:</span> {{ tarifs.hvnuitee }}€ par nuitée | {{ tarifs.hvsemaine }}€ par semaine</p>
+                    {% endif %}
+                    {% if tarifs.bsnuitee2 != null or tarifs.bsnuitee3 != null or tarifs.bsnuitee4 != null %}
+                        <p><span>Tarifs basse saison:</span> {{ tarifs.bsnuitee2 != null ? tarifs.bsnuitee2 ~ '€ pour 2' : '' }} {{ tarifs.bsnuitee3 != null ? tarifs.bsnuitee3 ~ '€ pour 3' : '' }} {{ tarifs.bsnuitee4 != null ? tarifs.bsnuitee4 ~ '€ pour 4' : '' }} | par nuitée </p>
+                    {% endif %}
+                    {% if tarifs.hsnuitee2 != null or tarifs.hsnuitee3 != null or tarifs.hsnuitee4 != null %}
+                        <p><span>Tarifs haute saison:</span> {{ tarifs.hsnuitee2 != null ? tarifs.hsnuitee2 ~ '€ pour 2' : '' }} {{ tarifs.hsnuitee3 != null ? tarifs.hsnuitee3 ~ '€ pour 3' : '' }} {{ tarifs.hsnuitee4 != null ? tarifs.hsnuitee4 ~ '€ pour 4' : '' }} | par semaine </p>
+                    {% endif %}
+                    {% if locatif.slug == 'camping' %}
+
+                    {% endif %}
+                </div>
+            </div>
+            <div class="derniere-partie">
+                <p>
+                    <span>Emplacement(s):</span>
+                    {% for coordonnee in coordonnees %}
+                        {% if loop.last %}
+                             {{ coordonnee.emplacement }}.
+                        {% else %}
+                             {{ coordonnee.emplacement }},
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+{% block footer %}
+    {{ component('Footer') }}
+{% endblock %}
