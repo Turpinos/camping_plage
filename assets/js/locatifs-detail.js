@@ -1,8 +1,13 @@
 const mainLocatifDetail = document.querySelector('.main-locatifs-details');
-const imgCarroussel = document.querySelectorAll('.informations-principales .img');
-const selectCarroussel = document.querySelectorAll('.select-container .pastille-select');
 
 if( mainLocatifDetail != undefined){
+
+const imgCarroussel = document.querySelectorAll('.informations-principales .img');
+const selectCarroussel = document.querySelectorAll('.select-container .pastille-select');
+const openerMap = document.querySelector('.lien-carte');
+const pings = document.querySelectorAll('.ping');
+const backgroundMap = document.getElementById('background-map');
+const closeMap = document.querySelector('#background-map .close');
 
 for (const select of selectCarroussel) {
     select.addEventListener('click', function(){
@@ -28,5 +33,26 @@ for (const select of selectCarroussel) {
 
     });
 }
+
+openerMap.addEventListener('click', function(){
+    document.body.style.overflow = 'hidden';
+
+    backgroundMap.classList.add('background-map');
+    backgroundMap.classList.remove('hidden');
+    for(const ping of pings){
+        ping.classList.remove('hidden');
+    }
+});
+
+closeMap.addEventListener('click', function(){
+    //reactiver le scroll..
+    document.body.style.overflow = 'auto';
+
+    backgroundMap.classList.add('hidden');
+    backgroundMap.classList.remove('background-map');
+    for (const ping of pings) {
+        ping.setAttribute('class', 'ping hidden');
+    }
+});
 
 }

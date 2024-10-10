@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\CoordonneesMapRepository;
 use App\Repository\ImagesRepository;
+use App\Repository\InformationsRepository;
 use App\Repository\LocatifsRepository;
 use App\Repository\TarifsGlobauxRepository;
 use App\Repository\TarifsRepository;
@@ -84,21 +85,24 @@ class LocatifsController extends AbstractController{
     }
 
     #[Route('/locatifs_details/{slug}', name:'locatifs_details')]
-    public function locatifs_details(LocatifsRepository $locatifsRepository, TarifsRepository $tarifsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, ImagesRepository $imagesRepository, CoordonneesMapRepository $coordonneesMapRepository ,string $slug){
+    public function locatifs_details(LocatifsRepository $locatifsRepository, TarifsRepository $tarifsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, ImagesRepository $imagesRepository, CoordonneesMapRepository $coordonneesMapRepository, InformationsRepository $informationsRepository ,string $slug){
 
         $locatif = $locatifsRepository->findOneBy(['slug' => $slug]);
+        $descrition = (preg_split('/[.]+[[:space:]]/mi', $locatif->getDescription()));
         $tarifs = $tarifsRepository->findOneBy(['id' => $locatif->getIdTarifs()->getId()]);
         $images = $imagesRepository->findBy(['id_locatifs' => $locatif->getId()]);
         $coordonneesMap = $coordonneesMapRepository->findBy(['locatifs' => $locatif->getId()]);
-        $tarifsGlobaux = [];
+        $tarifsGlobaux = $tarifsGlobauxRepository->findAll();
+        $tel = $informationsRepository->findOneBy(['slug' => 'telephone']);
 
-        if($locatif->getSlug() == "camping"){
-            $tarifsGlobaux = $tarifsGlobauxRepository->findAll();
+        $isPmr = [];
+        if($locatif->isPmr() == "1"){
+            $isPmr[] = $locatif->getId();
         }
 
         $page = [ 
             'libelle' => 'locatifs_details',
-            'title' => 'Plus en détails'
+            'title' => 'Les détails'
             
         ];
 
@@ -108,7 +112,10 @@ class LocatifsController extends AbstractController{
             'tarifs' => $tarifs,
             'images' => $images,
             'tarifsGlobaux' => $tarifsGlobaux,
-            'coordonnees' => $coordonneesMap
+            'coordonnees' => $coordonneesMap,
+            'description' => $descrition,
+            'telephone' => $tel,
+            'isPmr' => $isPmr
         ]);
     }
 }

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Devis & Réservation - Plage du midi
+{% endblock %}
+
+{% block header %}
+    {{ component('Header', {'title' : page.title }) }}
+{% endblock %}
+
+{% block body %}
+    <main id="reservation" class="main-reservation">
+        <section>
+
+            {{ form_start(form) }}
+
+                <div class="begin-form">
+                    <div class="container-name">
+
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.firstName) }}
+
+                    </div>    
+
+                    {{ form_row(form.address) }}
+                    {{ form_row(form.phone) }}
+
+                    <div>
+
+                        {{ form_row(form.nombreVoyageurs) }}
+                        {{ form_row(form.nombreAnimaux) }}
+
+                    </div>
+                    <div class="container-card-voyageurs">
+
+                        {{ form_row(form.ageDesVoyageurs) }}
+
+                    </div>
+                </div>
+
+            {{ form_end(form) }}
+
+        </section>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {{ component('Footer') }}
+{% endblock %}
