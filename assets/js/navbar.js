@@ -30,6 +30,8 @@ window.addEventListener('scroll', function(){
         initStyleNav = `-${valueHeightNav / 2}px`
     }
 
+    console.log(valueHeightNav);
+
     let posScreen = window.scrollY;
 
     let scroll;
@@ -48,11 +50,7 @@ window.addEventListener('scroll', function(){
         navbarContainer.style.top = '0px';
         navbarContainer.classList.add('anim');
         
-        if(window.screen.availWidth >= 860){
-            banner.style.marginBottom = `${valueHeightNav}px`;
-        }else if(window.screen.availWidth < 860){
-            banner.style.marginBottom = `${0 + valueHeightNav}px`;
-        }
+        banner.style.marginBottom = `${valueHeightNav}px`;
         isActive = true;
 
     }else if((initPosNav >= posScreen) && scroll == 'asc' && isActive != false){

@@ -25,7 +25,7 @@
                     {{ form_row(form.address) }}
                     {{ form_row(form.phone) }}
 
-                    <div>
+                    <div class="choice-quantity">
 
                         {{ form_row(form.nombreVoyageurs) }}
                         {{ form_row(form.nombreAnimaux) }}
@@ -35,6 +35,21 @@
 
                         {{ form_row(form.ageDesVoyageurs) }}
 
+                    </div>
+                </div>
+                <div class="end-form">
+                    <div class="container-checkBox">
+                        {{ form_row(form.chalet) }}
+                        {{ form_row(form.chaletGite) }}
+                        {{ form_row(form.cabane) }}
+                        {{ form_row(form.roulotte) }}
+                        {{ form_row(form.campingCar) }}
+                        {{ form_row(form.caravane) }}
+                        {{ form_row(form.tente) }}  
+                    </div>
+                    <div class="facultatif-container">
+                        <p>Option</p>
+                        {{ form_row(form.electricite) }}
                     </div>
                 </div>
 

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -90,6 +91,7 @@ class ReservationType extends AbstractType
             ->add('ageDesVoyageurs', ChoiceType::class, [
                 'label' => 'Voyageur 1',
                 'choices' => [
+                    'Choisir une tranche d\'âge' => null,
                     '0-3 ans' => '0-3',
                     '4-10 ans' => '4-10',
                     '11-17 ans' => '11-17',
@@ -107,7 +109,7 @@ class ReservationType extends AbstractType
                     'class' => 'row chalet'
                 )
             ])
-            ->add('chalet-gite', CheckboxType::class, [
+            ->add('chaletGite', CheckboxType::class, [
                 'label' => 'Chalet-gîte',
                 'value' => 'chalet-gite',
                 'row_attr' => array(
@@ -128,7 +130,7 @@ class ReservationType extends AbstractType
                     'class' => 'row roulotte'
                 )
             ])
-            ->add('camping-car', CheckboxType::class, [
+            ->add('campingCar', CheckboxType::class, [
                 'label' => 'Camping-car',
                 'value' => 'camping-car',
                 'row_attr' => array(
@@ -190,6 +192,9 @@ class ReservationType extends AbstractType
                 'row_attr' => array(
                     'class' => 'row commentaire'
                 )
+            ])
+            ->add('Envoyer', ButtonType::class, [
+                'attr' => ['class' => 'button']
             ])
         ;
     }
