@@ -17,6 +17,7 @@ class IndexController extends AbstractController{
     #[Route('/', name:'app_home')]
     public function index(CoordonneesMapRepository $coordonneMap, LocatifsRepository $locatifs, InformationsRepository $info, AccesPmrRepository $pmrItems, SaisonsRepository $saisonsRepository, OuverturesRepository $ouverturesRepository, HorairesRepository $horairesRepository)
     {
+
         //info section horaire..
         $saisons = $saisonsRepository->findAll();
         $ouvertures = $ouverturesRepository->findAll();

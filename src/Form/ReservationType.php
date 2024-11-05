@@ -8,11 +8,13 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ReservationType extends AbstractType
@@ -30,7 +32,16 @@ class ReservationType extends AbstractType
                 ),
                 'row_attr' => array(
                     'class' => 'row name'
-                )
+                ),
+                'constraints' => [
+                    new NotBlank( message: 'Ce champ doit être renseigné'),
+                    new Length(
+                        min: 2,
+                        minMessage: '{{ limit }} caractères minimum',
+                        max: 50,
+                        maxMessage: '{{ limit }} caractères maximum'
+                    )
+                ]
                 
             ])
             ->add('firstName', TextType::class, [
@@ -42,7 +53,16 @@ class ReservationType extends AbstractType
                 ),
                 'row_attr' => array(
                     'class' => 'row firstname'
-                )
+                ),
+                'constraints' => [
+                    new NotBlank( message: 'Ce champ doit être renseigné'),
+                    new Length(
+                        min: 2,
+                        minMessage: '{{ limit }} caractères minimum',
+                        max: 50,
+                        maxMessage: '{{ limit }} caractères maximum'
+                    )
+                ]
             ])
             ->add('address', TextType::class, [
                 'label' => 'Adresse postal complète',
@@ -88,19 +108,19 @@ class ReservationType extends AbstractType
                     'class' => 'row nbranimaux'
                 )
             ])
-            ->add('ageDesVoyageurs', ChoiceType::class, [
+            ->add('ageDesVoyageurs1', ChoiceType::class, [
                 'label' => 'Voyageur 1',
                 'choices' => [
                     'Choisir une tranche d\'âge' => null,
-                    '0-3 ans' => '0-3',
-                    '4-10 ans' => '4-10',
-                    '11-17 ans' => '11-17',
-                    '18-28 ans' => '18-28',
-                    '+28 ans' => '+28'
+                    '0-3 ans' => 1,
+                    '4-10 ans' => 2,
+                    '11-17 ans' => 3,
+                    '18-28 ans' => 4,
+                    '+28 ans' => 5
                 ],
                 'row_attr' => array(
                     'class' => 'row age'
-                )
+                ),
             ])
             ->add('chalet', CheckboxType::class, [
                 'label' => 'Chalet',
@@ -162,14 +182,14 @@ class ReservationType extends AbstractType
                 'label' => 'Début du séjour',
                 'widget' => 'single_text',
                 'row_attr' => array(
-                    'class' => 'row debut'
+                    'class' => 'endrow debut'
                 )
             ])
             ->add('finDuSejour', DateType::class, [
                 'label' => 'Fin du séjour',
                 'widget' => 'single_text',
                 'row_attr' => array(
-                    'class' => 'row fin'
+                    'class' => 'endrow fin'
                 )
             ])
             ->add('nombreVehicules', IntegerType::class, [
@@ -180,21 +200,23 @@ class ReservationType extends AbstractType
                     'max' => '10'
                 ),
                 'row_attr' => array(
-                    'class' => 'row nbrvehicules'
+                    'class' => 'endrow nbrvehicules'
                 )
             ])
             ->add('commentaire', TextareaType::class, [
                 'label' => 'Commentaire',
                 'attr' => array(
-                    'placeholder' => 'Ajoutez des précisions',
                     'maxlength' => '2000'
                 ),
                 'row_attr' => array(
-                    'class' => 'row commentaire'
+                    'class' => 'endrow commentaire'
                 )
             ])
-            ->add('Envoyer', ButtonType::class, [
-                'attr' => ['class' => 'button']
+            ->add('save', SubmitType::class, [
+                'attr' => ['class' => 'button'],
+                'row_attr' => array(
+                    'class' => 'endrow container-button'
+                )
             ])
         ;
     }
@@ -202,6 +224,7 @@ class ReservationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'required' => false
             // Configure your form options here
         ]);
     }

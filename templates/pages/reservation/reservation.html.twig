@@ -32,12 +32,18 @@
 
                     </div>
                     <div class="container-card-voyageurs">
+                        <div>
 
-                        {{ form_row(form.ageDesVoyageurs) }}
+                            {{ form_row(form.ageDesVoyageurs1)}}
+
+                        </div>
 
                     </div>
                 </div>
                 <div class="end-form">
+                    <div class="title-container">
+                        <p>Type de locatif</p>
+                    </div>
                     <div class="container-checkBox">
                         {{ form_row(form.chalet) }}
                         {{ form_row(form.chaletGite) }}
@@ -51,6 +57,13 @@
                         <p>Option</p>
                         {{ form_row(form.electricite) }}
                     </div>
+                    <div class="choice-date">
+                        {{ form_row(form.debutDuSejour) }}
+                        {{ form_row(form.finDuSejour) }}
+                    </div>
+                    {{ form_row(form.nombreVehicules) }}
+                    {{ form_row(form.commentaire) }}
+                    {{ form_row(form.save, { 'label' : 'Envoyer' }) }}
                 </div>
 
             {{ form_end(form) }}
