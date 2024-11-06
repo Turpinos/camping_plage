@@ -14,8 +14,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 class ReservationType extends AbstractType
 {
@@ -73,17 +78,35 @@ class ReservationType extends AbstractType
                 ),
                 'row_attr' => array(
                     'class' => 'row address'
-                )  
+                ),
+                'constraints' => [
+                    new NotBlank( message: 'Ce champ doit être renseigné'),
+                    new Length(
+                        min: 10,
+                        minMessage: '{{ limit }} caractères minimum',
+                        max: 200,
+                        maxMessage: '{{ limit }} caractères maximum'
+                    )
+                ]  
             ])
             ->add('phone', TelType::class,[
                 'label' => 'Téléphone',
                 'attr' => array(
-                    'minlength' => '2',
+                    'minlength' => '5',
                     'maxlength' => '20'
                 ),
                 'row_attr' => array(
                     'class' => 'row phone'
-                )
+                ),
+                'constraints' => [
+                    new NotBlank( message: 'Ce champ doit être renseigné'),
+                    new Length(
+                        min: 5,
+                        minMessage: '{{ limit }} caractères minimum',
+                        max: 15,
+                        maxMessage: '{{ limit }} caractères maximum'
+                    )
+                ]
             ])
             ->add('nombreVoyageurs', IntegerType::class, [
                 'label'=> 'Nombre de voyageurs',
@@ -95,23 +118,38 @@ class ReservationType extends AbstractType
                 ),
                 'row_attr' => array(
                     'class' => 'row nbrvoyageurs'
-                )
+                ),
+                'constraints' => [
+                    new NotBlank( message: 'Ce champ doit être renseigné'),
+                    new Positive(message: 'Minimum 1 voyageur'),
+                    new LessThanOrEqual(
+                        value: 20,
+                        message: ' Maximum 20 voyageurs'
+                    )
+                ]
             ])
             ->add('nombreAnimaux', IntegerType::class, [
                 'label' => 'Nombre d\'animaux',
                 'attr' => array(
                     'placeholder' => 'Entrez une quantité',
                     'min' => '0',
-                    'max' => '10'
+                    'max' => '20'
                 ),
                 'row_attr' => array(
                     'class' => 'row nbranimaux'
-                )
+                ),
+                'constraints' => [
+                    new PositiveOrZero(message: 'Ne peut être négatif'),
+                    new LessThanOrEqual(
+                        value: 20,
+                        message: 'Maximum 20 animaux'
+                    )
+                ]
             ])
             ->add('ageDesVoyageurs1', ChoiceType::class, [
                 'label' => 'Voyageur 1',
                 'choices' => [
-                    'Choisir une tranche d\'âge' => null,
+                    'Choisir une tranche d\'âge' => 0,
                     '0-3 ans' => 1,
                     '4-10 ans' => 2,
                     '11-17 ans' => 3,
@@ -120,7 +158,7 @@ class ReservationType extends AbstractType
                 ],
                 'row_attr' => array(
                     'class' => 'row age'
-                ),
+                )
             ])
             ->add('chalet', CheckboxType::class, [
                 'label' => 'Chalet',
@@ -183,14 +221,22 @@ class ReservationType extends AbstractType
                 'widget' => 'single_text',
                 'row_attr' => array(
                     'class' => 'endrow debut'
-                )
+                ),
+                'constraints' =>[
+                    new NotBlank( message: 'Ce champ doit être renseigné'),
+                    new Date(message: 'Le format de date est invalide')
+                ]
             ])
             ->add('finDuSejour', DateType::class, [
                 'label' => 'Fin du séjour',
                 'widget' => 'single_text',
                 'row_attr' => array(
                     'class' => 'endrow fin'
-                )
+                ),
+                'constraints' =>[
+                    new NotBlank( message: 'Ce champ doit être renseigné'),
+                    new Date(message: 'Le format de date est invalide')
+                ]
             ])
             ->add('nombreVehicules', IntegerType::class, [
                 'label'=> 'Nombre de véhicules',
@@ -201,7 +247,14 @@ class ReservationType extends AbstractType
                 ),
                 'row_attr' => array(
                     'class' => 'endrow nbrvehicules'
-                )
+                ),
+                'constraints' => [
+                    new PositiveOrZero(message: 'Ne peut être négatif'),
+                    new LessThanOrEqual(
+                        value: 10,
+                        message: 'Ne peut excéder {{ limit }}'
+                    )
+                ]
             ])
             ->add('commentaire', TextareaType::class, [
                 'label' => 'Commentaire',
@@ -210,7 +263,13 @@ class ReservationType extends AbstractType
                 ),
                 'row_attr' => array(
                     'class' => 'endrow commentaire'
-                )
+                ),
+                'constraints' => [
+                    new Length(
+                        max:2000,
+                        maxMessage: 'Ne peut contenir plus de 2000 caractères'
+                    )
+                ]
             ])
             ->add('save', SubmitType::class, [
                 'attr' => ['class' => 'button'],
