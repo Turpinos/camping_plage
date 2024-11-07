@@ -225,6 +225,14 @@
                         }
                     }
                 }
+
+                .container-error{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
             }
 
         }
@@ -260,7 +268,7 @@
 
                     .container-card-voyageurs{
                         padding-block: 1rem;
-                        max-height: 300px;
+                        max-height: 200px;
                         overflow-y: scroll;
                         scrollbar-width: none;
                     }

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    {{ component('Header', {'title' : page.title }) }}
+{% endblock %}
+
+{% block body %}
+<style>
+    body{
+        background-color: rgb(45, 45, 45);
+    }
+</style>
+<table>
+    <tr>
+        <td></td>
+    </tr>
+</table>
+{% endblock %}

@@ -2,10 +2,8 @@ const mainReservation = document.getElementById('reservation');
 
 if(mainReservation != undefined){
 
-const nbrVoyageurs = document.querySelector('#reservation_nombreVoyageurs');
 const containerVoyageurs = document.querySelector('.container-card-voyageurs div');
 const buttonForm = document.getElementById('reservation_save');
-let initQtyVoyageur = nbrVoyageurs.value;
 const emptyCardVoyageur = document.querySelector('.container-card-voyageurs div .row');
 const checkCampingCar = document.querySelector('.camping-car');
 const checkCaravane = document.querySelector('.caravane');
@@ -13,7 +11,16 @@ const checktente = document.querySelector('.tente');
 const containerOption = document.querySelector('.facultatif-container');
 const dateDebutSejour = document.getElementById('reservation_debutDuSejour');
 const dateFinSejour = document.getElementById('reservation_finDuSejour');
+const inputName = document.getElementById('reservation_name');
+const inputFirstName = document.getElementById('reservation_firstName');
+const inputEmail = document.getElementById('reservation_email');
+const inputaddress = document.getElementById('reservation_address');
+const inputTel = document.getElementById('reservation_phone');
+const nbrVoyageurs = document.getElementById('reservation_nombreVoyageurs');
+let selectAgeVoyageur = document.querySelectorAll('.container-card-voyageurs div .row select');
+const listCheckBox = document.querySelectorAll('.container-checkBox .row input');
 
+let initQtyVoyageur = nbrVoyageurs.value;
 
 //Evénement sur la modification de la quantité de voyageurs et ajustement du nombre de carte en conséquence.
 nbrVoyageurs.addEventListener('blur', function(){
@@ -88,25 +95,17 @@ dateDebutSejour.addEventListener('change', function(e){
     
     if(targetDate > compareDate){
         e.target.value = '';
-        const ul = document.createElement('ul');
-        const li = document.createElement('li');
-        li.innerText = 'Doit être inférieure à la fin.';
-        ul.appendChild(li);
-        document.querySelector('.debut').insertBefore(ul, dateDebutSejour);
+        document.querySelector('.debut').insertBefore(displayError('Doit être inférieure à la fin.'), dateDebutSejour);
     }else if (targetDate < currDate) {
         e.target.value = '';
-        const ul = document.createElement('ul');
-        const li = document.createElement('li');
-        li.innerText = 'La date est passée.';
-        ul.appendChild(li);
-        document.querySelector('.debut').insertBefore(ul, dateDebutSejour);
+        document.querySelector('.debut').insertBefore(displayError('La date est passée.'), dateDebutSejour);
     }
     
     
     
 });
 
-//Evenement de contrôle de date de début.
+//Evenement de contrôle de date de fin.
 dateFinSejour.addEventListener('change', function(e){
     const targetDate = new Date(e.target.value);
     const compareDate = new Date(dateDebutSejour.value)
@@ -118,18 +117,10 @@ dateFinSejour.addEventListener('change', function(e){
     
     if(targetDate < compareDate){
         e.target.value = '';
-        const ul = document.createElement('ul');
-        const li = document.createElement('li');
-        li.innerText = 'Doit être supérieur au début.';
-        ul.appendChild(li);
-        document.querySelector('.fin').insertBefore(ul, dateFinSejour);
+        document.querySelector('.fin').insertBefore(displayError('Doit être supérieur au début.'), dateFinSejour);
     }else if (targetDate < currDate) {
         e.target.value = '';
-        const ul = document.createElement('ul');
-        const li = document.createElement('li');
-        li.innerText = 'La date est passée.';
-        ul.appendChild(li);
-        document.querySelector('.fin').insertBefore(ul, dateFinSejour);
+        document.querySelector('.fin').insertBefore(displayError('La date est passée.'), dateFinSejour);
     }
     
     
@@ -137,7 +128,123 @@ dateFinSejour.addEventListener('change', function(e){
 });
 
 //Vérification du formulaire.
-buttonForm.addEventListener('click', function(){
+buttonForm.addEventListener('click', function(e){
+
+    selectAgeVoyageur = document.querySelectorAll('.container-card-voyageurs div .row select');
+    let validator = true;
+
+    if(inputName.value == ''){
+        validator = false;
+
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Nom"'));
+    }
+
+    if(inputFirstName.value == ''){
+        validator = false;
+
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Prénom"'));
+    }
+
+    if(inputEmail.value == ''){
+        validator = false;
+
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Email"'));
+    }
+
+    if(inputaddress.value == ''){
+        validator = false;
+
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Adresse"'));
+    }
+
+    if(inputTel.value == ''){
+        validator = false;
+
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Téléphone"'));
+    }
+
+    if(nbrVoyageurs.value == ''){
+        validator = false;
+
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec le nombre de voyageurs'));
+    }
+
+    for (const select of selectAgeVoyageur) {
+        if(select.value == 0){
+            validator = false;
+
+            if(document.querySelector('.container-error ul')){
+                document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+            }
+    
+            document.querySelector('.container-error').appendChild(displayError('Erreur avec l\'âge d\'un voyageur'));
+        }
+    }
+
+    let isCheck = false
+    for (const check of listCheckBox) {
+        if(check.checked){
+            isCheck = true;
+        }
+    }
+
+    if(!isCheck){
+        validator = false
+
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Au moins un type de locatif doit être sélectionner'));
+    }
+
+    if (dateDebutSejour.value == '') {
+        validator = false;
+
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec l\'une des dates'));
+    }
+
+    if(dateFinSejour.value == ''){
+        validator = false;
+
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec l\'une des dates'));
+    }
+
+    if(!validator){
+        e.preventDefault();
+    }
 
 });
 
@@ -158,6 +265,15 @@ function activeOption(bool, check1, check2) {
             document.getElementById('reservation_electricite').checked = false;
         }
     }
-}
+};
+
+//Affichage erreurs..
+function displayError(message){
+    const ul = document.createElement('ul');
+    const li = document.createElement('li');
+    li.innerText = message;
+    ul.appendChild(li);
+    return ul;
+};
 
 }
