@@ -19,6 +19,7 @@ const inputTel = document.getElementById('reservation_phone');
 const nbrVoyageurs = document.getElementById('reservation_nombreVoyageurs');
 let selectAgeVoyageur = document.querySelectorAll('.container-card-voyageurs div .row select');
 const listCheckBox = document.querySelectorAll('.container-checkBox .row input');
+const hiddenInputAge = document.getElementById('reservation_hiddenInputAge');
 
 let initQtyVoyageur = nbrVoyageurs.value;
 
@@ -63,6 +64,10 @@ nbrVoyageurs.addEventListener('blur', function(){
 
 
 //Evénement sur l'affichage de l'option.
+if(checkCampingCar.lastChild.checked || checkCaravane.lastChild.checked || checktente.lastChild.checked){
+    containerOption.classList.remove('disabled');
+}
+
 checkCampingCar.lastChild.addEventListener('click', function(e){
     activeOption(e.target.checked, checkCaravane, checktente);
 });
@@ -193,7 +198,13 @@ buttonForm.addEventListener('click', function(e){
         document.querySelector('.container-error').appendChild(displayError('Erreur avec le nombre de voyageurs'));
     }
 
+    let listAge = [];
     for (const select of selectAgeVoyageur) {
+
+        if(select.value != 0){
+            listAge.push(select.value);
+        }
+
         if(select.value == 0){
             validator = false;
 
@@ -204,6 +215,7 @@ buttonForm.addEventListener('click', function(e){
             document.querySelector('.container-error').appendChild(displayError('Erreur avec l\'âge d\'un voyageur'));
         }
     }
+    hiddenInputAge.value = JSON.stringify(listAge);
 
     let isCheck = false
     for (const check of listCheckBox) {

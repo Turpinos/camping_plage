@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -15,8 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Blank;
-use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
@@ -176,6 +175,7 @@ class ReservationType extends AbstractType
                     'class' => 'row age'
                 )
             ])
+            ->add('hiddenInputAge', HiddenType::class)
             ->add('chalet', CheckboxType::class, [
                 'label' => 'Chalet',
                 'value' => 'chalet',
@@ -232,7 +232,10 @@ class ReservationType extends AbstractType
                     'class' => 'row elec'
                 )
             ])
+            ->add('hiddenInputLocatif', HiddenType::class)
             ->add('debutDuSejour', DateType::class, [
+                'widget' => 'single_text',
+                'input' => 'string',
                 'label' => 'Début du séjour',
                 'widget' => 'single_text',
                 'row_attr' => array(
@@ -244,6 +247,8 @@ class ReservationType extends AbstractType
                 ]
             ])
             ->add('finDuSejour', DateType::class, [
+                'widget' => 'single_text',
+                'input' => 'string',
                 'label' => 'Fin du séjour',
                 'widget' => 'single_text',
                 'row_attr' => array(
@@ -299,7 +304,8 @@ class ReservationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'required' => false
+            'required' => false,
+            'allow_extra_fields' => true
             // Configure your form options here
         ]);
     }

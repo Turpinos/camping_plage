@@ -1,0 +1,172 @@
+{% apply inline_css %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w=
+3.org/TR/REC-html40/loose.dtd"><html>
+    <head></head>
+    <body>
+        <table style="max-width: 500px; width: 100%; color:#000000; margin: 0 auto;">
+            <tbody>
+                <tr>
+                    <td>
+                        <table style="max-width: 500px; width: 100%; border: 1px solid #828282; margin: 0 auto;">
+                            <tbody style="margin: 0;">
+                                <tr>
+                                    <td  colspan="2"><img style="height: 150px; width:100%" src="{{ email.image('@images/slide_camping.jpg') }}" alt="banniere"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 16px; padding-left: 15px; padding-top: 30px; color: #7ca651;" colspan="2"><h1>Bonjour {{ firstName }} {{ name }} !</h1></td>
+                                </tr> 
+                                <tr>
+                                    <td style="padding: 15px 5px;" colspan="2">
+                                        <p>Merci de vous intéresser au <span style="color: #7ca651; font-weight: bold;">Camping plage du midi</span>. Votre demande sera traitée dans les meilleurs délais et nous reveindrons vers vous au plus vite. En attendant, voici un récapitulatif des informations que vous avez saisi: </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 14px; color: #B7773E; padding-top: 30px; padding-bottom: 10px; padding-left: 15px;" colspan="2">
+                                        <h2>Le séjour:</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 15px; width: 40%; font-size: 14px; font-weight: bold;">
+                                        <p>Locatif:</p>
+                                    </td>
+                                    <td style="padding-right: 10px; padding-top: 10px; padding-bottom: 10px; text-align: center;">
+                                        {% if locatif|length > 0 %}
+
+                                            {% if typeLocatif.id == 2 and locatif.id != 8 %}
+                                                {{ chalet ? "<p>#{locatif.libelle}</p>"|raw }}
+                                            {% else %}
+                                                {{ chalet ? '<p>Chalet</p>'}}
+                                            {% endif %}
+
+                                            {% if typeLocatif.id == 2 and locatif.id == 8 %}
+                                                {{ chaletGite ? "<p>#{locatif.libelle}</p>"|raw }}
+                                            {% else %}
+                                                {{ chaletGite ? '<p>Chalet-gîte</p>'}}
+                                            {% endif %}
+
+                                            {% if typeLocatif.id == 1 %}
+                                                {{ cabane ? "<p>#{locatif.libelle}</p>"|raw }}
+                                            {% else %}
+                                                {{ cabane ? '<p>Cabane</p>'}}
+                                            {% endif %}
+
+                                        {% else %}
+                                            {{ chalet ? '<p>Chalet</p>'}}
+                                            {{ chaletGite ? '<p>Chalet-gîte</p>'}}
+                                            {{ cabane ? '<p>Cabane</p>'}}
+                                        {% endif %}
+
+                                        {{ roulotte ? '<p>Roulotte</p>'}}
+
+                                        {% if campingCar %}
+                                            <p>Camping-car{{ electricite ? ' avec l\'option électricité'}}</p>
+                                        {% endif %}
+                                        {% if caravane %}
+                                            <p>Caravane{{ electricite ? ' avec l\'option électricité'}}</p>
+                                        {% endif %}
+                                        {% if tente %}
+                                            <p>tente{{ electricite ? ' avec l\'option électricité'}}</p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% if locatif|length > 0 %}
+                                <tr>
+                                    <td style="padding-top: 10px; padding-bottom: 10px; text-align: center;" colspan="2">
+                                        <p>Revoir: <a style="text-decoration: none; font-weight: bold;" href="google.com">{{locatif.libelle}}</a></p>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                <tr>
+                                    <td style="padding-left: 15px; width: 40%; font-size: 14px; font-weight: bold;">
+                                        <p>Du:</p>
+                                    </td>
+                                    <td style="padding-right: 10px; padding-top: 10px; padding-bottom: 10px; text-align: center;">
+                                        <p>{{ dateDebut|format_date(locale: 'fr') }}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 15px; width: 40%; font-size: 14px; font-weight: bold;">
+                                        <p>Au:</p>
+                                    </td>
+                                    <td style="padding-right: 10px; padding-top: 10px; padding-bottom: 10px; text-align: center;">
+                                        <p>{{ dateFin|format_date(locale: 'fr') }}</p>
+                                    </td>
+                                </tr>
+                                {% for voyageur, age in ageVoyageurs %}
+                                    <tr>
+                                        <td style="padding-top: 10px; padding-bottom: 10px; text-align: center; font-weight: bold;" colspan="2">
+                                            <p>{{ voyageur }} ({{ age }})</p>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td style="font-size: 14px; color: #B7773E; padding-top: 30px; padding-bottom: 10px; padding-left: 15px;" colspan="2">
+                                        <h2>Vos informations:</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 15px; width: 40%; font-size: 14px; font-weight: bold;">
+                                        <p>Adresse:</p>
+                                    </td>
+                                    <td style="padding-right: 10px; padding-top: 10px; padding-bottom: 10px; text-align: center;">
+                                        <p>{{address}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 15px; width: 40%; font-size: 14px; font-weight: bold;">
+                                        <p>Téléphone:</p>
+                                    </td>
+                                    <td style="padding-right: 10px; padding-top: 10px; padding-bottom: 10px; text-align: center;">
+                                        <p>{{phone}}</p>
+                                    </td>
+                                </tr>
+                                {% if nbrAnimaux > 0 %}
+                                    <tr>
+                                        <td style="padding-left: 15px; width: 40%; font-size: 14px; font-weight: bold;">
+                                            <p>Animaux:</p>
+                                        </td>
+                                        <td style="padding-right: 10px; padding-top: 10px; padding-bottom: 10px; text-align: center;">
+                                            <p>{{ nbrAnimaux }}</p>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if nbrVehicule > 0 %}
+                                    <tr>
+                                        <td style="padding-left: 15px; width: 40%; font-size: 14px; font-weight: bold;">
+                                            <p>Véhicules:</p>
+                                        </td>
+                                        <td style="padding-right: 10px; padding-top: 10px; padding-bottom: 10px; text-align: center;">
+                                            <p>{{ nbrVehicule }}</p>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if commentaire|trim != '' %}
+                                    <tr>
+                                        <td style="font-size: 14px; color: #B7773E; padding-top: 30px; padding-bottom: 10px; padding-left: 15px;" colspan="2">
+                                            <h2>Votre commentaire:</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-top: 10px; padding-bottom: 10px; padding-left: 15px; padding-right: 15px;" colspan="2">
+                                            <p>{{commentaire}}</p>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td style="font-size: 14px; padding-top: 30px; padding-bottom: 10px; padding-left: 15px;" colspan="2">
+                                        <h2>Une question?</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 10px; padding-bottom: 10px; text-align: center;" colspan="2">
+                                        <p>Accédez à notre <a style="text-decoration: underline;" href="google.com">page de contact</a></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>   
+    </body>
+</html>
+{% endapply %}

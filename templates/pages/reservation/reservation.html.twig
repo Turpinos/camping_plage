@@ -46,13 +46,36 @@
                         <p>Type de locatif</p>
                     </div>
                     <div class="container-checkBox">
-                        {{ form_row(form.chalet) }}
-                        {{ form_row(form.chaletGite) }}
-                        {{ form_row(form.cabane) }}
-                        {{ form_row(form.roulotte) }}
-                        {{ form_row(form.campingCar) }}
-                        {{ form_row(form.caravane) }}
-                        {{ form_row(form.tente) }}  
+                        <!--Personnaliser l'affichage des checkbox-->
+                        {% if typeLocatif.id == 2 %}
+                            {% if locatif.slug != 'chalet_gite_elegance' %}
+                                {{ form_row(form.chalet, {
+                                    'label': locatif.libelle,
+                                    'attr':{
+                                        'checked': 'checked'
+                                    }
+                                }) }}
+
+                                {{ form_row(form.chaletGite) }}
+                            {% else %}
+                                {{ form_row(form.chalet) }}
+
+                                {{ form_row(form.chaletGite, {
+                                    'label': locatif.libelle,
+                                    'attr':{
+                                        'checked': 'checked'
+                                    }
+                                }) }}
+                            {% endif %}
+                        {% else %}
+                                {{ form_row(form.chalet) }}
+                                {{ form_row(form.chaletGite) }}
+                        {% endif %}
+                            {{ typeLocatif.id == 1 ? form_row(form.cabane, { 'label': locatif.libelle, 'attr': { 'checked': 'checked' } }) : form_row(form.cabane) }}
+                            {{ typeLocatif.id == 4 ? form_row(form.roulotte, { 'label': locatif.libelle, 'attr': { 'checked': 'checked' } }) : form_row(form.roulotte) }}
+                            {{ form_row(form.campingCar) }}
+                            {{ form_row(form.caravane) }}
+                            {{ form_row(form.tente) }}
                     </div>
                     <div class="facultatif-container disabled">
                         <p>Option</p>
