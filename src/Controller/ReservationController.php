@@ -9,6 +9,8 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\Exception\TransportException;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 
@@ -20,13 +22,13 @@ class ReservationController extends AbstractController
     {
         $locatif = [];
         $typeLocatif = ['id' => 0];
+        $error = '';
 
         $form = $this->createForm(ReservationType::class);
 
         if($slug != null){
             $locatif = $locatifRepository->findOneBy(['slug' => $slug]);
             $typeLocatif = $typeLocatifsRepository->findOneBy(['id' => $locatif->getIdTypeLocatifs()]);
-            $form->get('hiddenInputLocatif')->setData($locatif->getLibelle());
         }
 
         $form->handleRequest($request);
@@ -61,7 +63,6 @@ class ReservationController extends AbstractController
             $emailClient = (new TemplatedEmail())
                 ->from('arthur58230@hotmail.fr')
                 ->to($data['email'])
-                ->cc('arthur58230@hotmail.fr')
                 ->subject('Camping Plage du midi - Confirmation de contact')
                 ->htmlTemplate('emails/confirmationResa.html.twig')
                 ->context([
@@ -90,8 +91,7 @@ class ReservationController extends AbstractController
 
                 $email = (new TemplatedEmail())
                 ->from('arthur58230@hotmail.fr')
-                ->to('pinarthur65@gmail.com')
-                ->cc('arthur58230@hotmail.fr')
+                ->to('arthur58230@hotmail.fr')
                 ->subject('Camping Plage du midi - Demande de devis/réservation')
                 ->htmlTemplate('emails/demandeResa.html.twig')
                 ->context([
@@ -119,8 +119,23 @@ class ReservationController extends AbstractController
 
                 ]);
 
-            $mailer->send($emailClient);
-            $mailer->send($email);
+                try {
+
+                    $mailer->send($emailClient);
+                    $mailer->send($email);
+
+                } catch (TransportExceptionInterface $e) {
+
+                    try {
+
+                        $mailer->send($emailClient);
+                        $mailer->send($email);
+
+                    }catch(TransportException $except){
+                        $error = 'Nous rencontrons un problème lors de l\'envoi du mail. Merci de réessayer plus tard.';
+                    }
+                }
+            
 
             return $this->redirectToRoute('reservation');
 
@@ -138,7 +153,8 @@ class ReservationController extends AbstractController
             'page' => $page,
             'form' => $form,
             'locatif' => $locatif,
-            'typeLocatif' => $typeLocatif
+            'typeLocatif' => $typeLocatif,
+            'error' => $error
         ]);
     }
 }

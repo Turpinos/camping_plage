@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -232,7 +231,6 @@ class ReservationType extends AbstractType
                     'class' => 'row elec'
                 )
             ])
-            ->add('hiddenInputLocatif', HiddenType::class)
             ->add('debutDuSejour', DateType::class, [
                 'widget' => 'single_text',
                 'input' => 'string',

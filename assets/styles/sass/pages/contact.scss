@@ -1,0 +1,185 @@
+.main-contact{
+    section{
+        background: linear-gradient(170deg, rgba(255,255,255,1) 0%, rgba(254,250,224,1) 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 2rem;
+        margin-bottom: -3rem;
+        padding-block: 3rem;
+
+        article{
+            background-color: white;
+            box-shadow: 3px 5px 20px 0px rgba(0,0,0,0.40);
+            width: 90%;
+            max-width: 350px;
+            padding: 0.5rem;
+
+            .link{
+                text-align: center;
+            }
+            a{
+                font-size: 0.9rem;
+                color: $secondaryBold;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .div{
+                padding-bottom: 0.5rem;
+
+                p{
+                    padding-left: 0.5rem;
+                }
+            }
+
+            h2{
+                color: $secondaryBold;
+                text-transform: uppercase;
+                font-weight: 600;
+                margin-block:0.5rem;
+                font-size: 1.1rem;
+            }
+
+            .first-info{
+                border-bottom: 1px solid rgb(177, 177, 177);
+                padding-bottom: 2rem;
+                margin-bottom: 2rem;
+
+                form{
+        
+                    ul{
+                        color: rgb(174, 73, 73);
+                        font-size: 0.7rem;
+                        font-weight: 500;
+                        padding: 0px;
+                        margin-block: 0.1rem;
+                        list-style: none;
+                    }
+
+                    .row{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        padding-block: 0.3rem;
+    
+                        label{
+                            color: $secondaryBold;
+                            text-transform: uppercase;
+                            font-weight: 500;
+                            margin-block: 0.5rem;
+                        }
+    
+                        input{
+                            border-top: 0px;
+                            border-inline: 0px;
+                            border-bottom: 1px solid black;
+                            padding-left: 0.5rem;
+                            padding-block: 0.3rem;
+                            width: 90%;
+                            align-self: center;
+                            margin-bottom: 1rem;
+                        }
+
+                        input::placeholder{
+                            color: rgb(162, 162, 162);
+                            font-style: italic;
+                            font-weight: 500;
+                        }
+                    }
+
+                    textarea{
+                        width: 95%;
+                        height: 10rem;
+                        border: none;
+                        background-color: rgb(241, 241, 241);
+                        margin-inline: auto;
+                        resize: none;
+                    }
+
+                    .container-button{
+                        button{
+                            margin: 1rem auto;
+                            padding: 0.3rem 0.3rem;
+                            border: 1px solid $secondaryBold;
+                            background-color: $secondaryBold;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            letter-spacing: 0.05rem;
+                            color: white;
+                            transition: all 200ms;
+    
+                            &:hover{
+                                background-color: white;
+                                color: $secondaryBold;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .last-info{
+                h3{
+                    color: $secondaryBold;
+                    font-weight: 600;
+                    margin-block:0.5rem;
+                    font-size: 1.1rem;
+                }
+
+                ul{
+                    font-size: 1rem;
+
+                    li{
+                        padding-block: 0.1rem;
+                    }
+                }
+
+                span{
+                    font-weight: 600;
+                }
+
+                .google-map{
+                    width: 95%;
+                    height: 300px;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}
+
+@media screen and ( min-width: 860px){
+    .main-contact{
+        section{
+            article{
+                display: flex;
+                justify-content: center;
+                max-width: 900px;
+
+                .first-info{
+                    width: 47%;
+                    border-bottom: none;
+                    padding-bottom: 0px;
+                    margin-bottom: 0px;
+                    border-right: 1px solid rgb(177, 177, 177);
+                    padding-right: 1rem;
+                    margin-right: 1rem;
+
+                    .identity{
+                        display: flex;
+                        justify-content: space-around;
+
+                        .row{
+                            width: 45%;
+                        }
+
+                    }
+                }
+
+                .last-info{
+                    width: 47%;
+                }
+            }
+        }
+    }
+}

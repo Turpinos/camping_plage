@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Contact - Plage du midi
+{% endblock %}
+
+{% block header %}
+    {{ component('Header', {'title' : page.title }) }}
+{% endblock %}
+{% block body %}
+    <main id="contact" class="main-contact">
+        <section>
+            <article>
+                <div class="first-info">
+                    <div class="div address">
+                        <h2>Par courrier</h2>
+                        <p>
+                            {{ address.contenu }}
+                            <br/>
+                            {{ coorpro.contenu }}
+                        </p>
+                    </div>
+                    <div class="div tel">
+                        <h2>Par téléphone</h2>
+                        <p> {{ tel.contenu }}</p>
+                    </div>
+                    {{ form_start(form) }}
+                    <h2>Pour un réponse par email</h2>
+
+                    <div class="div identity">
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.firstName) }}
+                    </div>
+
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.subject) }}
+                    {{ form_row(form.message) }}
+                    {{ form_row(form.save) }}
+
+                    <p class="link"><a href="{{ path('reservation')}}">Pour réserver un séjour cliquez ici</a></p>
+
+                    {{ form_end(form) }}
+
+                </div>
+                <div class="last-info">
+                    <h2>Accès via transport</h2>
+                    <div class="div train">
+                        <h3>Par le train</h3>
+                        <ul>
+                            <li>De <span>Paris</span>: <span>Gare de Lyon</span> arrêt <span>Gare de Creusot-Montceau les Mines</span> puis en bus jusqu’à <span>Autun</span> ou <span>Saulieu</span>.</li>
+                            <li>De <span>Lyon</span>: <span>Gare Part-Dieu</span> arrêt <span>Gare de Creusot-Montceau les Mines</span> puis en bus jusqu’à <span>Autun</span> ou <span>Saulieu</span>.</li>
+                        </ul>
+                    </div>
+                    <div class="div bus">
+                        <h3>Par le bus</h3>
+                        <ul>
+                            <li>Depuis <span>Paris Bercy</span> destination <span>Avallon</span>.</li>
+                            <li>Depuis <span>Dijon</span> destination <span>Saulieu</span>.</li>
+                        </ul>
+                    </div>
+                    <div class="div autoroute">
+                        <h3>Par l'autoroute</h3>
+                        <p>Autoroute <span>A6</span> - sortie <span>Avallon 22</span>, ou encore <span>Pouilly en Auxois</span> échangeur entre <span>A38</span> et <span>A6</span> puis suivre direction <span>Saulieu</span>.</p>
+                    </div>
+                    <div class="div taxi">
+                        <h3>Par taxi</h3>
+                        <p>Taxi <span>Samuel Bureau</span>: 03 86 76 14 05.</p>
+                    </div>
+                    <div class="google-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2712.7602923417867!2d4.069311276883493!3d47.185370971154335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f21d749bc6e9e5%3A0xf58d5ec89c2100c4!2sChalets%2FCamping%20Plage%20du%20Midi!5e0!3m2!1sfr!2sfr!4v1731087873006!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                </div>
+
+            </article>
+        </section>
+
+    </main>
+{% endblock %}
+{% block footer %}
+    {{ component('Footer') }}
+{% endblock %}

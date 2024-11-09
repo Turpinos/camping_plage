@@ -102,7 +102,7 @@ class LocatifsController extends AbstractController{
 
         $page = [ 
             'libelle' => 'locatifs_details',
-            'title' => 'Les détails'
+            'title' => ''
             
         ];
 

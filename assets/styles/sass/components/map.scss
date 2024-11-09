@@ -23,6 +23,7 @@
 
 @media screen and ( min-width: 860px){
     .map-container{
+        display: flex;
         .ping{
             transform: translate(-50%, -100%) scale(1);
         }

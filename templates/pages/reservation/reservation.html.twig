@@ -88,7 +88,9 @@
                     {{ form_row(form.nombreVehicules) }}
                     {{ form_row(form.commentaire) }}
                     {{ form_row(form.save, { 'label' : 'Envoyer' }) }}
-                    <div class="container-error"></div>
+                    <div class="container-error">
+                        {{ error == '' ? '' : "<p>#{error}</p>"|raw }}
+                    </div>
                 </div>
 
             {{ form_end(form) }}

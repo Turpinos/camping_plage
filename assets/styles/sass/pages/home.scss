@@ -24,17 +24,21 @@ p, a{
 
             .input-container{
                 margin-right: 0.5rem;
-                width: 0.8rem;
-                height: 0.8rem;
-                border: 1px solid $mainBold;
-                border-radius: 3px;
+                width: 1rem;
+                height: 1rem;
+                background-color: white;
+                border: 2px solid $mainBold;
+                border-radius: 1rem;
+                transition: all 200ms;
                 &:hover{
                     cursor: pointer;
                 }
             }
 
             .check{
+                transition: all 200ms;
                 background-color: $mainBold;
+                border-color: white;
             }
 
             .hidden-p{
@@ -261,6 +265,7 @@ p, a{
         flex-direction: row;
         width: 100%;
         height: fit-content;
+        box-shadow: 3px 5px 15px 0px rgba(0,0,0,0.30);
         .map-container{
             width: 60%;
         }
@@ -268,7 +273,6 @@ p, a{
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding-bottom: 8px;
             width: 40%;
         }
     }
@@ -360,6 +364,7 @@ p, a{
         .container-select-map{
             .select-map{
                 height: 7rem;
+                padding-inline: 0.7rem 0.5rem;
             }
         }
     }
@@ -370,7 +375,8 @@ p, a{
     .map-interactive{
         .container-select-map{
             .select-map{
-                height: 9rem;
+                height: 8rem;
+                padding-inline: 1.2rem 0.5rem;
             }
         }
     }
