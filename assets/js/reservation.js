@@ -70,14 +70,52 @@ if(checkCampingCar.lastChild.checked || checkCaravane.lastChild.checked || check
 
 checkCampingCar.lastChild.addEventListener('click', function(e){
     activeOption(e.target.checked, checkCaravane, checktente);
+    if(e.target.checked){
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Il n\'est pas nécessaire de réserver un emplacement hors haute saison!'));
+
+    }else{
+        if(document.querySelector('.container-error ul') && !checkCaravane.lastChild.checked && !checktente.lastChild.checked){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+            console.log(checkCaravane.checked);
+            
+        }
+    }
 });
 
 checkCaravane.lastChild.addEventListener('click', function(e){
     activeOption(e.target.checked, checkCampingCar, checktente);
+    if(e.target.checked){
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Il n\'est pas nécessaire de réserver un emplacement hors haute saison!'));
+
+    }else{
+        if(document.querySelector('.container-error ul') && !checkCampingCar.lastChild.checked && !checktente.lastChild.checked){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+    }
 });
 
 checktente.lastChild.addEventListener('click', function(e){
     activeOption(e.target.checked, checkCampingCar, checkCaravane);
+    if(e.target.checked){
+        if(document.querySelector('.container-error ul')){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+
+        document.querySelector('.container-error').appendChild(displayError('Il n\'est pas nécessaire de réserver un emplacement hors haute saison!'));
+
+    }else{
+        if(document.querySelector('.container-error ul') && !checkCampingCar.lastChild.checked && !checkCaravane.lastChild.checked){
+            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
+        }
+    }
 });
 
 // Activation de l'input checkbox directement.

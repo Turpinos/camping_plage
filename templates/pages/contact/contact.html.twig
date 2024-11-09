@@ -41,6 +41,10 @@
 
                     {{ form_end(form) }}
 
+                    <div class="container-error">
+                        {{ error == '' ? '' : "<p>#{error}</p>"|raw }}
+                    </div>
+
                 </div>
                 <div class="last-info">
                     <h2>Accès via transport</h2>

@@ -168,6 +168,7 @@
                 </div>
                 <p><span>Mode de paiement:</span> chèques, chèques vacances, toutes les cartes de crédits, espèces.</p>
                 <p class="lien-pdf"><span>Règlement intérieur:</span> <a href="">visualiser en cliquant</a>.</p>
+                {{ locatif.slug == 'camping' ? "<p><span>Avertissement:</span> Il n'est pas nécessaire de réserver un emplacement hors haute saison!</p>"|raw }}
                 {{ locatif.ouverturehivernale ? '' : "<p><span>Avertissement:</span> cette location n'est pas disponible l'hiver!</p>"|raw }}
                 <p class="lien-resa"><a href="{{ path('reservation', {'slug': locatif.slug}) }}">Faire un devis ou réserver</a></p>
             </div>

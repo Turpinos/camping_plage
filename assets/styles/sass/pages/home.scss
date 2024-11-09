@@ -114,6 +114,10 @@ p, a{
             margin-top: 1rem;
         }
     }
+    a{
+        color: $secondaryBold;
+        text-decoration: none;
+    }
 
     p{
         height: 0px;
@@ -265,7 +269,6 @@ p, a{
         flex-direction: row;
         width: 100%;
         height: fit-content;
-        box-shadow: 3px 5px 15px 0px rgba(0,0,0,0.30);
         .map-container{
             width: 60%;
         }
@@ -293,9 +296,9 @@ p, a{
         }
     }
 
-    h2{
-        font-size: 1.5rem;
+    .index h2{
         padding-inline: 0.5rem;
+        margin-left: 1rem;
     }
 
     .point-clef{
@@ -314,7 +317,7 @@ p, a{
                 font-weight: 500;
             }
         }
-        .f2, .f4{
+        .f2, .f4, .f6{
             flex-direction: row-reverse;
         }
         p{

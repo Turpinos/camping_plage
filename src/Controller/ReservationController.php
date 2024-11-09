@@ -9,7 +9,6 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
@@ -126,14 +125,8 @@ class ReservationController extends AbstractController
 
                 } catch (TransportExceptionInterface $e) {
 
-                    try {
-
-                        $mailer->send($emailClient);
-                        $mailer->send($email);
-
-                    }catch(TransportException $except){
-                        $error = 'Nous rencontrons un problème lors de l\'envoi du mail. Merci de réessayer plus tard.';
-                    }
+                    $error = 'Nous rencontrons un problème lors de l\'envoi du mail. Merci de réessayer plus tard.';
+                    
                 }
             
 
