@@ -136,10 +136,7 @@ class ReservationController extends AbstractController
 
         
 
-        $page = [ 
-            'libelle' => 'devis_&_reservation',
-            'title' => 'Devis & Réservation'
-        ];
+        $page = 'Devis & Réservation';
 
         return $this->render('pages/reservation/reservation.html.twig', [
             'controller_name' => 'ReservationController',

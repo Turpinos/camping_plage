@@ -1,7 +1,7 @@
 <header>
     <div class="banner">
 
-        <h1 class="mobile">{{ title }}</h1>
+        {{ title is defined ? "<h1 class='mobile'>#{title}</h1>"|raw : '' }}
 
     </div>
     
@@ -9,5 +9,5 @@
             {{ component('Navbar') }}
         {% endblock %}
 
-        <h1 class="desk">{{ title }}</h1>
+        {{ title is defined ? "<h1 class='desk'>#{title}</h1>"|raw : '' }}
 </header>

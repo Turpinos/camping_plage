@@ -67,11 +67,7 @@ class ContactController extends AbstractController
         }
         
 
-        $page = [ 
-            'libelle' => 'Contact',
-            'title' => 'Contact'
-            
-        ];
+        $page = 'Contact';
 
         return $this->render('/pages/contact/contact.html.twig', [
             'page' => $page,

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block header %}
-    {{ component('Header', {'title' : page.title }) }}
+    {{ component('Header', {'title' : page }) }}
 {% endblock %}
 {% block body %}
     <main id="locatifs" class="main-locatifs">
@@ -85,7 +85,7 @@
         </section>
         <section id="background-map" class="hidden">
             <img class="close" src="{{ asset('/images/logos/fermer-la-croix.png') }}" alt="fermer" />
-            {{ component('Map', {'libelle' : page.libelle, 'coordonnee' : coordonneesMap, 'isPmr' : isPmr}) }}
+            {{ component('Map', {'coordonnee' : coordonneesMap, 'isPmr' : isPmr}) }}
         </section>
     </main>
 {% endblock %}

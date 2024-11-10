@@ -18,7 +18,7 @@ class LocatifsController extends AbstractController{
     public function locatifs(LocatifsRepository $locatifsRepository, CoordonneesMapRepository $coordonneesMapRepository, ImagesRepository $imagesRepository, TypeLocatifsRepository $typeLocatifsRepository,string $slug = null){
 
         $typeLocatifs= [];
-        $page = [];
+        $page = '';
         $locatifs = [];
         $coordonneesMap = [];
         $images = [];
@@ -26,11 +26,7 @@ class LocatifsController extends AbstractController{
 
         if($slug == null){
 
-            $page = [ 
-                'libelle' => 'locatifs',
-                'title' => 'Nos locations'
-                
-            ];
+            $page = 'Nos locations';
             $typeLocatifs = $typeLocatifsRepository->findAll();
             $locatifs = $locatifsRepository->findBy([],['slug' => 'ASC']);
             $coordonneesMap = $coordonneesMapRepository->findAll();
@@ -43,11 +39,7 @@ class LocatifsController extends AbstractController{
             }
 
         }elseif($slug == "hiver"){
-            $page = [ 
-                'libelle' => 'locatifs_hiver',
-                'title' => 'Nos locations d\'hiver'
-                
-            ];
+            $page = 'Nos locations d\'hiver';
 
             $locatifs = $locatifsRepository->findBy(['ouverture_hivernale' => '1'],['slug' => 'ASC']);
             $images = $imagesRepository->findBy(['isPicture' => "1"]);
@@ -100,14 +92,7 @@ class LocatifsController extends AbstractController{
             $isPmr[] = $locatif->getId();
         }
 
-        $page = [ 
-            'libelle' => 'locatifs_details',
-            'title' => ''
-            
-        ];
-
         return $this->render('/pages/locatifs/locatifs_details.html.twig', [
-            'page' => $page,
             'locatif' => $locatif,
             'tarifs' => $tarifs,
             'images' => $images,

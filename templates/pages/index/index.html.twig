@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-    {{ component('Header', {'title' : page.title }) }}
+    {{ component('Header', {'title' : page }) }}
 {% endblock %}
 
 {% block body %}
@@ -29,7 +29,7 @@
                     <p class="hidden-p"></p>
                 </div>
             </div>
-            {{ component('Map', {'libelle' : page.libelle, 'coordonnee' : coordonnee, 'isPmr' : isPmr}) }}
+            {{ component('Map', {'coordonnee' : coordonnee, 'isPmr' : isPmr}) }}
         </section>
         <section class="contact-rapide">
             <div>
@@ -41,32 +41,32 @@
         <section class="point-clef">
             <h2>3 étoiles à votre service</h2>
             <figure class="f1">
-                <img src="{{ asset('/images/slider_epiceriev2.jpg') }}" alt="Epicerie"/>
+                <img src="{{ asset('/images/media/slider_epiceriev2.jpg') }}" alt="Epicerie"/>
                 <figcaption>Une épicerie qui propose des produits d’alimentation locaux et bio mais aussi des articles de plage, des souvenir, les journaux et même un dépôt de pain.</figcaption>
             </figure>
             <p></p>
             <figure class="f2">
-                <img src="{{ asset('/images/cityv2.jpg') }}" alt="City"/>
+                <img src="{{ asset('/images/media/cityv2.jpg') }}" alt="City"/>
                 <figcaption>Un espace de jeux pour les petits et les grands, pour le plaisir de jouer entre amis ou en famille.</figcaption>
             </figure>
             <p></p>
             <figure class="f3">
-                <img src="{{ asset('/images/piscinev2.jpg') }}" alt="Piscine"/>
+                <img src="{{ asset('/images/media/piscinev2.jpg') }}" alt="Piscine"/>
                 <figcaption>Une piscine couverte et chauffée avec sa propre terrasse pour se prélasser au soleil.</figcaption>
             </figure>
             <p></p>
             <figure class="f4">
-                <img src="{{ asset('/images/saunav2.jpg') }}" alt="Sauna"/>
-                <figcaption>Un chalet dédié au « bien-être écologique » avec sauna, hammam, terrasse solarium, douche et tisanerie.</figcaption>
+                <img src="{{ asset('/images/media/saunav2.jpg') }}" alt="Sauna"/>
+                <figcaption>Un chalet dédié au « bien-être écologique » avec sauna, hammam, terrasse solarium, douche et tisanerie.</figcaption>
             </figure>
             <p></p>
             <figure class="f5">
-                <img src="{{ asset('/images/barv2.jpg') }}" alt="Bar"/>
+                <img src="{{ asset('/images/media/barv2.jpg') }}" alt="Bar"/>
                 <figcaption>Profitez d’une boisson au bar ou sur la terrasse au bord du lac.</figcaption>
             </figure>
             <p></p>
             <figure class="f6">
-                <img src="{{ asset('/images/bateau.jpg') }}" alt="Bar"/>
+                <img src="{{ asset('/images/media/bateau.jpg') }}" alt="Bar"/>
                 <figcaption>Montez à bord du bateau "Les settons" pour profiter d'une promenade de 45 minutes, commentée par le capitaine(<a href="https://bateaux-settons.com">Voir le site</a>).</figcaption>
             </figure>
         </section>
@@ -92,11 +92,11 @@
                 <p>-Base nautique Activital : Voile, Canoë et Kayak, Paddle. Nos résidents bénéficient d’un Pass réduction sur ces activités nautiques.</p>
                 <p>-Vélo.</p>
                 <p>-Pêche.</p>
-                <p>-À 10 minutes du lac, Cap Xtrem : rando quads et 4×4, parcours aventure, rafting.</p>
+                <p>-À 10 minutes du lac, Cap Xtrem : rando quads et 4x4, parcours aventure, rafting.</p>
                 <p>-Suivez la ligne rouge autour du Lac des Settons, un sentier pédestre de 15 kilomètres (environ 4 heures de marche) qui vous entraînera dans une aventure où vous découvrirez la faune, la flore et les paysages idylliques au cœur du Morvan.</p>
             </article>
             <div class="pmr">
-                <img src="{{ asset('/images/logo_pmr.jpg') }}" alt="Pmr" />
+                <img src="{{ asset('/images/logos/logo_pmr.jpg') }}" alt="Pmr" />
                 {% for itemPmr in itemsPmr %}
                     <p>{{ itemPmr.quantite }} {{ itemPmr.libelle }}</p>
                 {% endfor %}

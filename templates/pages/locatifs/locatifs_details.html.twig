@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block header %}
-    {{ component('Header', {'title' : page.title }) }}
+    {{ component('Header') }}
 {% endblock %}
 {% block body %}
     <main id="locatifs-details" class="main-locatifs-details">
         <section class="informations-principales">
             <div class="premiere-partie">
-                <h2>{{ locatif.libelle }}</h2>
+                <h1>{{ locatif.libelle }}</h1>
 
                 {% for image in images %}
                     {% if loop.first %}
@@ -167,7 +167,7 @@
                     <p><span>Note:</span> les arrhes versées à la réservation seront encaissées et déduites du montant total du séjour. Aucun remboursement ne sera effectué en cas de désistement.</p>
                 </div>
                 <p><span>Mode de paiement:</span> chèques, chèques vacances, toutes les cartes de crédits, espèces.</p>
-                <p class="lien-pdf"><span>Règlement intérieur:</span> <a href="">visualiser en cliquant</a>.</p>
+                <p class="lien-pdf"><span>Règlement intérieur:</span> <a href="{{ path('reglement_interieur') }}">visualiser en cliquant</a>.</p>
                 {{ locatif.slug == 'camping' ? "<p><span>Avertissement:</span> Il n'est pas nécessaire de réserver un emplacement hors haute saison!</p>"|raw }}
                 {{ locatif.ouverturehivernale ? '' : "<p><span>Avertissement:</span> cette location n'est pas disponible l'hiver!</p>"|raw }}
                 <p class="lien-resa"><a href="{{ path('reservation', {'slug': locatif.slug}) }}">Faire un devis ou réserver</a></p>
@@ -258,19 +258,19 @@
                 <img class="fleche-bas" src="{{ asset('/images/logos/fleche-vers-le-bas-pour-naviguer-noir.png') }}" alt="fleche" />
                 <h4>Réservations:</h4>
                 <p>En haute saison : Les réservations de locatifs se font à la semaine du samedi au samedi.
-                En basse saison :  Les réservations de locatifs sont disponibles à la nuitée. Les week-end et certains jours fériés, il se peut que les réservations ne soient disponibles qu’à partir de 2, 3, ou 4 nuitées.
+                En basse saison : Les réservations de locatifs sont disponibles à la nuitée. Les week-end et certains jours fériés, il se peut que les réservations ne soient disponibles qu’à partir de 2, 3, ou 4 nuitées.
                 En saison Hiver : Les réservations de locatifs sont disponibles à partir de 4 nuitées durant les vacances. Hors vacances, les locatifs sont disponibles à partir de 2 nuitées.</p>
 
-                <h4>Arrhes et solde:</h4>
-                <p>Pour que votre réservation soit effective, vous devez impérativement nous adresser des arrhes.  Le montant demandé est indiqué sur le site internet ainsi que sur les documents « tarif ». Ils sont différents selon la période et le type de locatifs.
-                Afin d’assurer la réservation, il est préférable que cela soit fait dans les 14 jours suivant l’option. Passé ce délai, l’option sera automatiquement supprimée.  Les arrhes versées ne sont pas remboursables. Durant la période COVID, nous vous laissons la possibilité de reporter ces arrhes sur un autre séjour de l’année, ou de l’année suivante. Tout séjour commencé, interrompu ou abrégé ne pourra donner lieu à un remboursement.
+                <h4>Arrhes et solde:</h4>
+                <p>Pour que votre réservation soit effective, vous devez impérativement nous adresser des arrhes. Le montant demandé est indiqué sur le site internet ainsi que sur les documents « tarif ». Ils sont différents selon la période et le type de locatifs.
+                Afin d’assurer la réservation, il est préférable que cela soit fait dans les 14 jours suivant l’option. Passé ce délai, l’option sera automatiquement supprimée. Les arrhes versées ne sont pas remboursables. Durant la période COVID, nous vous laissons la possibilité de reporter ces arrhes sur un autre séjour de l’année, ou de l’année suivante. Tout séjour commencé, interrompu ou abrégé ne pourra donner lieu à un remboursement.
                 Le solde du locatif vous sera demandé 14 jours avant la date d’arrivée.</p>
 
-                <h4>Condition de séjour et cautions:</h4>
+                <h4>Condition de séjour et cautions:</h4>
                 <p>Une assurance responsabilité civile est obligatoire (merci de nous fournir une copie). Les enfants sont considérés comme occupants à part entière. Le dépôt d’une somme de 400 euros est demandé. Si vous ne possédez pas de chéquier, il vous sera demandé vos numéros de carte bancaire. Elle pourra être débitée si le locatif n’est pas rendu propre et en état lors de l’état des lieux.</p>
 
-                <h4>Arrivée et départ:</h4>
-                <p>La remise des clés de votre location s’effectuera de 15H à 20H. En cas d’empêchement majeur justifié entraînant une arrivée en dehors de ces horaires, il est nécessaire de prévenir au {{ telephone.contenu }}. La location doit être libérée à 10H00. En cas de dépassement horaire, vous devrez prévenir la réception et convenir d’un arrangement selon la disponibilité de celui-ci, une demi-journée supplémentaire vous sera alors facturée.</p>
+                <h4>Arrivée et départ:</h4>
+                <p>La remise des clés de votre location s’effectuera de 15H à 20H. En cas d’empêchement majeur justifié entraînant une arrivée en dehors de ces horaires, il est nécessaire de prévenir au {{ telephone.contenu }}. La location doit être libérée à 10H00. En cas de dépassement horaire, vous devrez prévenir la réception et convenir d’un arrangement selon la disponibilité de celui-ci, une demi-journée supplémentaire vous sera alors facturée.</p>
 
                 <h4>Droit de rétractation:</h4>
                 <p>Le droit de rétractation ne peut être exercé pour les contrats de prestations de services d’hébergement autres que d’hébergement résidentiel (art. L.221-28 du code de la consommation).</p>
@@ -278,7 +278,7 @@
         </section>
         <section id="background-map" class="hidden">
             <img class="close" src="{{ asset('/images/logos/fermer-la-croix.png') }}" alt="fermer" />
-            {{ component('Map', {'libelle' : page.libelle, 'coordonnee' : coordonnees, 'isPmr' : isPmr}) }}
+            {{ component('Map', {'coordonnee' : coordonnees, 'isPmr' : isPmr}) }}
         </section>
     </main>
 {% endblock %}

@@ -1,0 +1,205 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Règlement intérieur - Plage du midi
+{% endblock %}
+
+{% block header %}
+    {{ component('Header', {'title' : page }) }}
+{% endblock %}
+{% block body %}
+    <main id="reglement-interieur" class="main-reglement-interieur">
+        <div class='head'>
+            <p>Règlement Intérieur & Conditions Générales de Vente</p>
+            <p>{{ address.contenu }}</p>
+            <p>{{ coorpro.contenu }}</p>
+            <p>{{ tel.contenu }} - {{ email.contenu }}</p>
+            <p>Dernière mise à jour: Novembre 2020</p>
+        </div>
+        <section>
+            <h2>Règlement intérieur</h2>
+            <h3>Conditions d’admission et de séjour</h3>
+            <p>
+                Pour être admis à pénétrer, à s’installer ou séjourner sur un terrain de camping, il faut y avoir été autorisé par le gestionnaire ou son représentant. Ce dernier a pour obligation de veiller à la bonne tenue et au bon ordre du terrain de camping ainsi qu’au respect de l’application du présent règlement intérieur. Le fait de séjourner sur le terrain de camping implique l’acceptation des dispositions du présent règlement et l’engagement de s’y conformer. Nul ne peut y élire domicile.
+            </p>
+            <h3>Formalités de police</h3>
+            <p>
+                Les mineurs non accompagnés de leurs parents ne seront admis qu’avec une autorisation écrite de ceux-ci. En application de l’article R. 611-35 du code de l’entrée et du séjour des étrangers et du droit d’asile, le gestionnaire est tenu de faire remplir et signer par le client de nationalité étrangère, dès son arrivée, une fiche individuelle de police. Elle doit mentionner notamment :
+            </p>
+            <ol>
+                <li>Le nom et les prénoms</li>
+                <li>La date et le lieu de naissance</li>
+                <li>La nationalité</li>
+                <li>Le domicile habituel</li>
+            </ol>
+            <p>Les enfants âgés de moins de 15 ans peuvent figurer sur la fiche de l’un des parents.</p>
+            <h3>Installation</h3>
+            <p>
+                L’hébergement de plein air et le matériel y afférent doivent être installés à l’emplacement indiqué conformément aux directives données par le gestionnaire ou son représentant.
+            </p>
+            <h3>Bureau d’accueil</h3>
+            <p>
+                Le bureau d accueil est ouvert de 9h à 12h et de 14h à 18h du lundi au vendredi durant la basse saison. En haute saison, les horaires d’ouvertures sont étendus de 9h à 12h et de 14h à 19h tous les jours de la semaine. On trouvera au bureau d’accueil tous les renseignements sur les services du terrain de camping, les informations sur les possibilités de ravitaillement, les installations sportives, les richesses touristiques des environs et diverses adresses qui peuvent s’avérer utiles. Un système de collecte et de traitement des réclamations est tenu à la disposition des clients.
+            </p>
+            <h3>Affichage</h3>
+            <p>
+                Le présent règlement intérieur est affiché à l’entrée du terrain de camping et au bureau d’accueil. Il est remis à chaque client qui le demande. Le camping est classé 3 étoiles, catégorie tourisme. Le nombre d’emplacements est affiché à l’entrée du terrain de camping et au bureau d’accueil. Les prix des différentes prestations sont communiqués aux clients dans les conditions fixées par arrêté du ministre chargé de la consommation et consultables à l’accueil.
+            </p>
+            <h3>Modalités de départ</h3>
+            <p>
+                Les clients sont invités à prévenir le bureau d’accueil de leur départ dès que possible. Les clients ayant l’intention de partir avant l’heure d’ouverture du bureau d’accueil doivent effectuer la veille le paiement de leur séjour.
+            </p>
+            <h3>Bruit et silence</h3>
+            <p>
+                Les clients sont priés d’éviter tous bruits et discussions qui pourraient gêner leurs voisins. Les appareils sonores doivent être réglés en conséquence. Les fermetures de portières et de coffres doivent être aussi discrètes que possible. Les chiens et autres animaux ne doivent jamais être laissés en liberté. Ils ne doivent pas être laissés au terrain de camping, même enfermés, en l’absence de leurs maîtres, qui en sont civilement responsables. Le gestionnaire assure la tranquillité de ses clients entre 23h et 8h. Le silence se doit d’être total.
+            </p>
+            <h3>Visiteurs</h3>
+            <p>
+                Après avoir été autorisés par le gestionnaire ou son représentant, les visiteurs peuvent être admis dans le terrain de camping sous la responsabilité des campeurs qui les reçoivent. Le client peut recevoir plusieurs visiteurs. Les prestations et installations des terrains de camping sont accessibles aux visiteurs gratuitement. Les voitures des visiteurs sont interdites dans le terrain de camping. Ils se doivent d’adopter un comportement similaire à celui des campeurs.
+            </p>
+            <h3>Circulation et stationnement des véhicules</h3>
+            <p>
+                A l’intérieur du terrain de camping, les véhicules doivent rouler à une vitesse limitée à 10km/h. La circulation est autorisée de 8h à 22h. Ne peuvent circuler dans le terrain de camping que les véhicules qui appartiennent aux campeurs y séjournant. Le stationnement est strictement interdit sur les emplacements habituellement occupés par les hébergements sauf si une place de stationnement à été prévue à cet effet. Le stationnement ne doit pas entraver la circulation ni empêcher l’installation de nouveaux arrivants.
+            </p>
+            <h3>Tenue et aspect des installations</h3>
+            <p>
+                Chacun est tenu de s’abstenir de toute action qui pourrait nuire à la propreté, à l’hygiène et à l’aspect du terrain de camping et de ses installations, notamment sanitaires.
+            </p>
+            <ul>
+                <li>Il est interdit de jeter des eaux usées sur le sol ou dans les caniveaux.</li>
+                <li>Les clients doivent vider les eaux usées dans les installations prévues à cet effet.</li>
+                <li>Les ordures ménagères, les déchets de toute nature, les papiers, doivent être déposés dans les poubelles.</li>
+                <li>Le lavage est strictement interdit en dehors des bacs prévus à cet usage. L’étendage du linge se fera, le cas échéant, au séchoir commun. Cependant, il est toléré jusqu’à 10h à proximité des hébergements, à la condition qu’il soit discret et ne gêne pas les voisins. Il ne devra jamais être fait à partir des arbres.</li>
+                <li>Les plantations et les décorations florales doivent être respectées. Il est interdit de planter des clous dans les arbres, de couper des branches, de faire des plantations.</li>
+                <li>Il n’est pas permis de délimiter l’emplacement d’une installation par des moyens personnels, ni de creuser le sol.</li>
+                <li>Toute réparation de dégradation commise à la végétation, aux clôtures, au terrain ou aux installations du terrain de camping sera à la charge de son auteur.</li>
+                <li>L’emplacement qui aura été utilisé durant le séjour devra être maintenu dans l’état dans lequel le campeur l’a trouvé à son entrée dans les lieux.</li>
+            </ul>
+            <h3>Sécurité</h3>
+            <h4>Incendie</h4>
+            <p>
+                Les feux ouverts (bois, charbon, etc.) sont rigoureusement interdits en dehors des espaces barbecue mis à disposition. Les réchauds doivent être maintenus en bon état de fonctionnement et ne pas être utilisés dans des conditions dangereuses. En cas d’incendie, aviser immédiatement la direction. Les extincteurs sont utilisables en cas de nécessité. Ils sont renseignés sur le plan du camping à l’aide de point rouge. Une trousse de secours de première urgence se trouve au bureau d’accueil.
+            </p>
+            <h4>Vol</h4>
+            <p>
+                La direction est responsable des objets déposés au bureau et a une obligation générale de surveillance du terrain de camping. Le campeur garde la responsabilité de sa propre Installation et doit signaler au responsable la présence de toute personne suspecte. Les clients sont invités à prendre les précautions habituelles pour la sauvegarde de leur matériel.
+            </p>
+            <h3>Jeux</h3>
+            <p>
+                Aucun jeu violent ou gênant ne peut être organisé à proximité des installations. La salle de réunion ne peut être utilisée pour les jeux mouvementés. Les enfants doivent toujours être sous la surveillance de leurs parents.
+            </p>
+            <h3>Garage mort</h3>
+            <p>
+                Il ne pourra être laissé de matériel non occupé sur le terrain, qu’après accord de la direction et seulement à l’emplacement indiqué. Cette prestation peut être payante.
+            </p>
+            <h3>Infraction au règlement intérieur</h3>
+            <p>
+                Dans le cas où un résidant perturberait le séjour des autres usagers ou ne respecterait pas les dispositions du présent règlement intérieur, le gestionnaire ou son représentant pourra oralement ou par écrit, s’il le juge nécessaire, mettre en demeure ce dernier de cesser les troubles. En cas d’infraction grave ou répétée au règlement intérieur et après mise en demeure par le gestionnaire de s’y conformer, celui-ci pourra résilier le contrat. En cas d’infraction pénale, le gestionnaire pourra faire appel aux forces de l’ordre.
+            </p>
+            <h2>Conditions Générales de Vente</h2>
+            <h3>Réservations</h3>
+            <h4>En haute saison :</h4>
+            <ul>
+                <li>Les réservations de locatifs se font à la semaine du samedi au samedi.</li>
+                <li>Les réservations de camping peuvent se faire à la semaine.</li>
+            </ul>
+            <h4>En basse saison :</h4>
+            <ul>
+                <li>Les week-end et certains jours fériés, il se peut que les réservations ne soient disponibles qu’à partir de 2, 3, ou 4 nuitées.</li>
+            </ul>
+            <h4>En saison d’Hiver :</h4>
+            <ul>
+                <li>Les réservations durant les vacances scolaires ne peuvent se faire qu’à partir de 4 nuitées</li>
+            </ul>
+            <h4>Arrhes</h4>
+            <p>
+                Pour que votre réservation soit effective, vous devez impérativement nous adresser des arrhes. Le montant demandé est indiqué sur le site internet ainsi que sur les documents « tarif ». Ils sont différents selon la période et le type de locatifs.
+            </p>
+            <p>
+                Afin d’assurer la réservation, il est préférable que cela soit fait dans les 14 jours suivant l’option. Passé ce délai, l’option sera automatiquement supprimée.
+            </p>
+            <p>
+                Les arrhes versées ne sont pas remboursables. Durant la période COVID, nous vous laissons la possibilité de reporter ces arrhes sur un autre séjour de l’année, ou de l’année suivante. Tout séjour commencé, interrompu ou abrégé ne pourra donner lieu à un remboursement.
+            </p>
+            <h4>Solde</h4>
+            <p>
+                Le solde du locatif vous sera demandé 14 jours avant la date d’arrivée.
+            </p>
+            <h3>Conditions d’admission et de séjour</h3>
+            <p>Toute personne devant séjourner au moins une nuit dans le camping doit à son arrivée se présenter à l’accueil pour y justifier de son identité.</p>
+            <p>Les demandes particulières devront être formulées par le client au moment de la réservation.</p>
+            <p>Pour les locations : un accusé de réception vous est délivré dès la confirmation de votre réservation. Il est demandé aux clients de se présenter avec à la réception.</p>
+            <p>Toute location est faite à titre personnel. Vous ne pouvez en aucun cas sous-louer ou céder vos droits à la présente convention sans notre accord.</p>
+            <p>Tout séjour commencé, interrompu ou abrégé ne pourra donner lieu à un remboursement sans justificatif valable.</p>
+            <p>Pour les emplacements de camping: l’horaire d’arrivée est entre 12h et 20h, l’horaire de départ est avant 12h. Si le départ est effectué après midi, veuillez l’avertir à la réception afin de vérifier les disponibilités de l’emplacement.</p>
+            <p>Pour les emplacements locatifs : l’horaire d’arrivée est entre 15h et 20h et l’horaire de départ avant 10h (avant 10h30 pour la cabane aux secrets).</p>
+            <p>Nous aviser de tout retard éventuel concernant votre horaire d’arrivée, par téléphone au {{ tel.contenu }} ou par courriel {{ email.contenu }}, afin de nous permettre de conserver votre location.</p>
+            <p>Passé 24 heures et sans nouvelle de votre part, la direction se réserve le droit d’attribuer l’emplacement de camping à un autre client.</p>
+            <p>Passé 48 heures et sans nouvelle de votre part, la direction se réserve le droit d’attribuer le chalet, roulotte, à un autre client.</p>
+            <h3>Réclamations</h3>
+            <p>Toutes réclamations ou commentaires divers seront pris en considération que s’ils sont écrits, signés, datés et aussi précis que possible. Le courrier doit être posté ou remis à un responsable du camping, une boite est aussi à disposition à l’accueil.</p>
+            <h3>Sécurité</h3>
+            <p>Les mineurs restent sous la responsabilité des parents présents sur le camping, et devront être accompagnés conformément à l article 371-3 du code civil.</p>
+            <h3>Le droit à l’image</h3>
+            <p>
+                Toute personne souhaitant s’opposer par avance à l’utilisation de son image sur des vidéos ou photos prises dans l’enceinte du camping et pouvant être publié pour assurer la promotion des activités du Camping Plage Du Midi devra compléter à cet effet un formulaire à l’accueil auquel il joindra 2 photos (face et profil) qui sera confidentiellement conservées par la société à cette fin.
+            </p>
+            <h3>Jeux et piscine</h3>
+            <p>L’accès à la piscine est subordonné à l’acceptation et au respect des règles, notamment l’accès des enfants au bassin qui ne peut se faire que sous la surveillance d’un adulte accompagnant.</p>
+            <p>Les aires de jeux et terrains de sport ne sont plus accessibles à partir de la tombée de la nuit afin de ne pas porter atteinte à la tranquillité des autres clients. Elles seront de nouveau accessibles le matin, dès 8h.</p>
+            <h3>Animaux</h3>
+            <p>
+                Les animaux ne sont acceptés que s’ils ont été déclarés sur le contrat de réservation, sous réserve du respect de la réglementation les concernant (puce, tatouage, vaccination…) que leur propriétaire devra être en mesure de justifier à toute réquisition du gestionnaire.
+            </p>
+            <p>
+                Les chiens de 1ere catégorie sont interdits sur le camping, les chiens de 2 ème catégorie doivent être muselés et tenus en laisse par une personne majeure. Les propriétaires des chiens sont invités à respecter les règles d’hygiène et de propreté collectives en ramassant les déjections de leurs animaux.
+            </p>
+            <h3>Bruit et silence</h3>
+            <p>Le silence doit être respecté entre 23h et 8h.</p>
+            <p>Les nécessités d’entretien du camping et les animations peuvent occasionner des nuisances sonores que nous tentons de limiter : nous vous remercions de votre compréhension.</p>
+            <h3>Circulation et stationnement</h3>
+            <p>
+                A l’intérieur du camping, les véhicules doivent rouler à la vitesse limite de 10 km/h. Les véhicules motorisés ne doivent pas circuler dans le camping entre 22h et 8h du matin, heures entre lesquelles la barrière d’accès au camping sera fermée. Il est expressément interdit de stationner sur les voies de circulation et sur les emplacements autres que celui loué.
+            </p>
+            <h3>Blocs sanitaires</h3>
+            <p>
+                Les blocs sanitaires sont des lieux publics. Ces endroits doivent donc être respectés de tous. Le gestionnaire se réserve la possibilité de fermer un ou plusieurs des blocs sanitaires en fonction de ses contraintes de nettoyage et entretien. Il est interdit de laver sa voiture à l’intérieur du camping.
+            </p>
+            <h3>Propreté – Évacuation des déchets – Tri sélectif</h3>
+            <p>Un espace payant avec machine à laver et machine sèche linge est à votre disposition.</p>
+            <p>
+                Le séchage du linge doit être effectué à l’aide du/des sèches linges situés sur le camping ou d’étendoirs fournis par le camping. dans la location, des étendoirs sont fournis. Sur les emplacements de camping, Le séchage du linge doit rester discret et ne pas gêner les voisins.
+            </p>
+            <p>
+                Les ordures ménagères doivent être déposées dans les poubelles prévues à cet effet. Le tri sélectif est de rigueur. Des containers à verres, emballages et papiers sont installés à l’intérieur du camping.
+            </p>
+            <h3>Emplacements</h3>
+            <p>
+                Superficie moyenne de 100 m2, l’installation complète d’une famille doit tenir sur la parcelle attribuée. En cas de 2° véhicule, prendre contact avec la direction pour un parking supplémentaire (sous réserve de disponibilité). Pour les groupes, la direction décidera du nombre d’emplacements nécessaire.
+            </p>
+            <p>
+                Il vous appartient de souscrire une assurance pour votre caravane, tente, camping-car, matériel, vous garantissant, en particulier, en matière de responsabilité civile.
+            </p>
+            <p>
+                Le locataire/campeur accepte l’emplacement en état. Si des dégradations venaient à être constatées, une facture de remise en état sera établie et le client s’engage à régler la ou les détériorations. En cas de vol, incendie, d’intempérie, d’accident, de dommages sur votre matériel de camping, véhicule, caravane, moto, camping-car, tente, et tout autre bien, seul le tribunal du défendeur sera compétent pour déterminer la ou les responsabilités.
+            </p>
+            <h3>Locatif</h3>
+            <p>
+                Un inventaire est disponible pour chaque chalet sur le site internet du camping, afin que les clients puissent prévoir ce qui n’est pas compris dans la location (drap et linge de toilette). Il est permis d’ajouter une tente sur l’emplacement du chalet ou roulotte
+            </p>
+            <p>Les animaux sont acceptés dans les locatifs. (tarifs indiqués sur les pages des locatifs)</p>
+            <p>
+                Une caution d’une somme de 400 euros est demandée. Si vous ne possédez pas de chéquier, il vous sera demandé vos numéros de carte bancaire. Elle pourra être débitée pour toutes dégradations ou si le chalet n’est pas restitué en parfait état de propreté. Si les dégradations venaient à être supérieures à la caution une facture de remise en état sera établie et le client s’engage à régler cette dernière dans un délai de 10 jours après réception du courrier.
+            </p>
+            <h3>Modes de paiements acceptés</h3>
+            <p>Espèces, cartes bancaires, chèques-vacances, chèques, virements bancaires.</p>
+            <p>
+                La signature du contrat de location, le versement des arrhes, acomptes ou soldes de séjour, l’occupation de l’emplacement ou du locatif par le client, valent acceptation de ces conditions générales et particulières, sans réserve.
+            </p>
+        </section>
+
+    </main>
+{% endblock %}
+{% block footer %}
+    {{ component('Footer') }}
+{% endblock %}

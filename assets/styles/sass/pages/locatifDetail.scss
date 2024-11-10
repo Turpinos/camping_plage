@@ -22,11 +22,11 @@
             align-items: center;
             border-bottom: 1px solid $mainLight;
 
-            h2{
+            h1{
                 font-weight: 700;
                 color: $mainBold;
                 text-transform: uppercase;
-                font-size: 1.7rem;
+                font-size: 1.5rem;
                 text-align: center;
             }
     
@@ -223,11 +223,11 @@
         flex-direction: row;
         .premiere-partie{
             border-bottom: none;
-            h2{
+            h1{
                 margin-bottom: 4rem;
                 font-size: 2.2rem;
             }
-            img{
+            .img{
                 width: auto;
                 max-width: 100%;
                 height: 400px;

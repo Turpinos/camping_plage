@@ -83,11 +83,7 @@ class IndexController extends AbstractController{
             }
         }
 
-        $page = [ 
-            'libelle' => 'index',
-            'title' => 'vivez le morvan des lacs & des sommets, une autre vie s\'invente ici'
-            
-        ];
+        $page = 'vivez le morvan des lacs & des sommets, une autre vie s\'invente ici';
 
         return $this->render('/pages/index/index.html.twig', [
             'page' => $page,
