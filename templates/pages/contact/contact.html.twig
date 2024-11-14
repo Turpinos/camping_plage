@@ -22,7 +22,7 @@
                     </div>
                     <div class="div tel">
                         <h2>Par téléphone</h2>
-                        <p> {{ tel.contenu }}</p>
+                        <p><a href="tel: {{tel.contenu}}" class="tel"> {{ tel.contenu }}</a></p>
                     </div>
                     {{ form_start(form) }}
                     <h2>Pour un réponse par email</h2>

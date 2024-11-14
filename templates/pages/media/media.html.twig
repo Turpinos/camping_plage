@@ -9,7 +9,63 @@
 {% endblock %}
 {% block body %}
     <main id="media" class="main-media">
+        {% if slug == null or slug == 'locatifs' %}
+            <section class="locatifs">
+                <h2>Les locations</h2>
+                <div class="contenu">
+                    {% for image in imagesLocatifs %}
+                        <article>
+                            <img src="{{ asset("/images/locations/#{image.imgurl}") }}" alt="{{ image.imgurl|replace({'.jpg' : '', '.png' : '', '_' : ' '})}}" loading="lazy">
+                        </article>
+                        {% if slug == null and loop.last %}
+                            <article class="plus">
+                                <a href="{{path('media', {'slug' : 'locatifs'})}}">En voir plus</a>
+                            </article>
+                        {% endif %}
+                        {% if slug == 'locatifs' and loop.last %}
+                            <article class="plus">
+                                <a href="{{path('media')}}">Les collections</a>
+                            </article>
+                        {% endif %}
+                    {% endfor %}
+                </div>
 
+            </section>
+        {% endif %}
+        {% if slug == null or slug == 'gallery' %}
+            <section class="gallery">
+                <h2>La galerie</h2>
+                <div class="contenu">
+                    {% for image in imagesGallery %}
+                        <article>
+                            <img src="{{ asset("/images/media/#{image.imgurl}") }}" alt="{{ image.imgurl|replace({'.jpg' : '', '.png' : '', '_' : ' '})}}" loading="lazy">
+                        </article>
+                        {% if slug == null and loop.last %}
+                            <article class="plus">
+                                <a href="{{path('media', {'slug' : 'gallery'})}}">En voir plus</a>
+                            </article>
+                        {% endif %}
+                        {% if slug == 'gallery' and loop.last %}
+                            <article class="plus">
+                                <a href="{{path('media')}}">Les collections</a>
+                            </article>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+        {% if slug == null %}
+            <p class="separator"></p>
+            <section class="video">
+
+                    <iframe  src="https://www.youtube.com/embed/P-JvzeWFlWA?si=s2I-2nR3BWU4rCOB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+
+            </section>
+        {% endif %}
+        <section id="background-img" class="hidden">
+            <img class="close" src="{{ asset('/images/logos/fermer-la-croix.png') }}" alt="fermer" />
+            <img class="view-img" src="" alt="">
+        </section>
     </main>
 {% endblock %}
 {% block footer %}

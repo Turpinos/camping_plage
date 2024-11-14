@@ -176,64 +176,44 @@ buttonForm.addEventListener('click', function(e){
     selectAgeVoyageur = document.querySelectorAll('.container-card-voyageurs div .row select');
     let validator = true;
 
-    if(inputName.value == ''){
-        validator = false;
-
-        if(document.querySelector('.container-error ul')){
-            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-        }
-
-        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Nom"'));
+    if(document.querySelector('.container-error ul')){
+        document.querySelector('.container-error').innerHTML = "";
     }
 
-    if(inputFirstName.value == ''){
+    if(inputName.value == '' || inputName.value.length < 2 || inputName.value.length > 50 ){
         validator = false;
-
-        if(document.querySelector('.container-error ul')){
-            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-        }
-
-        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Prénom"'));
+        
+        document.querySelector('.container-error').appendChild(displayError('Le nom doit contenir entre 2 et 50 caractères'));
     }
 
-    if(inputEmail.value == ''){
+    if(inputFirstName.value == '' || inputFirstName.value.length < 2 || inputFirstName.value.length > 50){
         validator = false;
 
-        if(document.querySelector('.container-error ul')){
-            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-        }
-
-        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Email"'));
+        document.querySelector('.container-error').appendChild(displayError('Le prénom doit contenir entre 2 et 50 caractères'));
     }
 
-    if(inputaddress.value == ''){
+    if(inputEmail.value == '' || inputEmail.value.length < 6 || inputEmail.value.length > 50){
         validator = false;
 
-        if(document.querySelector('.container-error ul')){
-            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-        }
-
-        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Adresse"'));
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ email'));
     }
 
-    if(inputTel.value == ''){
+    if(inputaddress.value == '' || inputaddress.value.length < 10 || inputaddress.value.length > 200){
         validator = false;
 
-        if(document.querySelector('.container-error ul')){
-            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-        }
-
-        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ "Téléphone"'));
+        document.querySelector('.container-error').appendChild(displayError('L\'adresse doit contenir entre 10 et 200 caractères'));
     }
 
-    if(nbrVoyageurs.value == ''){
+    if(inputTel.value == '' || inputTel.value.length < 5 || inputTel.value.length > 20){
         validator = false;
 
-        if(document.querySelector('.container-error ul')){
-            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-        }
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec le champ téléphone'));
+    }
 
-        document.querySelector('.container-error').appendChild(displayError('Erreur avec le nombre de voyageurs'));
+    if(nbrVoyageurs.value == '' || nbrVoyageurs.value < 1 ){
+        validator = false;
+
+        document.querySelector('.container-error').appendChild(displayError('Entre 1 et 20 voyageurs'));
     }
 
     let listAge = [];
@@ -245,10 +225,6 @@ buttonForm.addEventListener('click', function(e){
 
         if(select.value == 0){
             validator = false;
-
-            if(document.querySelector('.container-error ul')){
-                document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-            }
     
             document.querySelector('.container-error').appendChild(displayError('Erreur avec l\'âge d\'un voyageur'));
         }
@@ -265,31 +241,19 @@ buttonForm.addEventListener('click', function(e){
     if(!isCheck){
         validator = false
 
-        if(document.querySelector('.container-error ul')){
-            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-        }
-
         document.querySelector('.container-error').appendChild(displayError('Au moins un type de locatif doit être sélectionner'));
     }
 
     if (dateDebutSejour.value == '') {
         validator = false;
 
-        if(document.querySelector('.container-error ul')){
-            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-        }
-
-        document.querySelector('.container-error').appendChild(displayError('Erreur avec l\'une des dates'));
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec la date de début'));
     }
 
     if(dateFinSejour.value == ''){
         validator = false;
 
-        if(document.querySelector('.container-error ul')){
-            document.querySelector('.container-error').removeChild(document.querySelector('.container-error ul'));
-        }
-
-        document.querySelector('.container-error').appendChild(displayError('Erreur avec l\'une des dates'));
+        document.querySelector('.container-error').appendChild(displayError('Erreur avec la date de fin'));
     }
 
     if(!validator){

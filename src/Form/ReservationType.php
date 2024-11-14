@@ -87,7 +87,7 @@ class ReservationType extends AbstractType
                 'label' => 'Adresse postal complète',
                 'attr' => array(
                     'placeholder' => '1 rue du feu 56320 mabelleville',
-                    'minlength' => '2',
+                    'minlength' => '10',
                     'maxlength' => '200'
                 ),
                 'row_attr' => array(

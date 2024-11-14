@@ -2,14 +2,13 @@ const mainIndex =  document.getElementById('index');
 
 if(mainIndex != undefined){
 
-const mapInteractive = document.querySelector('.map-interactive');
 const mapContainer = document.querySelector('.map-container');
 const inputContainer = document.querySelectorAll('.input-container');
 const pings = document.querySelectorAll('.ping');
 let isActiveSelect = false;
 
 for(const input of inputContainer){
-    input.addEventListener('click', function(){
+    input.parentElement.addEventListener('click', function(){
 
         if(!isActiveSelect){
             input.classList.add('check');
