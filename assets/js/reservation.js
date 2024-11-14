@@ -17,6 +17,7 @@ const inputEmail = document.getElementById('reservation_email');
 const inputaddress = document.getElementById('reservation_address');
 const inputTel = document.getElementById('reservation_phone');
 const nbrVoyageurs = document.getElementById('reservation_nombreVoyageurs');
+const nrbVehicules = document.getElementById('reservation_nombreVehicules');
 let selectAgeVoyageur = document.querySelectorAll('.container-card-voyageurs div .row select');
 const listCheckBox = document.querySelectorAll('.container-checkBox .row input');
 const hiddenInputAge = document.getElementById('reservation_hiddenInputAge');
@@ -254,6 +255,12 @@ buttonForm.addEventListener('click', function(e){
         validator = false;
 
         document.querySelector('.container-error').appendChild(displayError('Erreur avec la date de fin'));
+    }
+
+    if(nrbVehicules.value == '' || nrbVehicules.value < 0 || nrbVehicules.value > 10){
+        validator = false;
+
+        document.querySelector('.container-error').appendChild(displayError('Le nombre de véhicules doit être entre 0 et 20'));
     }
 
     if(!validator){

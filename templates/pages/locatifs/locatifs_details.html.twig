@@ -148,7 +148,20 @@
                     <p><span>Animaux:</span> {{ tarifs.animaux }}€</p>
                 {% endif %}
                 {% if locatif.slug != "camping" %}
-                    <p class="lien-pdf"><span>Inventaire:</span> <a href="">visualiser en cliquant</a>.</p>
+                    <p class="lien-pdf">
+                        <span>Inventaire(s):</span>
+                        {% for inv in inventaire %}
+                            {% if loop.first %}
+                                <a href="{{ asset("/pdf/inventaires/#{inv.pdfurl}") }}" target="_blank">inventaire {{ loop.length != 1 ? ' n°' ~ loop.index : '' }}</a>
+                            {% else %}
+                                + <a href="{{ asset("/pdf/inventaires/#{inv.pdfurl}") }}" target="_blank">inventaire n°{{ loop.index }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if inventaire is empty %}
+                            indisponible
+                        {% endif %}
+                    .</p>
+                    
                 {% endif %}
                 <p>
                     <span>Taxe de séjour:</span> 

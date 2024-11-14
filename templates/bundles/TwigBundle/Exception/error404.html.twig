@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Fausse route - Plage du midi
+{% endblock %}
+
+{% block header %}
+    {{ component('Header', {'title' : 'Fausse route'}) }}
+{% endblock %}
+{% block body %}
+    <main id='main-error404' class="main-error404">
+        <h2>Vous ne trouverez pas le camping par ici !</h2>
+        <article>
+            <p>Laissez-nous vous aider:</p>
+            <ul>
+                <li>Vous pouvez commencer par retourner <a href="{{ path('app_home') }}">à l'accueil</a>.</li>
+                <li>Vous êtes sur mobile ? Cliquez sur le menu <img src="{{asset('/images/logos/burger-bar.png')}}" alt="logo de menu"/> pour trouver le bon lien.</li>
+            </ul>
+        </article>
+    </main>
+{% endblock %}
+{% block footer %}
+    {{ component('Footer') }}
+{% endblock %}

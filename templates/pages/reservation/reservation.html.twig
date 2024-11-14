@@ -88,6 +88,7 @@
                     {{ form_row(form.nombreVehicules) }}
                     {{ form_row(form.commentaire) }}
                     {{ form_row(form.save, { 'label' : 'Envoyer' }) }}
+                    <p class="info-form">*: Ces champs sont facultatifs.</p>
                     <div class="container-error">
                         {{ error == '' ? '' : "<p>#{error}</p>"|raw }}
                     </div>

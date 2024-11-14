@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\CoordonneesMapRepository;
 use App\Repository\ImagesRepository;
 use App\Repository\InformationsRepository;
+use App\Repository\InventaireRepository;
 use App\Repository\LocatifsRepository;
 use App\Repository\TarifsGlobauxRepository;
 use App\Repository\TarifsRepository;
@@ -24,6 +25,10 @@ class LocatifsController extends AbstractController{
         $images = [];
         $isPmr = [];
 
+        if($slug != null && $slug != "hiver"){
+            $slug = null;
+        }
+
         if($slug == null){
 
             $page = 'Nos locations';
@@ -38,7 +43,7 @@ class LocatifsController extends AbstractController{
                 }
             }
 
-        }elseif($slug == "hiver"){
+        }else if($slug == "hiver"){
             $page = 'Nos locations d\'hiver';
 
             $locatifs = $locatifsRepository->findBy(['ouverture_hivernale' => '1'],['slug' => 'ASC']);
@@ -77,7 +82,21 @@ class LocatifsController extends AbstractController{
     }
 
     #[Route('/locatifs_details/{slug}', name:'locatifs_details')]
-    public function locatifs_details(LocatifsRepository $locatifsRepository, TarifsRepository $tarifsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, ImagesRepository $imagesRepository, CoordonneesMapRepository $coordonneesMapRepository, InformationsRepository $informationsRepository ,string $slug){
+    public function locatifs_details(LocatifsRepository $locatifsRepository, TarifsRepository $tarifsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, ImagesRepository $imagesRepository, CoordonneesMapRepository $coordonneesMapRepository, InformationsRepository $informationsRepository, InventaireRepository $inventaireRepository, string $slug){
+
+        //Vérification de la validité du slug;
+        $compSlug = $locatifsRepository->findAll();
+        $testValue = false;
+
+        foreach ($compSlug as $comp) {
+            if($comp->getSlug() == $slug){
+                $testValue = true;
+            }
+        }
+
+        if (!$testValue) {
+            return $this->redirectToRoute('locatifs');
+        }
 
         $locatif = $locatifsRepository->findOneBy(['slug' => $slug]);
         $descrition = (preg_split('/[.]+[[:space:]]/mi', $locatif->getDescription()));
@@ -86,6 +105,7 @@ class LocatifsController extends AbstractController{
         $coordonneesMap = $coordonneesMapRepository->findBy(['locatifs' => $locatif->getId()]);
         $tarifsGlobaux = $tarifsGlobauxRepository->findAll();
         $tel = $informationsRepository->findOneBy(['slug' => 'telephone']);
+        $inventaire = $inventaireRepository->findBy(['locatif' => $locatif->getId()]);
 
         $isPmr = [];
         if($locatif->isPmr() == "1"){
@@ -100,7 +120,8 @@ class LocatifsController extends AbstractController{
             'coordonnees' => $coordonneesMap,
             'description' => $descrition,
             'telephone' => $tel,
-            'isPmr' => $isPmr
+            'isPmr' => $isPmr,
+            'inventaire' => $inventaire
         ]);
     }
 }

@@ -19,9 +19,24 @@ class ReservationController extends AbstractController
     #[Route('/reservation/{slug}', name: 'reservation')]
     public function index(MailerInterface $mailer, Request $request, LocatifsRepository $locatifRepository, TypeLocatifsRepository $typeLocatifsRepository, string $slug = null): Response
     {
+        //Vérification de la validité du slug
+        $compSlug = $locatifRepository->findAll();
+        $testValue = false;
+
         $locatif = [];
         $typeLocatif = ['id' => 0];
         $error = '';
+
+        //comparaison du slug donné aux slugs existant
+        foreach ($compSlug as $comp) {
+            if($comp->getSlug() == $slug){
+                $testValue = true;
+            }
+        }
+
+        if(!$testValue){
+            $slug = null;
+        }
 
         $form = $this->createForm(ReservationType::class);
 

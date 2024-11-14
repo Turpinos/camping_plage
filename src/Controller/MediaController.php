@@ -35,15 +35,7 @@ class MediaController extends AbstractController
                 
                 $imagesGallery = $galleryRepository->findAll();
 
-            }else{
-
-                $this->redirectToRoute('media');
-
             }
-            
-            
-            
-
         }
 
         $page = 'Photo & vidéo';

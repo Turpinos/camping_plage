@@ -143,7 +143,7 @@ class ReservationType extends AbstractType
                 ]
             ])
             ->add('nombreAnimaux', IntegerType::class, [
-                'label' => 'Nombre d\'animaux',
+                'label' => 'Nombre d\'animaux*',
                 'attr' => array(
                     'placeholder' => 'Entrez une quantité',
                     'min' => '0',
@@ -262,12 +262,14 @@ class ReservationType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Entrez une quantité',
                     'min' => '0',
-                    'max' => '10'
+                    'max' => '10',
+                    'value' => '0'
                 ),
                 'row_attr' => array(
                     'class' => 'endrow nbrvehicules'
                 ),
                 'constraints' => [
+                    new NotBlank(),
                     new PositiveOrZero(message: 'Ne peut être négatif'),
                     new LessThanOrEqual(
                         value: 10,
@@ -276,7 +278,7 @@ class ReservationType extends AbstractType
                 ]
             ])
             ->add('commentaire', TextareaType::class, [
-                'label' => 'Commentaire',
+                'label' => 'Commentaire*',
                 'attr' => array(
                     'maxlength' => '2000'
                 ),

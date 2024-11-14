@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LocatifsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -45,6 +47,17 @@ class Locatifs
 
     #[ORM\Column]
     private ?bool $ouverture_hivernale = null;
+
+    /**
+     * @var Collection<int, Inventaire>
+     */
+    #[ORM\OneToMany(targetEntity: Inventaire::class, mappedBy: 'locatif', orphanRemoval: true)]
+    private Collection $inventaires;
+
+    public function __construct()
+    {
+        $this->inventaires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -167,6 +180,36 @@ class Locatifs
     public function setOuvertureHivernale(bool $ouverture_hivernale): static
     {
         $this->ouverture_hivernale = $ouverture_hivernale;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Inventaire>
+     */
+    public function getInventaires(): Collection
+    {
+        return $this->inventaires;
+    }
+
+    public function addInventaire(Inventaire $inventaire): static
+    {
+        if (!$this->inventaires->contains($inventaire)) {
+            $this->inventaires->add($inventaire);
+            $inventaire->setLocatif($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInventaire(Inventaire $inventaire): static
+    {
+        if ($this->inventaires->removeElement($inventaire)) {
+            // set the owning side to null (unless already changed)
+            if ($inventaire->getLocatif() === $this) {
+                $inventaire->setLocatif(null);
+            }
+        }
 
         return $this;
     }
