@@ -305,8 +305,8 @@ class ReservationType extends AbstractType
     {
         $resolver->setDefaults([
             'required' => false,
-            'allow_extra_fields' => true
-            // Configure your form options here
+            'allow_extra_fields' => true,
+            'csrf_protection' => false
         ]);
     }
 }

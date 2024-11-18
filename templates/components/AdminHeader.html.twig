@@ -1,0 +1,10 @@
+<header class="admin-banner">
+    <div class="container-title">
+        <h1>Administration</h1>
+    </div>
+    <div class="container-logout">
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        {% endif %}
+    </div>
+</header>
