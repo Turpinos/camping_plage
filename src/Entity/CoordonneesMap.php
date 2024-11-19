@@ -16,7 +16,7 @@ class CoordonneesMap
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?locatifs $locatifs = null;
+    private ?Locatifs $locatifs = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $emplacement = null;
@@ -29,12 +29,12 @@ class CoordonneesMap
         return $this->id;
     }
 
-    public function getIdLocatifs(): ?locatifs
+    public function getIdLocatifs(): ?Locatifs
     {
         return $this->locatifs;
     }
 
-    public function setIdLocatifs(?locatifs $locatifs): static
+    public function setIdLocatifs(?Locatifs $locatifs): static
     {
         $this->locatifs = $locatifs;
 

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Repository\AccesPmrRepository;
 use App\Repository\CoordonneesMapRepository;
-use App\Repository\HorairesRepository;
 use App\Repository\InformationsRepository;
 use App\Repository\LocatifsRepository;
 use App\Repository\OuverturesRepository;
@@ -15,13 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController{
 
     #[Route('/', name:'app_home')]
-    public function index(CoordonneesMapRepository $coordonneMap, LocatifsRepository $locatifs, InformationsRepository $info, AccesPmrRepository $pmrItems, SaisonsRepository $saisonsRepository, OuverturesRepository $ouverturesRepository, HorairesRepository $horairesRepository)
+    public function index(CoordonneesMapRepository $coordonneMap, LocatifsRepository $locatifs, InformationsRepository $info, AccesPmrRepository $pmrItems, SaisonsRepository $saisonsRepository, OuverturesRepository $ouverturesRepository)
     {
 
         //info section horaire..
         $saisons = $saisonsRepository->findAll();
         $ouvertures = $ouverturesRepository->findAll();
-        $horaire = $horairesRepository->findOneBy(['slug' => 'ouverture']);
+        $horaire = $info->findOneBy(['slug' => 'ouverture']);
 
         //info section pmr..
         $itemsPmr = $pmrItems->findAll();

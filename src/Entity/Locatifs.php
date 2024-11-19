@@ -148,12 +148,12 @@ class Locatifs
         return $this;
     }
 
-    public function getIdTarifs(): ?tarifs
+    public function getIdTarifs(): ?Tarifs
     {
         return $this->tarifs;
     }
 
-    public function setIdTarifs(tarifs $tarifs): static
+    public function setIdTarifs(Tarifs $tarifs): static
     {
         $this->tarifs = $tarifs;
 

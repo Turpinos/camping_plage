@@ -1,0 +1,82 @@
+.main-login{
+    background: linear-gradient(170deg, rgb(255, 255, 255) 0%, rgb(254, 250, 224) 100%);
+    margin-bottom: -2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2{
+        color: $mainBold;
+        text-transform: uppercase;
+        font-size: 1.3rem;
+    }
+
+    form{
+        margin: 5rem auto;
+        padding: 0 1rem;
+        background-color: white;
+        box-shadow: 3px 5px 20px 0px rgba(0,0,0,0.40);
+
+        .row{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 0 2.5rem;
+
+            label{
+                color: $secondaryBold;
+                text-transform: uppercase;
+                font-weight: 500;
+                margin-block: 0.5rem;
+            }
+
+            input{
+                border-top: 0px;
+                border-inline: 0px;
+                border-bottom: 1px solid black;
+                padding-left: 0.5rem;
+                padding-block: 0.3rem;
+                width: 90%;
+                align-self: center;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .error-login{
+            color: rgb(174, 73, 73);
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 0px;
+            margin-block: 0.1rem;
+            list-style: none;
+            max-width: 300px;
+        }
+
+        button{
+            margin: 1rem auto;
+            padding: 0.3rem 0.3rem;
+            border: 1px solid $secondaryBold;
+            background-color: $secondaryBold;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            color: white;
+            transition: all 200ms;
+
+            &:hover{
+                background-color: white;
+                color: $secondaryBold;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 860px) {
+
+.main-login{
+    form{
+        margin: 8rem auto;
+    }
+}
+}

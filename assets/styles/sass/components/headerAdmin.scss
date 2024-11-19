@@ -1,0 +1,46 @@
+.admin-banner{
+    background-color: $mainBold;
+    color: white;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1{
+        margin: 0 0.5rem;
+        font-size: 1.5rem;
+
+    }
+
+    .desk-logout{
+        display: none;
+        margin: 0 0.5rem;
+    }
+
+    .mobile-logout{
+        display: flex;
+        margin: 0 0.5rem;
+    }
+}
+
+@media screen and ( min-width: 860px){
+
+.admin-banner{
+
+    h1{
+        margin: 0 1rem;
+    }
+
+    .desk-logout{
+        display: initial;
+        margin: 0 1rem;
+        font-weight: 500;
+        color: white;
+        text-decoration: none;
+    }
+
+    .mobile-logout{
+        display: none;
+    }
+}
+}

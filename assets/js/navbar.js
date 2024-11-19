@@ -1,4 +1,7 @@
 const navbarContainer = document.querySelector('.container');
+
+if(navbarContainer != undefined){
+
 const banner = document.querySelector('.banner');
 const divChoiceLang = document.querySelector('.choiceLang');
 const choiceLang = document.querySelectorAll('.choiceLang img');
@@ -29,8 +32,6 @@ window.addEventListener('scroll', function(){
         initPosNav = banner.clientHeight - (valueHeightNav / 2);
         initStyleNav = `-${valueHeightNav / 2}px`
     }
-
-    console.log(valueHeightNav);
 
     let posScreen = window.scrollY;
 
@@ -153,3 +154,5 @@ closed.addEventListener('click', function(){
     }, 10);
     
 });
+
+}

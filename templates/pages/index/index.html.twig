@@ -116,7 +116,7 @@
                         <p>{{ saison.libelle }}: {{ saison.datedebut|date('d/m/Y') }} au {{ saison.datefin|date('d/m/Y') }}</p>
                     </div>
                 {% endfor %}
-                <p>Ouverture de {{ horaire.horairedebut|date('H:i') }} à {{ horaire.horairefin|date('H:i') }}</p>
+                <p>Ouverture: {{ horaire.contenu }}</p>
             </article>
             <article class="ouvertures">
                 {% for ouverture in ouvertures %}

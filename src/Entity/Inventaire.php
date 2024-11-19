@@ -18,7 +18,7 @@ class Inventaire
 
     #[ORM\ManyToOne(inversedBy: 'inventaires')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?locatifs $locatif = null;
+    private ?Locatifs $locatif = null;
 
     public function getId(): ?int
     {
@@ -37,12 +37,12 @@ class Inventaire
         return $this;
     }
 
-    public function getLocatif(): ?locatifs
+    public function getLocatif(): ?Locatifs
     {
         return $this->locatif;
     }
 
-    public function setLocatif(?locatifs $locatif): static
+    public function setLocatif(?Locatifs $locatif): static
     {
         $this->locatif = $locatif;
 

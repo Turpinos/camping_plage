@@ -6,28 +6,32 @@
     {{ component('AdminHeader') }}
 {% endblock %}
 {% block body %}
-    <form action="{{ path('app_login') }}" method="post">
+    <main id="main-login" class="main-login">
+        <form action="{{ path('app_login') }}" method="post">
 
-        {% if error %}
-            <div class="error-login">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+            <h2>Connexion</h2>
 
-        <h2>Connexion</h2>
+            <div class="row email">
+                <label for="username">Email</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus>
+            </div>
 
-        <div class="email">
-            <label for="username">Email</label>
-            <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus>
-        </div>
-        
-        <div class="password">
-            <label for="password">Mot de passe</label>
-            <input type="password" name="_password" id="password" autocomplete="current-password" required>
-        </div>
+            <div class="row password">
+                <label for="password">Mot de passe</label>
+                <input type="password" name="_password" id="password" autocomplete="current-password" required>
+            </div>
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button type="submit">Connexion</button>
-    </form>
+            {% if error %}
+                <div class="error-login">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <div class=" row button">
+                <button type="submit">Connexion</button>
+            </div>
+        </form>
+    </main>
 {% endblock %}
 {% block footer %}
     {{ component('Footer') }}

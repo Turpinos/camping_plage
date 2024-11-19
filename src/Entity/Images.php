@@ -15,7 +15,7 @@ class Images
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?locatifs $id_locatifs = null;
+    private ?Locatifs $id_locatifs = null;
 
     #[ORM\Column(length: 100)]
     private ?string $img_url = null;
@@ -28,12 +28,12 @@ class Images
         return $this->id;
     }
 
-    public function getIdLocatifs(): ?locatifs
+    public function getIdLocatifs(): ?Locatifs
     {
         return $this->id_locatifs;
     }
 
-    public function setIdLocatifs(?locatifs $id_locatifs): static
+    public function setIdLocatifs(?Locatifs $id_locatifs): static
     {
         $this->id_locatifs = $id_locatifs;
 
