@@ -16,9 +16,6 @@ class AccesPmr
     #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
-    #[ORM\Column]
-    private ?int $quantite = null;
-
     #[ORM\Column(length: 50)]
     private ?string $slug = null;
 
@@ -35,18 +32,6 @@ class AccesPmr
     public function setLibelle(string $libelle): static
     {
         $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    public function getQuantite(): ?int
-    {
-        return $this->quantite;
-    }
-
-    public function setQuantite(int $quantite): static
-    {
-        $this->quantite = $quantite;
 
         return $this;
     }

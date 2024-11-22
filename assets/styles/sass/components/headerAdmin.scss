@@ -31,16 +31,17 @@
         margin: 0 1rem;
     }
 
-    .desk-logout{
-        display: initial;
+    .container-logout{
+        display: flex;
         margin: 0 1rem;
+    }
+
+    .desk-logout{
+        display: initial;       
         font-weight: 500;
         color: white;
         text-decoration: none;
     }
 
-    .mobile-logout{
-        display: none;
-    }
 }
 }

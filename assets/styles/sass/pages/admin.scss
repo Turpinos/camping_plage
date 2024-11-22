@@ -1,0 +1,157 @@
+.main-admin{
+    background-color: rgb(231, 231, 231);
+    margin-bottom: -2rem;
+    padding-block: 1rem;
+
+    section{
+        background-color: white;
+        box-shadow: 3px 5px 20px -5px rgba(0,0,0,0.40);
+        margin: 2rem auto;
+        width: 95%;
+        min-width: 325px;
+        border-radius: 1rem;
+        padding: 0.5rem 0 0 0;
+
+        h2{
+            padding-left: 0.8rem;
+            margin: 0.3 0;
+            color: $mainBold;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+
+            .no-border{
+                border: none;
+            }
+
+            tr{
+                border-block:1px solid rgb(220, 220, 220);
+            }
+
+            td:first-child{
+                font-weight: 500;
+            }
+    
+            td{
+                padding: 1rem 0.3rem;
+                font-size: 0.9rem;
+            }
+            
+            th{
+                text-align: left;
+                padding:1.3rem 1rem 1.3rem 1rem;
+                color: $mainLight;
+            }
+        }
+
+        .preview-img{
+            display: none;
+        }
+
+        .table-info{
+            display: none;
+        }
+
+        .modifier{
+            text-align: center;
+            width: 70px;
+            color: rgb(228, 126, 0);
+            font-weight: 500;
+            cursor: pointer;
+
+            a{
+                text-decoration: none;
+                color: rgb(228, 126, 0);
+            }
+        }
+        .rempl-suppr{
+            width: 60px;
+        }
+
+        .suppr{
+            text-align: center;
+            width: 60px;
+            color: rgb(255, 54, 54);
+            padding-inline: 0rem 0.3rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .add{
+            padding: 1rem 1rem;
+            margin: 0;
+            color: $secondaryBold;
+            font-weight: 500;
+        }
+
+        .add-loc{
+            padding: 1rem 1rem;
+            margin: 0;
+
+            a{
+                color: $secondaryBold;
+                text-decoration: none;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .saisons-ouvertures{
+        table{
+            tr:last-child{
+                border: none;
+            }
+        }
+    }
+}
+
+@media screen and ( min-width: 860px ){
+  
+.main-admin{
+    section{
+        width: 900px;
+        max-width: 95%;
+
+        table{
+            tr{
+                td{
+                    padding: 1rem 0.8rem;
+                }
+
+                th{
+                    padding-left: 1.3rem;
+                }
+            }
+
+            .preview-img{
+                display: inline-block;
+                padding: 0.2rem 0;
+    
+                img{
+                    display: flex;
+                    max-width: 100px;
+                    height: 3rem;
+                }
+
+            }
+
+            .table-info{
+                display: inline-block;
+                color: rgb(95, 95, 95);
+                max-width: 400px;
+                min-width: 100px;
+                margin: 0;
+            }
+    
+            .suppr{
+                padding-inline: 0rem 0.3rem;
+            }
+        }
+    }
+}
+
+}

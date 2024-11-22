@@ -28,9 +28,6 @@ class Locatifs
     #[ORM\Column(nullable: true)]
     private ?int $superficie = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $mode_paiement = null;
-
     #[ORM\Column]
     private ?bool $pmr = null;
 
@@ -108,18 +105,6 @@ class Locatifs
     public function setSuperficie(?int $superficie): static
     {
         $this->superficie = $superficie;
-
-        return $this;
-    }
-
-    public function getModePaiement(): ?string
-    {
-        return $this->mode_paiement;
-    }
-
-    public function setModePaiement(?string $mode_paiement): static
-    {
-        $this->mode_paiement = $mode_paiement;
 
         return $this;
     }

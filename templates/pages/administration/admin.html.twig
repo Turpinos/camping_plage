@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration | Camping plage du midi{% endblock %}
+
+{% block header %}
+    {{ component('AdminHeader') }}
+{% endblock %}
+{% block body %}
+    <main id="main-admin" class="main-admin">
+        <section  class="locations">
+            <h2>Locations</h2>
+            <table>
+                <tbody>
+                    {% for loc in locatifs %}
+                        <tr>
+                            <td>{{ loc.libelle }}</td>
+                            
+                            {% set nbrImages = 0 %}
+                            {% for img in images %}
+                                {% if img.getIdLocatifs().getId() == loc.id %}
+                                    {% set nbrImages = nbrImages + 1 %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <td class="table-info">{{ nbrImages }} image(s)</td>
+                            <td class="table-info">{{ loc.ouverturehivernale ? 'dispo. l\'hiver' : 'indispo. l\'hiver' }}</td>
+                            <td class="table-info">
+                                {% set firstEmpl = false %}
+                                {% for emplacement in emplacements %}
+                                    {% if emplacement.getIdLocatifs().getId() == loc.id %}
+                                        {{ not firstEmpl ? "#{emplacement.emplacement}" : ", #{emplacement.emplacement}" }}
+                                        {% set firstEmpl = true %}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="modifier"><a href="#{loc.id}">Modifier</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="add-loc"><a href="#">Ajouter une location</a></p>
+        </section>
+        <section class="saisons-ouvertures">
+            <h2>Saisons & Ouvertures</h2>
+            <table>
+                <tbody>
+                    <tr class="no-border">
+                        <th>Saisons</th>
+                    </tr>
+                    {% for saison in saisons %}
+                        <tr>
+                            <td>{{ saison.libelle }}</td>
+                            <td class="table-info">De: {{ saison.datedebut|date("d/m/Y") }}</td>
+                            <td class="table-info">A: {{ saison.datefin|date("d/m/Y") }}</td>
+                            <td data-id="{{ saison.id }}" class="modifier">Modifier</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th>Ouvertures</th>
+                    </tr>
+                    {% for ouverture in ouvertures %}
+                        <tr>
+                            <td>{{ ouverture.libelle }}</td>
+                            <td class="table-info">
+                                {% if ouverture.actif is same as (null) %}
+                                    Indéfini(e)(s)
+                                {% elseif ouverture.actif == true %}
+                                    Ouvert(e)(s)
+                                {% elseif ouverture.actif == false %}
+                                    Fermé(e)(s)
+                                {% endif %}
+                            </td>
+                            <td data-id="{{ ouverture.id }}" class="modifier">Modifier</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="galerie">
+            <h2>Galerie</h2>
+            <table>
+                <tbody>
+                    {% for img in gallery %}
+                        <tr>
+                            <td>{{ img.imgurl }}</td>
+                            <td class="preview-img"><img src="{{ asset("/images/media/#{img.imgurl}") }}" alt="{{ img.imgurl }}"></td>
+                            <td data-id="{{ img.id }}" class="suppr">Suppr</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="add">Ajouter une image</p>
+        </section>
+        <section class="informations">
+            <h2>Informations</h2>
+            <table>
+                <tbody>
+                    <tr class="no-border">
+                        <th>Informations</th>
+                    </tr>
+                    {% for info in informations %}
+                        <tr>
+                            <td>{{ info.libelle }}</td>
+                            <td class="table-info">{{ info.contenu }}</td>
+                            <td class="rempl-suppr"></td>
+                            <td data-id="{{ info.id }}" class="modifier">Modifier</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th>Tarifs globaux</th>
+                    </tr>
+                    {% for tarif in tarifs %}
+                        <tr>
+                            <td>{{ tarif.libelle }}</td>
+                            <td class="table-info">{{ tarif.valeur }}€</td>
+                            <td class="rempl-suppr"></td>
+                            <td data-id="{{ tarif.id }}" class="modifier">Modifier</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th>Aménagements PMR</th>
+                    </tr>
+                    {% for acces in accesPmr %}
+                        <tr>
+                            <td>{{ acces.libelle }}</td>
+                            <td class="table-info"></td>
+                            <td data-id="{{ acces.id }}" class="modifier">Modifier</td>
+                            <td data-id="{{ acces.id }}" class="suppr">Suppr</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="add">Ajouter un aménagement PMR</p>
+        </section>
+    </main>
+{% endblock %}
+{% block footer %}
+    {{ component('Footer') }}
+{% endblock %}
