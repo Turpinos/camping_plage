@@ -52,7 +52,7 @@
                             <td>{{ saison.libelle }}</td>
                             <td class="table-info">De: {{ saison.datedebut|date("d/m/Y") }}</td>
                             <td class="table-info">A: {{ saison.datefin|date("d/m/Y") }}</td>
-                            <td data-id="{{ saison.id }}" class="modifier">Modifier</td>
+                            <td data-id="{{ saison.id }}" class="modifier modifier-saisons">Modifier</td>
                         </tr>
                     {% endfor %}
                     <tr>
@@ -70,7 +70,7 @@
                                     Fermé(e)(s)
                                 {% endif %}
                             </td>
-                            <td data-id="{{ ouverture.id }}" class="modifier">Modifier</td>
+                            <td data-id="{{ ouverture.id }}" class="modifier modifier-ouvertures">Modifier</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -84,7 +84,7 @@
                         <tr>
                             <td>{{ img.imgurl }}</td>
                             <td class="preview-img"><img src="{{ asset("/images/media/#{img.imgurl}") }}" alt="{{ img.imgurl }}"></td>
-                            <td data-id="{{ img.id }}" class="suppr">Suppr</td>
+                            <td data-id="{{ img.id }}" class="suppr suppr-img">Suppr</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -103,7 +103,7 @@
                             <td>{{ info.libelle }}</td>
                             <td class="table-info">{{ info.contenu }}</td>
                             <td class="rempl-suppr"></td>
-                            <td data-id="{{ info.id }}" class="modifier">Modifier</td>
+                            <td data-id="{{ info.id }}" class="modifier modifier-info">Modifier</td>
                         </tr>
                     {% endfor %}
                     <tr>
@@ -114,7 +114,7 @@
                             <td>{{ tarif.libelle }}</td>
                             <td class="table-info">{{ tarif.valeur }}€</td>
                             <td class="rempl-suppr"></td>
-                            <td data-id="{{ tarif.id }}" class="modifier">Modifier</td>
+                            <td data-id="{{ tarif.id }}" class="modifier modifier-tarifs">Modifier</td>
                         </tr>
                     {% endfor %}
                     <tr>
@@ -124,14 +124,78 @@
                         <tr>
                             <td>{{ acces.libelle }}</td>
                             <td class="table-info"></td>
-                            <td data-id="{{ acces.id }}" class="modifier">Modifier</td>
-                            <td data-id="{{ acces.id }}" class="suppr">Suppr</td>
+                            <td data-id="{{ acces.id }}" class="modifier modifier-acces">Modifier</td>
+                            <td data-id="{{ acces.id }}" class="suppr suppr-acces">Suppr</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
             <p class="add">Ajouter un aménagement PMR</p>
         </section>
+        <div class="background-form hidden">
+            <div class="div div-form-saisons hidden">
+                {{ form_start(formSaisons) }}
+                    {{ form_row(formSaisons.libelle) }}
+                    {{ form_row(formSaisons.date_debut) }}
+                    {{ form_row(formSaisons.date_fin) }}
+                    <div class="button">
+                        {{ form_row(formSaisons.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formSaisons) }}
+            </div>
+            <div class="div div-form-ouvertures hidden">
+                {{ form_start(formOuvertures) }}
+                    {{ form_row(formOuvertures.libelle) }}
+                    {{ form_row(formOuvertures.choice_type) }}
+                    <div class="button">
+                        {{ form_row(formOuvertures.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formOuvertures) }}
+            </div>
+            <div class="div div-form-gallery hidden">
+                {{ form_start(formGallery) }}
+                    {{ form_row(formGallery.img_url) }}
+                    <p class="aide">*Dimensions autorisées de 1:1 à 16:9, au format JPEG</p>
+                    <div class="preview-img-form"></div>
+                    <div class="button">
+                        {{ form_row(formGallery.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formGallery) }}
+            </div>
+            <div class="div div-form-info hidden">
+                {{ form_start(formInfo) }}
+                    {{ form_row(formInfo.libelle) }}
+                    {{ form_row(formInfo.contenu) }}
+                    <div class="button">
+                        {{ form_row(formInfo.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formInfo) }}
+            </div>
+            <div class="div div-form-tarifs hidden">
+                {{ form_start(formTarifs) }}
+                    {{ form_row(formTarifs.libelle) }}
+                    {{ form_row(formTarifs.valeur) }}
+                    <p class="aide">*Format valide: 0.00</p>
+                    <div class="button">
+                        {{ form_row(formTarifs.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formTarifs) }}
+            </div>
+            <div class="div div-form-accesPmr hidden">
+                {{ form_start(formAccesPmr) }}
+                    {{ form_row(formAccesPmr.libelle) }}
+                    <div class="button">
+                        {{ form_row(formAccesPmr.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formAccesPmr) }}
+            </div>
+        </div>
     </main>
 {% endblock %}
 {% block footer %}
