@@ -61,15 +61,13 @@
                     {% for ouverture in ouvertures %}
                         <tr>
                             <td>{{ ouverture.libelle }}</td>
-                            <td class="table-info">
-                                {% if ouverture.actif is same as (null) %}
-                                    Indéfini(e)(s)
-                                {% elseif ouverture.actif == true %}
-                                    Ouvert(e)(s)
-                                {% elseif ouverture.actif == false %}
-                                    Fermé(e)(s)
-                                {% endif %}
-                            </td>
+                            {% if ouverture.actif is same as (null) %}
+                            <td data-bool="null" class="table-info">Indéfini(e)(s)</td>
+                            {% elseif ouverture.actif == true %}
+                            <td data-bool="true" class="table-info">Ouvert(e)(s)</td>
+                            {% elseif ouverture.actif == false %}
+                            <td data-bool="false" class="table-info">Fermé(e)(s)</td>
+                            {% endif %}
                             <td data-id="{{ ouverture.id }}" class="modifier modifier-ouvertures">Modifier</td>
                         </tr>
                     {% endfor %}
@@ -89,7 +87,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <p class="add">Ajouter une image</p>
+            <p class="add add-img" data-id="0">Ajouter une image</p>
         </section>
         <section class="informations">
             <h2>Informations</h2>
@@ -130,7 +128,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <p class="add">Ajouter un aménagement PMR</p>
+            <p class="add add-acces" data-id="0">Ajouter un aménagement PMR</p>
         </section>
         <div class="background-form hidden">
             <div class="div div-form-saisons hidden">
@@ -194,6 +192,27 @@
                         <div class="annuler"><button type="button">Annuler</button></div>
                     </div>
                 {{ form_end(formAccesPmr) }}
+            </div>
+            <div class="div div-form-delGallery hidden">
+                {{ form_start(formDelGallery) }}
+                    <p class="del-libelle"></p>
+                    <div class="preview-img-form"></div>
+                    {{ form_row(formDelGallery.id) }}
+                    <div class="button">
+                        {{ form_row(formDelGallery.delete) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formDelGallery) }}
+            </div>
+            <div class="div div-form-delAccesPmr hidden">
+                {{ form_start(formDelAccesPmr) }}
+                    <p class="del-libelle"></p>
+                    {{ form_row(formDelAccesPmr.id) }}
+                    <div class="button">
+                        {{ form_row(formDelAccesPmr.delete) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formDelAccesPmr) }}
             </div>
         </div>
     </main>

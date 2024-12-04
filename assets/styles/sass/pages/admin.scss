@@ -86,6 +86,7 @@
             margin: 0;
             color: $secondaryBold;
             font-weight: 500;
+            cursor: pointer;
         }
 
         .add-loc{
@@ -129,6 +130,20 @@
             padding: 1rem;
             width: 90%;
             max-width: 400px;
+
+            .del-libelle{
+                text-align: center;
+            }
+
+            .preview-img-form{
+
+                img{
+                    display: flex;
+                    max-width: 300px;
+                    max-height: 5rem;
+                    margin-inline: auto;
+                }
+            }
 
             ul{
                 color: rgb(174, 73, 73);

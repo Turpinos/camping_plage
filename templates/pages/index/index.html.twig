@@ -41,32 +41,32 @@
         <section class="point-clef">
             <h2>3 étoiles à votre service</h2>
             <figure class="f1">
-                <img src="{{ asset('/images/media/slider_epiceriev2.jpg') }}" alt="Epicerie"/>
+                <img src="{{ asset('/images/mise-en-page/slider_epiceriev2.jpg') }}" alt="Epicerie"/>
                 <figcaption>Une épicerie qui propose des produits d’alimentation locaux et bio mais aussi des articles de plage, des souvenir, les journaux et même un dépôt de pain.</figcaption>
             </figure>
             <p></p>
             <figure class="f2">
-                <img src="{{ asset('/images/media/cityv2.jpg') }}" alt="City"/>
+                <img src="{{ asset('/images/mise-en-page/cityv2.jpg') }}" alt="City"/>
                 <figcaption>Un espace de jeux pour les petits et les grands, pour le plaisir de jouer entre amis ou en famille.</figcaption>
             </figure>
             <p></p>
             <figure class="f3">
-                <img src="{{ asset('/images/media/piscinev2.jpg') }}" alt="Piscine"/>
+                <img src="{{ asset('/images/mise-en-page/piscinev2.jpg') }}" alt="Piscine"/>
                 <figcaption>Une piscine couverte et chauffée avec sa propre terrasse pour se prélasser au soleil.</figcaption>
             </figure>
             <p></p>
             <figure class="f4">
-                <img src="{{ asset('/images/media/saunav2.jpg') }}" alt="Sauna"/>
+                <img src="{{ asset('/images/mise-en-page/saunav2.jpg') }}" alt="Sauna"/>
                 <figcaption>Un chalet dédié au « bien-être écologique » avec sauna, hammam, terrasse solarium, douche et tisanerie.</figcaption>
             </figure>
             <p></p>
             <figure class="f5">
-                <img src="{{ asset('/images/media/barv2.jpg') }}" alt="Bar"/>
+                <img src="{{ asset('/images/mise-en-page/barv2.jpg') }}" alt="Bar"/>
                 <figcaption>Profitez d’une boisson au bar ou sur la terrasse au bord du lac.</figcaption>
             </figure>
             <p></p>
             <figure class="f6">
-                <img src="{{ asset('/images/media/bateau.jpg') }}" alt="Bar"/>
+                <img src="{{ asset('/images/mise-en-page/bateau.jpg') }}" alt="Bateau"/>
                 <figcaption>Montez à bord du bateau "Les settons" pour profiter d'une promenade de 45 minutes, commentée par le capitaine(<a href="https://bateaux-settons.com">Voir le site</a>).</figcaption>
             </figure>
         </section>
@@ -106,11 +106,11 @@
             <article class="saisons">
                 {% for saison in saisons %}
                     <div>
-                        {% if saison.slug == "saison_d_hiver" %}
+                        {% if saison.id == "1" %}
                             <img src="{{ asset('/images/logos/flocon-de-neige.png') }}" alt="saison d'hiver"/>
-                        {% elseif saison.slug == "basse_saison" %}
+                        {% elseif saison.id == "2" or saison.id == "4" %}
                             <img src="{{ asset('/images/logos/feuille-derable.png') }}" alt="basse saison"/>
-                        {% elseif saison.slug == "haute_saison" %}
+                        {% elseif saison.id == "3" %}
                             <img src="{{ asset('/images/logos/soleil.png') }}" alt="haute saison"/>
                         {% endif %}
                         <p>{{ saison.libelle }}: {{ saison.datedebut|date('d/m/Y') }} au {{ saison.datefin|date('d/m/Y') }}</p>
@@ -123,22 +123,22 @@
                     <div>
                         {% if ouverture.actif == "1" %}
                             <img src="{{ asset('/images/logos/bouton_vert.png') }}" alt="actif"/>
-                            {% if ouverture.slug == "accueil_&_bar" %}
+                            {% if ouverture.id == "1" %}
                                 <p>{{ ouverture.libelle }}: {{ "ouverts toute l'année" }}.</p>
-                            {% elseif ouverture.slug == "piscine_chauffee" or ouverture.slug == "epicerie" %}
+                            {% elseif ouverture.id == "2" or ouverture.id == "4" %}
                                 <p>{{ ouverture.libelle }}: {{ "ouverte" }}.</p>
-                            {% elseif ouverture.slug == "snack" %}
+                            {% elseif ouverture.id == "3" %}
                                 <p>{{ ouverture.libelle }}: {{ "ouvert" }}.</p>
-                            {% elseif ouverture.slug == "sauna_&_hammam" %}
+                            {% elseif ouverture.id == "5" %}
                                 <p>{{ ouverture.libelle }}: {{ "ouverts" }}.</p>
                             {% endif %}
                         {% elseif ouverture.actif == "0" %}
                             <img src="{{ asset('/images/logos/bouton_rouge.png') }}" alt="inactif"/>
-                            {% if ouverture.slug == "accueil_&_bar" or ouverture.slug == "sauna_&_hammam" %}
+                            {% if ouverture.id == "1" or ouverture.id == "5" %}
                                 <p>{{ ouverture.libelle }}: {{ "actuellement fermés" }}.</p>
-                            {% elseif ouverture.slug == "piscine_chauffee" or ouverture.slug == "epicerie" %}
+                            {% elseif ouverture.id == "2" or ouverture.id == "4" %}
                                 <p>{{ ouverture.libelle }}: {{ "actuellement fermée" }}.</p>
-                            {% elseif ouverture.slug == "snack" %}
+                            {% elseif ouverture.id == "3" %}
                                 <p>{{ ouverture.libelle }}: {{ "actuellement fermé" }}.</p>
                             {% endif %}
                         {% elseif ouverture.actif == null %}

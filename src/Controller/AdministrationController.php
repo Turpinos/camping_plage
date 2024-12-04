@@ -8,6 +8,14 @@ use App\Entity\Informations;
 use App\Entity\Ouvertures;
 use App\Entity\Saisons;
 use App\Entity\TarifsGlobaux;
+use App\Form\AccesPmrType;
+use App\Form\DeleteAccesPmrType;
+use App\Form\DeleteGalleryType;
+use App\Form\GalleryType;
+use App\Form\InformationsType;
+use App\Form\OuverturesType;
+use App\Form\SaisonsType;
+use App\Form\TarifsGlobauxType;
 use App\Repository\AccesPmrRepository;
 use App\Repository\CoordonneesMapRepository;
 use App\Repository\GalleryRepository;
@@ -17,30 +25,20 @@ use App\Repository\LocatifsRepository;
 use App\Repository\OuverturesRepository;
 use App\Repository\SaisonsRepository;
 use App\Repository\TarifsGlobauxRepository;
+use App\Service\PictureService;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Validator\Constraints\Date;
-use Symfony\Component\Validator\Constraints\Image;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\LessThanOrEqual;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\PositiveOrZero;
-use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class AdministrationController extends AbstractController
 {
     #[Route('/administration', name: 'app_administration')]
-    public function index(LocatifsRepository $locatifsRepository, ImagesRepository $imagesRepository, CoordonneesMapRepository $coordonneesMapRepository, SaisonsRepository $saisonsRepository, OuverturesRepository $ouverturesRepository, GalleryRepository $galleryRepository, InformationsRepository $informationsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, AccesPmrRepository $accesPmrRepository): Response
+    public function index(LocatifsRepository $locatifsRepository, ImagesRepository $imagesRepository, CoordonneesMapRepository $coordonneesMapRepository, SaisonsRepository $saisonsRepository, OuverturesRepository $ouverturesRepository, GalleryRepository $galleryRepository, InformationsRepository $informationsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, AccesPmrRepository $accesPmrRepository, EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, PictureService $pictureService, Request $request): Response
     {
 
         $locatifs = $locatifsRepository->findAll();
@@ -53,277 +51,215 @@ class AdministrationController extends AbstractController
         $tarifs = $tarifsGlobauxRepository->findAll();
         $accesPmr = $accesPmrRepository->findAll();
 
-        //formulaire saisons..
-        $saisonsEntity = new Saisons();
+        //appel form avec nom perso pour éviter conflit de validation..
+        $formSaisons = $formFactory->createNamed('form_saisons', SaisonsType::class);
+        $formOuvertures = $formFactory->createNamed('form_ouvertures', OuverturesType::class);
+        $formGallery = $formFactory->createNamed('form_gallery', GalleryType::class);
+        $formInfo = $formFactory->createNamed('form_informations', InformationsType::class);
+        $formTarifs = $formFactory->createNamed('form_tarifs', TarifsGlobauxType::class);
+        $formAccesPmr = $formFactory->createNamed('form_AccesPmr', AccesPmrType::class);
+        $formDelGallery = $formFactory->createNamed('form_DelGallery', DeleteGalleryType::class);
+        $formDelAccesPmr = $formFactory->createNamed('form_DelAccesPmr', DeleteAccesPmrType::class);
 
-        $formSaisons = $this->createFormBuilder($saisonsEntity)
-        ->add('libelle', TextType::class, [
-            'label' => 'Nom',
-            'attr' => [
-                'minLength' => 1,
-                'maxLength' => 50
-            ],
-            'row_attr' => [
-                'class' => 'row libelle'
-            ],
-            'constraints' => [
-                new NotBlank(message: 'Doit être renseigné'),
-                new Length(
-                    min: 1,
-                    max: 50,
-                    minMessage: 'Au moins {{ limit }} caractère',
-                    maxMessage: 'Pas plus de {{ limit }} caractères'
-                )
-            ],
-        ])
-        ->add('date_debut', DateType::class, [
-            'widget' => 'single_text',
-            'input' => 'string',
-            'label' => 'Début',
-            'widget' => 'single_text',
-            'row_attr' => array(
-                'class' => 'row debut'
-            ),
-            'constraints' =>[
-                new NotBlank(message: 'Doit être renseigné'),
-                new Date()
-            ]
-        ])
-        ->add('date_fin', DateType::class, [
-            'widget' => 'single_text',
-            'input' => 'string',
-            'label' => 'Fin',
-            'widget' => 'single_text',
-            'row_attr' => array(
-                'class' => 'row fin'
-            ),
-            'constraints' =>[
-                new NotBlank(message: 'Doit être renseigné'),
-                new Date()
-            ]
-        ])
-        ->add('id', HiddenType::class)
-        ->add('save', SubmitType::class, [
-            'label' => 'Confirmer',
-            'row_attr' => [
-                'class' => 'row submit'
-            ]
-        ])
-        ->getForm();
 
-        //formulaire ouverture..
-        $ouverturesEntity = new Ouvertures();
+        //Vérification des formulaires pour l'update..
+        $formSaisons->handleRequest($request);
+        if ($formSaisons->isSubmitted() && $formSaisons->isValid()) {
 
-        $formOuvertures = $this->createFormBuilder($ouverturesEntity)
-        ->add('libelle', TextType::class, [
-            'label' => 'Nom',
-            'attr' => [
-                'minLength' => 1,
-                'maxLength' => 50
-            ],
-            'row_attr' => [
-                'class' => 'row libelle'
-            ],
-            'constraints' => [
-                new NotBlank(message: 'Doit être renseigné'),
-                new Length(
-                    min: 1,
-                    max: 50,
-                    minMessage: 'Au moins {{ limit }} caractère',
-                    maxMessage: 'Pas plus de {{ limit }} caractères'
-                )
-            ],
-        ])
-        ->add('choice_type', ChoiceType::class, [
-            'label' => 'Ouverture',
-            'mapped' => false,
-            'attr' => [
-                'class' => 'container-radio'
-            ],
-            'row_attr' => [
-                'class' => 'row choice'
-            ],
-            'choices' => [
-                'Oui' => 'oui',
-                'Non' => 'non',
-                'Sur réservation' => 'resa'
-            ],
-            'expanded' => true,
-            'multiple' => false,
-            'constraints' => [
-                new NotBlank(message: 'Doit être renseigné'),
-            ]
-        ])
-        ->add('save', SubmitType::class, [
-            'label' => 'Confirmer',
-            'row_attr' => [
-                'class' => 'row submit'
-            ]
-        ])
-        ->getForm();
+            $data = $formSaisons->getData();
 
-        //formulaire galerie..
-        $galleryEntity = new Gallery();
+            $updateSaison = $entityManager->getRepository(Saisons::class)->find($data['id']);
 
-        $formGallery = $this->createFormBuilder($galleryEntity)
-        ->add('img_url', FileType::class, [
-            'label' => 'Importer*',
-            'row_attr' => [
-                'class' => 'row img'
-            ],
-            'mapped' => false,
-            'multiple' => false,
-            'constraints' => [
-                new NotBlank(message: 'Doit être renseigné'),
-                new Image(
-                    maxRatio: 1.78,
-                    maxRatioMessage: 'Le format doit être entre 1:1 et 16:9',
-                    allowPortrait: false,
-                    allowPortraitMessage: 'Le format doit être entre 1:1 et 16:9',
-                    mimeTypes: [
-                        'image/jpeg'
-                    ],
-                    mimeTypesMessage: 'Format obligatoire: JPEG'
-                )
-            ]
-        ])
-        ->add('save', SubmitType::class, [
-            'label' => 'Confirmer',
-            'row_attr' => [
-                'class' => 'row submit'
-            ]
-        ])
-        ->getForm();
+            if($updateSaison->getLibelle() != $data['libelle']){
 
-        //formulaire info..
-        $informationsEntity = new Informations();
+                $updateSaison->setLibelle($data['libelle']);
+                $slugger = new AsciiSlugger();
+                $updateSaison->setSlug($slugger->slug($data['libelle']));
 
-        $formInfo = $this->createFormBuilder($informationsEntity)
-        ->add('libelle', TextType::class, [
-            'label' => 'Nom',
-            'attr' => [
-                'minLength' => 1,
-                'maxLength' => 50
-            ],
-            'row_attr' => [
-                'class' => 'row libelle'
-            ],
-            'constraints' => [
-                new NotBlank(message: 'Doit être renseigné'),
-                new Length(
-                    min: 1,
-                    max: 50,
-                    minMessage: 'Au moins {{ limit }} caractère',
-                    maxMessage: 'Pas plus de {{ limit }} caractères'
-                )
-            ],
-        ])
-        ->add('contenu', TextareaType::class, [
-            'label' => 'Contenu',
-            'attr' => [
-                'minLength' => 1,
-                'maxLength' => 200
-            ],
-            'row_attr' => [
-                'class' => 'row contenu'
-            ],
-            'constraints' => [
-                new NotBlank(message: 'Doit être renseigné'),
-                new Length(
-                    min: 1,
-                    max: 200,
-                    minMessage: 'Au moins {{ limit }} caractère',
-                    maxMessage: 'Pas plus de {{ limit }} caractères'
-                )
-            ],
-        ])
-        ->add('save', SubmitType::class, [
-            'label' => 'Confirmer',
-            'row_attr' => [
-                'class' => 'row submit'
-            ]
-        ])
-        ->getForm();
+            }
 
-        //formulaire tarifs globaux
-        $tarifsEntity = new TarifsGlobaux();
+            $dateDebut = date_format($data['date_debut'], 'Y-m-d');
+            $dateDebut = new DateTimeImmutable($dateDebut);
 
-        $formTarifs = $this->createFormBuilder($tarifsEntity)
-        ->add('libelle', TextType::class, [
-            'label' => 'Nom',
-            'attr' => [
-                'minLength' => 1,
-                'maxLength' => 50
-            ],
-            'row_attr' => [
-                'class' => 'row libelle'
-            ],
-            'constraints' => [
-                new NotBlank(message: 'Doit être renseigné'),
-                new Length(
-                    min: 1,
-                    max: 50,
-                    minMessage: 'Au moins {{ limit }} caractère',
-                    maxMessage: 'Pas plus de {{ limit }} caractères'
-                    
-                )
-            ],
-        ])
-        ->add('valeur', NumberType::class, [
-            'label' => 'Valeur*',
-            'scale' => 2,
-            'attr' => [
-                'step' => 0.01,
-                'min' => 0,
-            ],
-            'constraints' => [
-                new NotBlank(message: 'Doit être renseigné'),
-                new Type([
-                    'type' => 'float',
-                    'message' => 'Format accepté: 1.00'
-                ]),
-                new PositiveOrZero(message: 'Minimum: 0.00')
-            ]
-        ])
-        ->add('save', SubmitType::class, [
-            'label' => 'Confirmer',
-            'row_attr' => [
-                'class' => 'row submit'
-            ]
-        ])
-        ->getForm();
+            if($updateSaison->getDateDebut() != $dateDebut){
+                $updateSaison->setDateDebut($dateDebut);
+            }
 
-        //formulaire acces pmr..
-        $accesPmrEntity = new AccesPmr();
+            $dateFin = date_format($data['date_fin'], 'Y-m-d');
+            $dateFin = new DateTimeImmutable($dateFin);
+            
+            if($updateSaison->getDateFin() != $dateFin){
+                $updateSaison->setDateFin($dateDebut);
+            }
 
-        $formAccesPmr = $this->createFormBuilder($accesPmrEntity)
-        ->add('libelle', TextType::class, [
-            'label' => 'Nom',
-            'attr' => [
-                'minLength' => 1,
-                'maxLength' => 50
-            ],
-            'row_attr' => [
-                'class' => 'row libelle'
-            ],
-            'constraints' => [
-                new NotBlank(message: 'Doit être renseigné'),
-                new Length(
-                    min: 1,
-                    max: 50,
-                    minMessage: 'Au moins {{ limit }} caractère',
-                    maxMessage: 'Pas plus de {{ limit }} caractères'
-                    
-                )
-            ],
-        ])
-        ->add('save', SubmitType::class, [
-            'label' => 'Confirmer',
-            'row_attr' => [
-                'class' => 'row submit'
-            ]
-        ])
-        ->getForm();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_administration');
+            
+        }
+
+        $formOuvertures->handleRequest($request);
+        if($formOuvertures->isSubmitted() && $formOuvertures->isValid()){
+
+            $data = $formOuvertures->getData();
+            
+            $updateOuverture = $entityManager->getRepository(Ouvertures::class)->find($data['id']);
+
+            if($updateOuverture->getLibelle() != $data['libelle']){
+                $updateOuverture->setLibelle($data['libelle']);
+                $slugger = new AsciiSlugger();
+                $updateOuverture->setSlug($slugger->slug($data['libelle']));
+            }
+
+            if($data['choice_type'] == 'true'){
+
+                $updateOuverture->setActif(true);
+
+            }else if($data['choice_type'] == 'false'){
+
+                $updateOuverture->setActif(false);
+
+            }else if($data['choice_type'] == 'null'){
+
+                $updateOuverture->setActif(null);
+
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_administration');
+
+        }
+
+        $formGallery->handleRequest($request);
+        if($formGallery->isSubmitted() && $formGallery->isValid()){
+            
+            $data = $formGallery->getData();
+
+            $infoImg = $pictureService->freeresize($data['img_url'], '../public/images/media/');
+
+            if($infoImg != 'erreur'){
+
+                $addgallery = new Gallery;
+                $addgallery->setImgUrl($infoImg);
+                $addgallery->setImgAlt(str_replace('.jpg', '', $infoImg));
+
+                $entityManager->persist($addgallery);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_administration');
+
+            }
+
+
+        }
+
+        $formDelGallery->handleRequest($request);
+        if($formDelGallery->isSubmitted() && $formDelGallery->isValid()){
+
+            $data = $formDelGallery->getData();
+            $removegallery = $entityManager->getRepository(Gallery::class)->find($data['id']);
+
+            //suppressions du dossier..
+            unlink('../public/images/media/' . $removegallery->getImgUrl());
+            
+            $entityManager->remove($removegallery);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_administration');
+        }
+
+        $formInfo->handleRequest($request);
+        if($formInfo->isSubmitted() && $formInfo->isValid()){
+
+            $data = $formInfo->getData();
+            $updateInfo = $entityManager->getRepository(Informations::class)->find($data['id']);
+
+            if($updateInfo->getLibelle() != $data['libelle']){
+
+                $updateInfo->setLibelle($data['libelle']);
+                $slugger = new AsciiSlugger();
+                $updateInfo->setSlug($slugger->slug($data['libelle']));
+
+            }
+
+            if($updateInfo->getContenu() != $data['contenu']){
+                $updateInfo->setContenu($data['contenu']);
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_administration');
+        }
+
+        $formTarifs->handleRequest($request);
+        if($formTarifs->isSubmitted() && $formTarifs->isValid()){
+
+            $data = $formTarifs->getData();
+            $updateTarifs = $entityManager->getRepository(TarifsGlobaux::class)->find($data['id']);
+
+            if($updateTarifs->getLibelle() != $data['libelle']){
+
+                $updateTarifs->setLibelle($data['libelle']);
+                $slugger = new AsciiSlugger();
+                $updateTarifs->setSlug($slugger->slug($data['libelle']));
+
+            }
+
+            if($updateTarifs->getValeur() != $data['valeur']){
+                $updateTarifs->setValeur($data['valeur']);
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_administration');
+        }
+
+        $formAccesPmr->handleRequest($request);
+        if($formAccesPmr->isSubmitted() && $formAccesPmr->isValid()){
+
+            $data = $formAccesPmr->getData();
+            
+            if($data['id'] != '0' && $data['id'] != null){
+
+                $updateAccesPmr = $entityManager->getRepository(AccesPmr::class)->find($data['id']);
+
+                if($updateAccesPmr->getLibelle() != $data['libelle']){
+
+                    $updateAccesPmr->setLibelle($data['libelle']);
+                    $slugger = new AsciiSlugger();
+                    $updateAccesPmr->setSlug($slugger->slug($data['libelle']));
+
+                }
+
+                $entityManager->flush();
+
+            }else if($data['id'] == '0'){
+
+                $addAccesPmr = new AccesPmr();
+
+                $addAccesPmr->setLibelle($data['libelle']);
+                $slugger = new AsciiSlugger();
+                $addAccesPmr->setSlug($slugger->slug($data['libelle']));
+
+                $entityManager->persist($addAccesPmr);
+                $entityManager->flush();
+
+            }
+
+            return $this->redirectToRoute('app_administration');
+        }
+
+        $formDelAccesPmr->handleRequest($request);
+        if($formDelAccesPmr->isSubmitted() && $formDelAccesPmr->isValid()){
+            
+            $data = $formDelAccesPmr->getData();
+            $delAccesPmr = $entityManager->getRepository(AccesPmr::class)->find($data['id']);
+            $entityManager->remove($delAccesPmr);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_administration');
+        }
 
         return $this->render('pages/administration/admin.html.twig', [
             'locatifs' => $locatifs,
@@ -340,7 +276,9 @@ class AdministrationController extends AbstractController
             'formGallery' => $formGallery,
             'formInfo' => $formInfo,
             'formTarifs' => $formTarifs,
-            'formAccesPmr' => $formAccesPmr
+            'formAccesPmr' => $formAccesPmr,
+            'formDelGallery' => $formDelGallery,
+            'formDelAccesPmr' => $formDelAccesPmr
 
         ]);
     }

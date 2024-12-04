@@ -104,7 +104,7 @@ class LocatifsController extends AbstractController{
         $images = $imagesRepository->findBy(['id_locatifs' => $locatif->getId()]);
         $coordonneesMap = $coordonneesMapRepository->findBy(['locatifs' => $locatif->getId()]);
         $tarifsGlobaux = $tarifsGlobauxRepository->findAll();
-        $tel = $informationsRepository->findOneBy(['slug' => 'telephone']);
+        $tel = $informationsRepository->findOneBy(['id' => '1']);
         $inventaire = $inventaireRepository->findBy(['locatif' => $locatif->getId()]);
 
         $isPmr = [];

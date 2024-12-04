@@ -45,11 +45,11 @@
                     {% if tarifs.hsnuitee2 != null or tarifs.hsnuitee3 != null or tarifs.hsnuitee4 != null %}
                         <p><span>Tarifs haute saison:</span> {{ tarifs.hsnuitee2 != null ? tarifs.hsnuitee2 ~ '€ pour 2,' : '' }} {{ tarifs.hsnuitee3 != null ? tarifs.hsnuitee3 ~ '€ pour 3,' : '' }} {{ tarifs.hsnuitee4 != null ? tarifs.hsnuitee4 ~ '€ pour 4,' : '' }} par semaine </p>
                     {% endif %}
-                    {% if locatif.slug == 'camping' %}
+                    {% if locatif.id == '11' %}
                         <p>
                             <span>Emplacement:</span> 
                             {% for tarif in tarifsGlobaux %}
-                                {% if tarif.slug == "emplacement_camping" %}
+                                {% if tarif.id == "7" %}
                                     {{ tarif.valeur }}€ /jour.
                                 {% endif %}
                             {% endfor %}
@@ -57,7 +57,7 @@
                         <p>
                             <span>Tarif adulte:</span> 
                             {% for tarif in tarifsGlobaux %}
-                                {% if tarif.slug == "camping_adulte" %}
+                                {% if tarif.id == "4" %}
                                     {{ tarif.valeur }}€ /jour.
                                 {% endif %}
                             {% endfor %}
@@ -65,7 +65,7 @@
                         <p>
                             <span>Tarif enfant (- de 11 ans):</span> 
                             {% for tarif in tarifsGlobaux %}
-                                {% if tarif.slug == "camping_enfant_-11" %}
+                                {% if tarif.id == "5" %}
                                     {{ tarif.valeur }}€ /jour.
                                 {% endif %}
                             {% endfor %}
@@ -98,13 +98,13 @@
                     <a>Afficher sur la carte</a>
                     <img src="{{ asset('/images/logos/adresse.png')}}" alt='plan' />
                 </div>
-                {% if locatif.slug != "camping" %}
+                {% if locatif.id != "11" %}
                     <p><span>Capacité:</span> Idéal pour {{ locatif.capacite }} personnes.</p>
                 {% else %}
                     <p>
                         <span>Camping-car (emplacement + véhicule):</span> 
                         {% for tarif in tarifsGlobaux %}
-                            {% if tarif.slug == "camping-car" %}
+                            {% if tarif.id == "10" %}
                                 {{ tarif.valeur }}€ /jour.
                             {% endif %}
                         {% endfor %}
@@ -112,7 +112,7 @@
                     <p>
                         <span>électricité 10A:</span> 
                         {% for tarif in tarifsGlobaux %}
-                            {% if tarif.slug == "electricite" %}
+                            {% if tarif.id == "9" %}
                                 {{ tarif.valeur }}€ /jour.
                             {% endif %}
                         {% endfor %}
@@ -120,7 +120,7 @@
                     <p>
                         <span>Véhicule:</span> 
                         {% for tarif in tarifsGlobaux %}
-                            {% if tarif.slug == "voiture_camping" %}
+                            {% if tarif.id == "8" %}
                                 {{ tarif.valeur }}€ /jour.
                             {% endif %}
                         {% endfor %}
@@ -128,14 +128,14 @@
                     <p>
                         <span>Enfant (- de 3 ans):</span> 
                         {% for tarif in tarifsGlobaux %}
-                            {% if tarif.slug == "camping_enfant_-3" %}
+                            {% if tarif.id == "6" %}
                                 {{ tarif.valeur == 0 ? "gratuit." : tarif.valeur ~ "€ /jour." }}
                             {% endif %}
                         {% endfor %}
                     </p>
                 {% endif %}
                 <p><span>Superficie:</span> {{ locatif.superficie }}m².</p>
-                {% if locatif.slug != "camping" %}
+                {% if locatif.id != "11" %}
                     {% if tarifs.tvjour is same as(null) %}
                         <p><span>Location TV:</span> Indisponible.</p>
                     {% elseif tarifs.tvjour is same as(0) %}
@@ -147,7 +147,7 @@
                 {% if tarifs.animaux != null %}
                     <p><span>Animaux:</span> {{ tarifs.animaux }}€</p>
                 {% endif %}
-                {% if locatif.slug != "camping" %}
+                {% if locatif.id != "11" %}
                     <p class="lien-pdf">
                         <span>Inventaire(s):</span>
                         {% for inv in inventaire %}
@@ -166,14 +166,14 @@
                 <p>
                     <span>Taxe de séjour:</span> 
                     {% for tarif in tarifsGlobaux %}
-                        {% if tarif.slug == "taxe_de_sejour" %}
+                        {% if tarif.id == "1" %}
                             {{ tarif.valeur }}€ /jour et /adulte de +18 ans.
                         {% endif %}
                     {% endfor %}
                 </p>
                 <p><span>Arrhes nuitée et week-end:</span> {{ tarifs.arrhesnuitee }}% en basse saison.</p>
-                <p><span>Arrhes semaine:</span> {{ locatif.slug == "camping" ? tarifs.arrhessemaine ~ "%" : tarifs.arrhessemaine ~ "€" }} en haute saison.</p>
-                {% if locatif.slug != "camping" %}
+                <p><span>Arrhes semaine:</span> {{ locatif.id == "11" ? tarifs.arrhessemaine ~ "%" : tarifs.arrhessemaine ~ "€" }} en haute saison.</p>
+                {% if locatif.id != "11" %}
                 <p><span>Caution:</span> {{ tarifs.caution }}€</p>
                 {% endif %}
                 <div class="note">
@@ -181,7 +181,7 @@
                 </div>
                 <p><span>Mode de paiement:</span> chèques, chèques vacances, toutes les cartes de crédits, espèces.</p>
                 <p class="lien-pdf"><span>Règlement intérieur:</span> <a href="{{ path('reglement_interieur') }}">visualiser en cliquant</a>.</p>
-                {{ locatif.slug == 'camping' ? "<p><span>Avertissement:</span> Il n'est pas nécessaire de réserver un emplacement hors haute saison!</p>"|raw }}
+                {{ locatif.id == '11' ? "<p><span>Avertissement:</span> Il n'est pas nécessaire de réserver un emplacement hors haute saison!</p>"|raw }}
                 {{ locatif.ouverturehivernale ? '' : "<p><span>Avertissement:</span> cette location n'est pas disponible l'hiver!</p>"|raw }}
                 <p class="lien-resa"><a href="{{ path('reservation', {'slug': locatif.slug}) }}">Faire un devis ou réserver</a></p>
             </div>
@@ -203,7 +203,7 @@
             <article>
                 <h3>Tarifs</h3>
                 <img class="fleche-bas" src="{{ asset('/images/logos/fleche-vers-le-bas-pour-naviguer-noir.png') }}" alt="fleche" />
-                {% if locatif.slug != "camping" %}
+                {% if locatif.id != "11" %}
                     {% if tarifs.hvnuitee != null %}
                         <h4>Tarifs hiver de novembre à fin mars:</h4>
                             <ul>
@@ -242,7 +242,7 @@
                     </ul>
                 {% endif %}
                 <h4>Divers:</h4>
-                {% if locatif.slug != "camping" %}
+                {% if locatif.id != "11" %}
                     {% if tarifs.animaux != null %}
                         <ul>
                             <li>Animaux: {{ tarifs.animaux }}€ par animaux par jour.</li>
@@ -251,15 +251,15 @@
                 {% endif %}
                 <ul>
                     {% for tarif in tarifsGlobaux %}
-                        {% if tarif.slug == 'petit_dejeuner' %}
+                        {% if tarif.id == '2' %}
                             <li>Petit-déjeuner: {{ tarif.valeur }}€</li>
                         {% endif %}
                     {% endfor %}
                 </ul>
-                {% if locatif.slug == "la_cabane_aux_secrets" %}
+                {% if locatif.id == "10" %}
                     <ul>
                         {% for tarif in tarifsGlobaux %}
-                            {% if tarif.slug == 'bouteille_de_champagne' %}
+                            {% if tarif.id == '3' %}
                                 <li>Accompagnez ce moment insolite avec une bouteille de champagne qui vous attendra bien frappée: {{ tarif.valeur }}€ sur commande.</li>
                             {% endif %}
                         {% endfor %}

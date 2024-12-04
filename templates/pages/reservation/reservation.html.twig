@@ -46,9 +46,9 @@
                         <p>Type de locatif</p>
                     </div>
                     <div class="container-checkBox">
-                        <!--Personnaliser l'affichage des checkbox-->
+
                         {% if typeLocatif.id == 2 %}
-                            {% if locatif.slug != 'chalet_gite_elegance' %}
+                            {% if locatif.id != '8' %}
                                 {{ form_row(form.chalet, {
                                     'label': locatif.libelle,
                                     'attr':{
