@@ -144,17 +144,6 @@ p, a{
         margin-inline: auto;
         margin-block: 3rem;
         width: 90%;
-        p{
-            margin: 0px;
-            padding: 0.8rem 0.5rem;
-            text-indent: 0.3rem;
-            color: $mainBold;
-        }
-
-        p::first-letter{
-            color: $mainLight;
-            font-weight: 700;
-        }
 
         h3{
             margin: 0px;
@@ -163,6 +152,13 @@ p, a{
             font-weight: 700;
             text-transform: uppercase;
             color: $mainLight;
+        }
+
+        .ul-activite{
+            list-style: circle;
+            li{
+                padding: 0.4rem 0.5rem;
+            }
         }
     }
     .pmr{
@@ -339,12 +335,12 @@ p, a{
         padding-bottom: 0px;
         article{
             width: 40%;
-            p{
+        ul{
                 font-size: 1rem;
             }
         }
         .pmr{
-            transform: translateY(20%);
+            transform: translateY(35%);
             p{
                 font-size: 1.2rem;
             }

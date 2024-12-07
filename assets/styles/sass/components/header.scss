@@ -18,6 +18,20 @@
     text-transform: uppercase;
 }
 
+.list-alerte{
+    border-block: 1px solid rgb(238, 230, 186);
+    background-color: rgb(255, 252, 236);
+    list-style: circle;
+    padding: 0.1rem 1rem 0.1rem 2rem;
+    color: rgb(215, 139, 16);
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    li{
+        margin: 1rem 0;
+    }
+}
+
 
 
 @media screen and ( min-width: 860px ){
@@ -41,6 +55,10 @@
     width: 60%;
     text-align: center;
     text-transform: uppercase;
+}
+
+.list-alerte{
+    padding-left: 7rem;
 }
 
 }

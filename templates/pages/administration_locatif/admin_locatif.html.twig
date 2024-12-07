@@ -1,0 +1,220 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration | Camping plage du midi{% endblock %}
+
+{% block header %}
+    {{ component('AdminHeader') }}
+{% endblock %}
+{% block body %}
+    <main id="main-admin-loc" class="main-admin-loc">
+        <section  class="locations">
+            <h2>Location</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Nom</td>
+                        <td class="table-info">{{ locatif.libelle }}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td class="table-info">{{ locatif.description }}</td>
+                    </tr>
+                    <tr>
+                        <td>Capacité</td>
+                        <td class="table-info">{{ locatif.capacite }}</td>
+                    </tr>
+                    <tr>
+                        <td>Superficie</td>
+                        <td class="table-info">{{ locatif.superficie }}</td>
+                    </tr>
+                    <tr>
+                        <td>Adapté pmr</td>
+                        <td class="table-info">{{ locatif.pmr ? "Oui" : "Non" }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ouvert l'hiver</td>
+                        <td class="table-info">{{ locatif.ouverturehivernale ? "Oui" : "Non" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="add-update modifier-loc" data-id="{{ locatif.id }}">Modifier les éléments</p>
+        </section>
+        <section  class="tarifs">
+            <h2>Tarifs</h2>
+            <table>
+                <tbody>
+                    {% if locatif.id != 10 and locatif.id != 11 %}
+                        <tr>
+                            <td>Semaine hors saison</td>
+                            <td class="table-info">{{ tarifs.hssemaine }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nuitée basse saison</td>
+                            <td class="table-info">{{ tarifs.bsnuitee }}</td>
+                        </tr>
+                        <tr>
+                            <td>Semaine basse saison</td>
+                            <td class="table-info">{{ tarifs.bssemaine }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nuitée hiver</td>
+                            <td class="table-info">{{ tarifs.hvnuitee == null ? 'null' : tarifs.hvnuitee }}</td>
+                        </tr>
+                        <tr>
+                            <td>Semaine hiver</td>
+                            <td class="table-info">{{ tarifs.hvsemaine == null ? 'null' : tarifs.hvsemaine }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if locatif.id == 10 %}
+                        <tr>
+                            <td>Nuitée basse saison pour 2</td>
+                            <td class="table-info">{{ tarifs.bsnuitee2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nuitée basse saison pour 3</td>
+                            <td class="table-info">{{ tarifs.bsnuitee3 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nuitée basse saison pour 4</td>
+                            <td class="table-info">{{ tarifs.bsnuitee4 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nuitée haute saison pour 2</td>
+                            <td class="table-info">{{ tarifs.hsnuitee2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nuitée haute saison pour 3</td>
+                            <td class="table-info">{{ tarifs.hsnuitee3 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nuitée haute saison pour 4</td>
+                            <td class="table-info">{{ tarifs.hsnuitee4 }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Arrhes par nuitée</td>
+                        <td class="table-info">{{ tarifs.arrhesnuitee }}</td>
+                    </tr>
+                    <tr>
+                        <td>Arrhes par semaine</td>
+                        <td class="table-info">{{ tarifs.arrhessemaine }}</td>
+                    </tr>
+                    {% if locatif.id != 11 %}   
+                        <tr>
+                            <td>Caution</td>
+                            <td class="table-info">{{ tarifs.caution }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tv par jour</td>
+                            <td class="table-info">{{ tarifs.tvjour == null ? 'null' : tarifs.tvjour }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tv par semaine</td>
+                            <td class="table-info">{{ tarifs.tvsemaine == null ? 'null' : tarifs.tvsemaine }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Animaux</td>
+                        <td class="table-info">{{ tarifs.animaux == null ? 'null' : tarifs.animaux }}</td>
+                    </tr>
+                    <tr>
+                        <td>Petit-déjeuner inclu</td>
+                        <td class="table-info">{{ tarifs.dejinclu ? "Oui" : "Non"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="add-update modifier-tarifs" data-id="{{ tarifs.id }}">Modifier les tarifs</p>
+        </section>
+        <section class="images">
+            <h2>Images</h2>
+            <table>
+                <tbody>
+                    {% set existImg = false %}
+                    {% for img in images %}
+                        {% if img.ispicture != '1' %}
+                        {% set existImg = true %}
+                            <tr>
+                                <td>{{ img.imgurl }}</td>
+                                <td class="preview-img"><img src="{{ asset("/images/locations/#{img.imgurl}") }}" alt="{{ img.imgurl }}"></td>
+                                <td data-id="{{ img.id }}" class="suppr suppr-img">Suppr</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {% if existImg == false %}
+                        <tr>
+                            <td>Aucune image</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <p class="add-update add-img" data-id="0">Ajouter une image</p>
+        </section>
+        <section class="vignette">
+            <h2>Vignette</h2>
+            <table>
+                <tbody>
+                    {% set existVignette = false %}
+                    {% for img in images %}
+                        {% if img.ispicture == '1' %}
+                        {% set existVignette = img.id %}
+                            <tr>
+                                <td>{{ img.imgurl }}</td>
+                                <td class="preview-img"><img src="{{ asset("/images/locations/#{img.imgurl}") }}" alt="{{ img.imgurl }}"></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {% if existVignette == false %}
+                        <tr>
+                            <td>Aucune vignette</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            {% if existVignette == false %}
+                <p class="add-update add-img" data-id="0">Ajouter une image</p>
+            {% else %}
+                <p class="add-update add-img" data-id="{{ existVignette }}">Remplacer l'image</p>
+            {% endif %}
+        </section>
+        <section class="pdf">
+            <h2>Inventaire</h2>
+            <table>
+                <tbody>
+                    {% set existPdf = false %}
+                    {% for pdf in inventaire %}
+                        {% set existPdf = true %}
+                            <tr>
+                                <td>{{ pdf.pdfurl }}</td>
+                                <td data-id="{{ pdf.id }}" class="suppr suppr-pdf">Suppr</td>
+                            </tr>
+                    {% endfor %}
+                    {% if existPdf == false %}
+                        <tr>
+                            <td>Aucun inventaire</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <p class="add-update add-pdf" data-id="0">Ajouter un inventaire</p>
+        </section>
+        <section class="emplacement">
+            <h2>Emplacement</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2" class="tr-map">{{ component('Map', {'coordonnee' : coordonnees, 'isPmr' : isPmr}) }}</td>
+                    </tr>
+                    {% for coord in coordonnees %}
+                        <tr>
+                            <td class="num-emplacement" data-position="{{ coord.position }}">{{ coord.emplacement == null ? 'Non défini' : coord.emplacement }}</td>
+                            <td class="update-ping add-pdf">Modifier</td>
+                        </tr>  
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+{% endblock %}
+{% block footer %}
+    {{ component('Footer') }}
+{% endblock %}

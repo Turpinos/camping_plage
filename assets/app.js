@@ -12,6 +12,7 @@ import './js/locatifs-detail.js';
 import './js/reservation.js';
 import './js/media.js';
 import './js/admin.js';
+import './js/admin-loc.js';
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/sass/app.scss';

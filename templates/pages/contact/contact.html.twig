@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block header %}
-    {{ component('Header', {'title' : page }) }}
+    {{ component('Header', {'title' : page, displayAlert: true }) }}
 {% endblock %}
 {% block body %}
     <main id="contact" class="main-contact">

@@ -72,7 +72,7 @@
                                 {% if locatif|length > 0 %}
                                 <tr>
                                     <td style="padding-top: 10px; padding-bottom: 10px; text-align: center;" colspan="2">
-                                        <p style=" margin:0 auto; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px; width:fit-content; font-weight: bold; font-size: 14px; color:#ffffff; border-radius: 14px; background-color:#436420">Revoir: <a style="text-decoration: none; color:#ffffff;" href="https://google.com">{{locatif.libelle}}</a></p>
+                                        <p style=" margin:0 auto; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px; width:fit-content; font-weight: bold; font-size: 14px; color:#ffffff; border-radius: 14px; background-color:#436420">Revoir: <a style="text-decoration: none; color:#ffffff;" href="{{ url }}">{{locatif.libelle}}</a></p>
                                     </td>
                                 </tr>
                                 {% endif %}
@@ -159,7 +159,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top: 10px; padding-bottom: 10px; text-align: center;" colspan="2">
-                                        <p>Accédez à notre <a style="text-decoration: underline;" href="https://google.com">page de contact</a></p>
+                                        <p>Accédez à notre <a style="text-decoration: underline;" href="{{ urlContact }}">page de contact</a></p>
                                     </td>
                                 </tr>
                             </tbody>

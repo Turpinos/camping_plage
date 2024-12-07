@@ -1,4 +1,4 @@
-.main-admin{
+.main-admin-loc{
     background-color: rgb(231, 231, 231);
     margin-bottom: -2rem;
     padding-block: 1rem;
@@ -24,10 +24,6 @@
             width: 100%;
             border-collapse: collapse;
 
-            .no-border{
-                border: none;
-            }
-
             tr{
                 border-block:1px solid rgb(220, 220, 220);
             }
@@ -40,36 +36,17 @@
                 padding: 1rem 0.3rem;
                 font-size: 0.9rem;
             }
-            
-            th{
-                text-align: left;
-                padding:1.3rem 1rem 1.3rem 1rem;
-                color: $mainLight;
+
+            .table-info{
+                display: inline-block;
+                color: rgb(95, 95, 95);
+                margin: 0;
             }
+            
         }
 
         .preview-img{
             display: none;
-        }
-
-        .table-info{
-            display: none;
-        }
-
-        .modifier{
-            text-align: center;
-            width: 70px;
-            color: rgb(228, 126, 0);
-            font-weight: 500;
-            cursor: pointer;
-
-            a{
-                text-decoration: none;
-                color: rgb(228, 126, 0);
-            }
-        }
-        .rempl-suppr{
-            width: 60px;
         }
 
         .suppr{
@@ -81,7 +58,7 @@
             cursor: pointer;
         }
 
-        .add{
+        .add-update{
             padding: 1rem 1rem;
             margin: 0;
             color: $secondaryBold;
@@ -89,30 +66,33 @@
             cursor: pointer;
         }
 
-        .add-loc{
+        .update-ping{
             padding: 1rem 1rem;
             margin: 0;
-
-            a{
-                color: $secondaryBold;
-                text-decoration: none;
-                font-weight: 500;
-            }
+            width: 70px;
+            color: $secondaryBold;
+            font-weight: 500;
+            cursor: pointer;
         }
+
     }
 
-    .saisons-ouvertures{
-        table{
-            tr:last-child{
-                border: none;
-            }
-        }
+    .num-emplacement{
+        padding-left: 1.5rem;
     }
 
     .locations{
         table{
-            tr:last-child{
-                border: none;
+            td:first-child{
+                width: 30%;
+            }
+        }
+    }
+
+    .tarifs{
+        table{
+            td:first-child{
+                width: 50%;
             }
         }
     }
@@ -242,14 +222,14 @@
 
     }
 
-    .hidden{
+    .hidden-form{
         display: none;
     }
 }
 
 @media screen and ( min-width: 860px ){
   
-.main-admin{
+.main-admin-loc{
     section{
         width: 900px;
         max-width: 95%;
@@ -258,10 +238,6 @@
             tr{
                 td{
                     padding: 1rem 0.8rem;
-                }
-
-                th{
-                    padding-left: 1.3rem;
                 }
             }
 
@@ -275,14 +251,6 @@
                     height: 3rem;
                 }
 
-            }
-
-            .table-info{
-                display: inline-block;
-                color: rgb(95, 95, 95);
-                max-width: 400px;
-                min-width: 100px;
-                margin: 0;
             }
     
             .suppr{

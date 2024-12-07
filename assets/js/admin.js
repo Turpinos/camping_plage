@@ -11,8 +11,10 @@ const divFormGallery = document.querySelector('.div-form-gallery');
 const divFormInfo = document.querySelector('.div-form-info');
 const divFormTarifs = document.querySelector('.div-form-tarifs');
 const divFormAccesPmr = document.querySelector('.div-form-accesPmr');
+const divFormAlertMessages = document.querySelector('.div-form-alertMessages');
 const divFormDelGallery = document.querySelector('.div-form-delGallery');
 const divFormDelAccesPmr = document.querySelector('.div-form-delAccesPmr');
+const divFormDelAlertMessages = document.querySelector('.div-form-delAlertMessages');
 
 //List des buttons d'annulations des formulaires..
 const annulFormSaisons = document.querySelector('.div-form-saisons .annuler button');
@@ -21,8 +23,10 @@ const annulFormGallery = document.querySelector('.div-form-gallery .annuler butt
 const annulFormInfo = document.querySelector('.div-form-info .annuler button');
 const annulFormTarifs = document.querySelector('.div-form-tarifs .annuler button');
 const annulFormAccesPmr = document.querySelector('.div-form-accesPmr .annuler button');
+const annulFormAlertMessages = document.querySelector('.div-form-alertMessages .annuler button');
 const annulFormDelGallery = document.querySelector('.div-form-delGallery .annuler button');
 const annulFormDelAccesPmr = document.querySelector('.div-form-delAccesPmr .annuler button');
+const annulFormDelAlertMessages = document.querySelector('.div-form-delAlertMessages .annuler button');
 
 //Boutons pour déclencher l'apparition des formulaires..
 const updateButtonSaisons = document.querySelectorAll('.modifier-saisons');
@@ -30,12 +34,15 @@ const updateButtonOuvertures = document.querySelectorAll('.modifier-ouvertures')
 const updateButtonInfo = document.querySelectorAll('.modifier-info');
 const updateButtonTarifs = document.querySelectorAll('.modifier-tarifs');
 const updateButtonAccesPmr = document.querySelectorAll('.modifier-acces');
+const updateButtonAlert = document.querySelectorAll('.modifier-alerte');
 
 const deleteButtonGallery = document.querySelectorAll('.suppr-img');
 const deleteButtonAccesPmr = document.querySelectorAll('.suppr-acces');
+const deleteButtonAlert = document.querySelectorAll('.suppr-alerte');
 
 const addButtonGallery = document.querySelector('.add-img');
 const addButtonAccesPmr = document.querySelector('.add-acces');
+const addButtonAlert = document.querySelector('.add-alerte');
 
 //Champ type file pour la gallerie..
 const inputFile = document.querySelector('#form_gallery_img_url');
@@ -81,7 +88,105 @@ if(document.querySelector('.div-form-saisons form ul') != undefined){
     backgroundForm.classList.remove('hidden');
     divFormDelAccesPmr.classList.remove('hidden');
 
+}else if(document.querySelector('.div-form-alertMessages form ul') != undefined){
+
+    backgroundForm.classList.remove('hidden');
+    divFormAlertMessages.classList.remove('hidden');
+
+}else if(document.querySelector('.div-form-delAlertMessages form ul') != undefined){
+
+    backgroundForm.classList.remove('hidden');
+    divFormDelAlertMessages.classList.remove('hidden');
+
 }
+
+//Déclenchement form alerte..
+for (const update of updateButtonAlert) {
+
+    update.addEventListener('click', function(e){
+
+        backgroundForm.classList.remove('hidden');
+        divFormAlertMessages.classList.remove('hidden');
+
+        const containerElements = e.target.parentNode;
+        let infoElement = containerElements.children[0];
+        
+
+        const input = document.querySelector('.div-form-alertMessages form div textarea');
+
+        input.value = infoElement.innerText;
+
+        const inputId = document.querySelector('.div-form-alertMessages form #form_alertMessages_id');
+        inputId.value = e.target.dataset.id;
+
+    });
+}
+
+//Annulation form alerte..
+annulFormAlertMessages.addEventListener('click', function(){
+
+    const input = document.querySelector('.div-form-alertMessages form div textarea');
+
+    input.value = ''
+
+    backgroundForm.classList.add('hidden');
+    divFormAlertMessages.classList.add('hidden');
+});
+
+//Déclenchement form delAlerte..
+for (const update of deleteButtonAlert) {
+
+    update.addEventListener('click', function(e){
+
+        backgroundForm.classList.remove('hidden');
+        divFormDelAlertMessages.classList.remove('hidden');
+
+        const containerElements = e.target.parentNode;
+        let infoElement = containerElements.children[0];
+        
+
+        const libelle = document.querySelector('.div-form-delAlertMessages form .del-libelle');
+
+        libelle.innerText = infoElement.innerText;
+
+        const inputId = document.querySelector('.div-form-delAlertMessages form #form_DelAlertMessages_id');
+        inputId.value = e.target.dataset.id;
+
+    });
+}
+
+//Annulation form delAlerte..
+annulFormDelAlertMessages.addEventListener('click', function(){
+
+    const libelle = document.querySelector('.div-form-delAlertMessages form .del-libelle');
+
+    libelle.innerText = '';
+
+    backgroundForm.classList.add('hidden');
+    divFormDelAlertMessages.classList.add('hidden');
+});
+
+//Déclenchement form addAlerte..
+addButtonAlert.addEventListener('click', function(e){
+
+    backgroundForm.classList.remove('hidden');
+    divFormAlertMessages.classList.remove('hidden');
+
+    const inputId = document.querySelector('.div-form-alertMessages form #form_alertMessages_id');
+    inputId.value = e.target.dataset.id;
+
+});
+
+//Annulation form addAlerte..
+annulFormAlertMessages.addEventListener('click', function(){
+
+    const input = document.querySelector('.div-form-alertMessages form div textarea');
+
+    input.value = ''
+
+    backgroundForm.classList.add('hidden');
+    divFormAlertMessages.classList.add('hidden');
+});
 
 //Déclenchement form saisons..
 for (const update of updateButtonSaisons) {

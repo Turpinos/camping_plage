@@ -29,7 +29,7 @@ class GalleryType extends AbstractType
                 new NotBlank(message: 'Doit être renseigné'),
                 new Image(
                     allowPortrait: false,
-                    allowPortraitMessage: 'Le format doit être entre 1:1 et 16:9',
+                    allowPortraitMessage: 'Pas de portrait',
                     maxSize: '2M',
                     maxSizeMessage: 'Max {{ limit }}Mo',
                     mimeTypes: [

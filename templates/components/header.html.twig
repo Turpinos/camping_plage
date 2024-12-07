@@ -10,4 +10,12 @@
         {% endblock %}
 
         {{ title is defined ? "<h1 class='desk'>#{title}</h1>"|raw : '' }}
+
+        {% if this.getAlert() is not empty %}
+            <ul class="list-alerte">
+                {% for message in this.getAlert() %}
+                    <li>{{ message.message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 </header>

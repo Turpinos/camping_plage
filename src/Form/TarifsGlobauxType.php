@@ -40,7 +40,7 @@ class TarifsGlobauxType extends AbstractType
             ],
         ])
         ->add('valeur', NumberType::class, [
-            'label' => 'Valeur*',
+            'label' => 'Valeur',
             'scale' => 2,
             'attr' => [
                 'step' => 0.01,

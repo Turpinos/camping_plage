@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\AccesPmr;
+use App\Entity\AlertMessages;
 use App\Entity\Gallery;
 use App\Entity\Informations;
 use App\Entity\Ouvertures;
 use App\Entity\Saisons;
 use App\Entity\TarifsGlobaux;
 use App\Form\AccesPmrType;
+use App\Form\AlertMessagesType;
 use App\Form\DeleteAccesPmrType;
+use App\Form\DeleteAlertMessagesType;
 use App\Form\DeleteGalleryType;
 use App\Form\GalleryType;
 use App\Form\InformationsType;
@@ -17,6 +20,7 @@ use App\Form\OuverturesType;
 use App\Form\SaisonsType;
 use App\Form\TarifsGlobauxType;
 use App\Repository\AccesPmrRepository;
+use App\Repository\AlertMessagesRepository;
 use App\Repository\CoordonneesMapRepository;
 use App\Repository\GalleryRepository;
 use App\Repository\ImagesRepository;
@@ -38,7 +42,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 class AdministrationController extends AbstractController
 {
     #[Route('/administration', name: 'app_administration')]
-    public function index(LocatifsRepository $locatifsRepository, ImagesRepository $imagesRepository, CoordonneesMapRepository $coordonneesMapRepository, SaisonsRepository $saisonsRepository, OuverturesRepository $ouverturesRepository, GalleryRepository $galleryRepository, InformationsRepository $informationsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, AccesPmrRepository $accesPmrRepository, EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, PictureService $pictureService, Request $request): Response
+    public function index(LocatifsRepository $locatifsRepository, ImagesRepository $imagesRepository, CoordonneesMapRepository $coordonneesMapRepository, SaisonsRepository $saisonsRepository, OuverturesRepository $ouverturesRepository, GalleryRepository $galleryRepository, InformationsRepository $informationsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, AccesPmrRepository $accesPmrRepository, AlertMessagesRepository $alertMessagesRepository, EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, PictureService $pictureService, Request $request): Response
     {
 
         $locatifs = $locatifsRepository->findAll();
@@ -50,6 +54,7 @@ class AdministrationController extends AbstractController
         $informations = $informationsRepository->findAll();
         $tarifs = $tarifsGlobauxRepository->findAll();
         $accesPmr = $accesPmrRepository->findAll();
+        $alertMessages = $alertMessagesRepository->findAll();
 
         //appel form avec nom perso pour éviter conflit de validation..
         $formSaisons = $formFactory->createNamed('form_saisons', SaisonsType::class);
@@ -58,8 +63,12 @@ class AdministrationController extends AbstractController
         $formInfo = $formFactory->createNamed('form_informations', InformationsType::class);
         $formTarifs = $formFactory->createNamed('form_tarifs', TarifsGlobauxType::class);
         $formAccesPmr = $formFactory->createNamed('form_AccesPmr', AccesPmrType::class);
+        $formAlertMessages = $formFactory->createNamed('form_alertMessages', AlertMessagesType::class);
+        //form de suppression..
         $formDelGallery = $formFactory->createNamed('form_DelGallery', DeleteGalleryType::class);
         $formDelAccesPmr = $formFactory->createNamed('form_DelAccesPmr', DeleteAccesPmrType::class);
+        $formDelAlertMessages = $formFactory->createNamed('form_DelAlertMessages', DeleteAlertMessagesType::class);
+
 
 
         //Vérification des formulaires pour l'update..
@@ -261,6 +270,43 @@ class AdministrationController extends AbstractController
             return $this->redirectToRoute('app_administration');
         }
 
+        $formAlertMessages->handleRequest($request);
+        if($formAlertMessages->isSubmitted() && $formAlertMessages->isValid()){
+
+            $data = $formAlertMessages->getData();
+
+            if($data['id'] != 0 && $data['id'] != null){
+
+                $updateAlert = $entityManager->getRepository(AlertMessages::class)->find($data['id']);
+                $updateAlert->setMessage($data['message']);
+                $entityManager->flush();
+
+            }else if($data['id'] == 0){
+
+                $addAlert = new AlertMessages();
+                $addAlert->setMessage($data['message']);
+                $entityManager->persist($addAlert);
+                $entityManager->flush();
+
+            }
+
+            return $this->redirectToRoute('app_administration');
+
+        }
+
+        $formDelAlertMessages->handleRequest($request);
+        if($formDelAlertMessages->isSubmitted() && $formDelAlertMessages->isValid()){
+
+            $data = $formDelAlertMessages->getData();
+
+            $delAlert = $entityManager->getRepository(AlertMessages::class)->find($data['id']);
+            $entityManager->remove($delAlert);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_administration');
+
+        }
+
         return $this->render('pages/administration/admin.html.twig', [
             'locatifs' => $locatifs,
             'images' => $images,
@@ -271,14 +317,17 @@ class AdministrationController extends AbstractController
             'informations' => $informations,
             'tarifs' => $tarifs,
             'accesPmr' => $accesPmr,
+            'alertMessages' => $alertMessages,
             'formSaisons' => $formSaisons,
             'formOuvertures' => $formOuvertures,
             'formGallery' => $formGallery,
             'formInfo' => $formInfo,
             'formTarifs' => $formTarifs,
             'formAccesPmr' => $formAccesPmr,
+            'formAlertMessages' => $formAlertMessages,
             'formDelGallery' => $formDelGallery,
-            'formDelAccesPmr' => $formDelAccesPmr
+            'formDelAccesPmr' => $formDelAccesPmr,
+            'formDelAlertMessages' => $formDelAlertMessages
 
         ]);
     }

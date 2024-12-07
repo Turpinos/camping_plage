@@ -7,6 +7,27 @@
 {% endblock %}
 {% block body %}
     <main id="main-admin" class="main-admin">
+        <section class="alert-messages">
+            <h2>Messages d'alerte</h2>
+            <table>
+                <tbody>
+                    {% for message in alertMessages %}
+                        <tr>
+                            <td>{{ message.message }}</td>
+                            <td data-id="{{ message.id }}" class="modifier modifier-alerte">Modifier</td>
+                            <td data-id="{{ message.id }}" class="suppr suppr-alerte">Supprimer</td>
+                        </tr>
+                    {% endfor %}
+
+                    {% if alertMessages is empty %}
+                        <tr>
+                            <td>Aucune alerte existante</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <p class="add add-alerte" data-id="0">Ajouter une alerte</p>
+        </section>
         <section  class="locations">
             <h2>Locations</h2>
             <table>
@@ -28,17 +49,20 @@
                                 {% set firstEmpl = false %}
                                 {% for emplacement in emplacements %}
                                     {% if emplacement.getIdLocatifs().getId() == loc.id %}
-                                        {{ not firstEmpl ? "#{emplacement.emplacement}" : ", #{emplacement.emplacement}" }}
+                                        {% if emplacement.emplacement == null %}
+                                            {{ not firstEmpl ? "N" : ", N" }}
+                                        {% else %}
+                                            {{ not firstEmpl ? "#{emplacement.emplacement}" : ", #{emplacement.emplacement}" }}
+                                        {% endif %}
                                         {% set firstEmpl = true %}
                                     {% endif %}
                                 {% endfor %}
                             </td>
-                            <td class="modifier"><a href="#{loc.id}">Modifier</a></td>
+                            <td class="modifier"><a href="{{ path('app_administration_locatif', {'slug': loc.slug }) }}">Modifier</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <p class="add-loc"><a href="#">Ajouter une location</a></p>
         </section>
         <section class="saisons-ouvertures">
             <h2>Saisons & Ouvertures</h2>
@@ -155,7 +179,7 @@
             <div class="div div-form-gallery hidden">
                 {{ form_start(formGallery) }}
                     {{ form_row(formGallery.img_url) }}
-                    <p class="aide">*Dimensions autorisées de 1:1 à 16:9, au format JPEG</p>
+                    <p class="aide">*pas de portrait, max 2Mo au format JPEG</p>
                     <div class="preview-img-form"></div>
                     <div class="button">
                         {{ form_row(formGallery.save) }}
@@ -177,7 +201,6 @@
                 {{ form_start(formTarifs) }}
                     {{ form_row(formTarifs.libelle) }}
                     {{ form_row(formTarifs.valeur) }}
-                    <p class="aide">*Format valide: 0.00</p>
                     <div class="button">
                         {{ form_row(formTarifs.save) }}
                         <div class="annuler"><button type="button">Annuler</button></div>
@@ -213,6 +236,24 @@
                         <div class="annuler"><button type="button">Annuler</button></div>
                     </div>
                 {{ form_end(formDelAccesPmr) }}
+            </div>
+            <div class="div div-form-alertMessages hidden">
+                {{ form_start(formAlertMessages) }}
+                    {{ form_row(formAlertMessages.message) }}
+                    <div class="button">
+                        {{ form_row(formAlertMessages.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formAlertMessages) }}
+            </div>
+            <div class="div div-form-delAlertMessages hidden">
+                {{ form_start(formDelAlertMessages) }}
+                    <p class="del-libelle"></p>
+                    <div class="button">
+                        {{ form_row(formDelAlertMessages.delete) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formDelAlertMessages) }}
             </div>
         </div>
     </main>

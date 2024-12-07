@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-    {{ component('Header', {'title' : page }) }}
+    {{ component('Header', {'title' : page, displayAlert: true }) }}
 {% endblock %}
 
 {% block body %}
@@ -73,27 +73,32 @@
         <section class="activite" id="activite">
             <h2>Nos prestations</h2>
             <article>
-                <p>-Soirées dansantes les mercredis et samedis en haute saison.</p>
-                <p>-Initiation & promenade accompagnée en Gyropodes électriques.</p>
-                <p>-Location de pédalos.</p>
-                <p>-Piscine & bain à bulles couverts & chauffés.</p>
-                <p>-City Stade Agorespace, ping-pong, billard, babyfoot, fléchette, terrain de pétanque.</p>
-                <p>-2 barbecues collectifs.</p>
-                <p>-Spot Wifi gratuit uniquement au bar et en terrasse.</p>
-                <p>-Des sanitaires, douches & salle de bain bébé chauffés.</p>
-                <p>-Snack restauration (hamburgers, sandwiches, salades, frites, gaufres, glaces).</p>
-                <p>-Laverie (Lave-linge et sèche-linge).</p>
-                <p>-Service courrier à l’accueil, ouvert de 9h à 20h.</p>
-                <p>-Les propriétaires sont sur place jour et nuit et parlent anglais.</p>
+                <h3>Au camping:</h3>
+                <ul class="ul-activite">
+                    <li>Soirées dansantes les mercredis et samedis en haute saison.</li>
+                    <li>Initiation & promenade accompagnée en Gyropodes électriques.</li>
+                    <li>Location de pédalos.</li>
+                    <li>Piscine & bain à bulles couverts & chauffés.</li>
+                    <li>City Stade Agorespace, ping-pong, billard, babyfoot, fléchette, terrain de pétanque.</li>
+                    <li>2 barbecues collectifs.</li>
+                    <li>Spot Wifi gratuit uniquement au bar et en terrasse.</li>
+                    <li>Des sanitaires, douches & salle de bain bébé chauffés.</li>
+                    <li>Snack restauration (hamburgers, sandwiches, salades, frites, gaufres, glaces).</li>
+                    <li>Laverie (Lave-linge et sèche-linge).</li>
+                    <li>Service courrier à l’accueil, ouvert de 9h à 20h.</li>
+                    <li>Les propriétaires sont sur place jour et nuit et parlent anglais.</li>
+                </ul>
             </article>
             <article>
                 <h3>Autour du camping:</h3>
-                <p>-Bateau promenade « Les Settons » (tour du lac commenté).</p>
-                <p>-Base nautique Activital : Voile, Canoë et Kayak, Paddle. Nos résidents bénéficient d’un Pass réduction sur ces activités nautiques.</p>
-                <p>-Vélo.</p>
-                <p>-Pêche.</p>
-                <p>-À 10 minutes du lac, Cap Xtrem : rando quads et 4x4, parcours aventure, rafting.</p>
-                <p>-Suivez la ligne rouge autour du Lac des Settons, un sentier pédestre de 15 kilomètres (environ 4 heures de marche) qui vous entraînera dans une aventure où vous découvrirez la faune, la flore et les paysages idylliques au cœur du Morvan.</p>
+                <ul class="ul-activite">
+                    <li>Bateau promenade « Les Settons » (tour du lac commenté).</li>
+                    <li>Base nautique Activital : Voile, Canoë et Kayak, Paddle. Nos résidents bénéficient d’un Pass réduction sur ces activités nautiques.</li>
+                    <li>Vélo.</li>
+                    <li>Pêche.</li>
+                    <li>À 10 minutes du lac, Cap Xtrem : rando quads et 4x4, parcours aventure, rafting.</li>
+                    <li>Suivez la ligne rouge autour du Lac des Settons, un sentier pédestre de 15 kilomètres (environ 4 heures de marche) qui vous entraînera dans une aventure où vous découvrirez la faune, la flore et les paysages idylliques au cœur du Morvan.</li>
+                </ul>
             </article>
             <div class="pmr">
                 <img src="{{ asset('/images/logos/logo_pmr.jpg') }}" alt="Pmr" />

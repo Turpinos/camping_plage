@@ -23,6 +23,10 @@ class ReservationController extends AbstractController
         $compSlug = $locatifRepository->findAll();
         $testValue = false;
 
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+        $host = $_SERVER['HTTP_HOST'];
+        $url = '';
+        $urlContact = $protocol . $host . '/contact';
         $locatif = [];
         $typeLocatif = ['id' => 0];
         $error = '';
@@ -41,8 +45,13 @@ class ReservationController extends AbstractController
         $form = $this->createForm(ReservationType::class);
 
         if($slug != null){
+
+            //Récupération info locatifs..
             $locatif = $locatifRepository->findOneBy(['slug' => $slug]);
             $typeLocatif = $typeLocatifsRepository->findOneBy(['id' => $locatif->getIdTypeLocatifs()]);
+
+            //Création auto url..
+            $url = $protocol . $host . '/locatifs_details/' . $slug;
         }
 
         $form->handleRequest($request);
@@ -99,7 +108,9 @@ class ReservationController extends AbstractController
                     'nbrVehicule' => $data['nombreVehicules'],
                     'commentaire' => $data['commentaire'],
                     'locatif' => $locatif,
-                    'typeLocatif' => $typeLocatif
+                    'typeLocatif' => $typeLocatif,
+                    'url' => $url,
+                    'urlContact' => $urlContact
 
                 ]);
 
