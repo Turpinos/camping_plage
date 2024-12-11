@@ -20,7 +20,7 @@ class TarifsCampingType extends AbstractType
     {
         $builder
             ->add('arrhes_jour', IntegerType::class, [
-                'label' => 'Arrhes au jour',
+                'label' => 'Arrhes au jour en %',
                 'attr' => array(
                     'min' => '0'
                 ),
@@ -32,7 +32,7 @@ class TarifsCampingType extends AbstractType
                 ]
             ])
             ->add('arrhes_semaine', IntegerType::class, [
-                'label' => 'Arrhes à la semaine',
+                'label' => 'Arrhes à la semaine en %',
                 'attr' => array(
                     'min' => '0'
                 ),

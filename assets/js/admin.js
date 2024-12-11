@@ -125,10 +125,6 @@ for (const update of updateButtonAlert) {
 //Annulation form alerte..
 annulFormAlertMessages.addEventListener('click', function(){
 
-    const input = document.querySelector('.div-form-alertMessages form div textarea');
-
-    input.value = ''
-
     backgroundForm.classList.add('hidden');
     divFormAlertMessages.classList.add('hidden');
 });
@@ -158,10 +154,6 @@ for (const update of deleteButtonAlert) {
 //Annulation form delAlerte..
 annulFormDelAlertMessages.addEventListener('click', function(){
 
-    const libelle = document.querySelector('.div-form-delAlertMessages form .del-libelle');
-
-    libelle.innerText = '';
-
     backgroundForm.classList.add('hidden');
     divFormDelAlertMessages.classList.add('hidden');
 });
@@ -179,10 +171,6 @@ addButtonAlert.addEventListener('click', function(e){
 
 //Annulation form addAlerte..
 annulFormAlertMessages.addEventListener('click', function(){
-
-    const input = document.querySelector('.div-form-alertMessages form div textarea');
-
-    input.value = ''
 
     backgroundForm.classList.add('hidden');
     divFormAlertMessages.classList.add('hidden');
@@ -240,14 +228,6 @@ for (const update of updateButtonSaisons) {
 //Annulation form saisons..
 annulFormSaisons.addEventListener('click', function(){
 
-    const listInputs = document.querySelectorAll('.div-form-saisons form div input');
-
-    for (const input of listInputs) {
-        
-        input.value = '';
-
-    }
-
     backgroundForm.classList.add('hidden');
     divFormSaisons.classList.add('hidden');
 });
@@ -297,17 +277,6 @@ for (const update of updateButtonOuvertures) {
 //Annulation form ouvertures..
 annulFormOuvertures.addEventListener('click', function(){
 
-    const libelleInput = document.querySelector('.div-form-ouvertures form div input');
-    const radioInput = document.querySelectorAll('.div-form-ouvertures form div #form_ouvertures_choice_type input');
-
-    libelleInput.value = '';
-
-    for (const input of radioInput) {
-        
-        input.checked = false;
-
-    }
-
     backgroundForm.classList.add('hidden');
     divFormOuvertures.classList.add('hidden');
 });
@@ -346,12 +315,6 @@ for (const suppr of deleteButtonGallery) {
 
 //Annulation form suppr img..
 annulFormDelGallery.addEventListener('click', function(){
-
-    const libelle = document.querySelector('.div-form-delGallery form .del-libelle');
-    const divImg = document.querySelector('.div-form-delGallery form .preview-img-form');
-
-    libelle.innerText = '';
-    divImg.innerHTML = '';
 
     backgroundForm.classList.add('hidden');
     divFormDelGallery.classList.add('hidden');
@@ -392,6 +355,7 @@ inputFile.addEventListener('change', function(e){
             reader.readAsDataURL(file);
         }else{
             e.target.value = '';
+            divImg.innerHTML = '';
         }
     }
 
@@ -444,12 +408,6 @@ for (const update of updateButtonInfo) {
 
 //Annulation form infos..
 annulFormInfo.addEventListener('click', function(){
-
-    const libelleInput = document.querySelector('.div-form-info form div input');
-    const textArea = document.querySelector('.div-form-info form div textarea');
-
-    libelleInput.value = '';
-    textArea.value = '';
 
     backgroundForm.classList.add('hidden');
     divFormInfo.classList.add('hidden');
@@ -512,12 +470,6 @@ for (const update of updateButtonTarifs) {
 //Annulation form tarifs..
 annulFormTarifs.addEventListener('click', function(){
 
-    const libelleInput = document.querySelector('.div-form-tarifs form div #form_tarifs_libelle');
-    const valueInput = document.querySelector('.div-form-tarifs form div #form_tarifs_valeur');
-
-    libelleInput.value = '';
-    valueInput.value = '';
-
     backgroundForm.classList.add('hidden');
     divFormTarifs.classList.add('hidden');
 });
@@ -546,10 +498,6 @@ for (const update of updateButtonAccesPmr) {
 //Annulation form pmr..
 annulFormAccesPmr.addEventListener('click', function(){
 
-    const libelleInput = document.querySelector('.div-form-accesPmr form div input');
-
-    libelleInput.value = '';
-
     backgroundForm.classList.add('hidden');
     divFormAccesPmr.classList.add('hidden');
 });
@@ -577,9 +525,6 @@ for (const suppr of deleteButtonAccesPmr) {
 
 //Annulation form delpmr..
 annulFormDelAccesPmr.addEventListener('click', function(){
-
-    const libelle = document.querySelector('.div-form-delAccesPmr form .del-libelle');
-    libelle.innerText = '';
 
     backgroundForm.classList.add('hidden');
     divFormDelAccesPmr.classList.add('hidden');

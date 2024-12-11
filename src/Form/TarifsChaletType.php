@@ -92,7 +92,7 @@ class TarifsChaletType extends AbstractType
                 ]
             ])
             ->add('arrhes_jour', IntegerType::class, [
-                'label' => 'Arrhes au jour',
+                'label' => 'Arrhes au jour en %',
                 'attr' => array(
                     'min' => '0'
                 ),

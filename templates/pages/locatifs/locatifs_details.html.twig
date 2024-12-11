@@ -250,11 +250,16 @@
                     {% endif %}
                 {% endif %}
                 <ul>
-                    {% for tarif in tarifsGlobaux %}
-                        {% if tarif.id == '2' %}
-                            <li>Petit-déjeuner: {{ tarif.valeur }}€</li>
-                        {% endif %}
-                    {% endfor %}
+                    {% if tarifs.dejinclu == true %}
+                        <li>Petit-déjeuner: compris</li>
+                    {% else %}
+                        {% for tarif in tarifsGlobaux %}
+                            {% if tarif.id == '2' %}
+                                <li>Petit-déjeuner: {{ tarif.valeur }}€</li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    
                 </ul>
                 {% if locatif.id == "10" %}
                     <ul>

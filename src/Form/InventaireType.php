@@ -20,7 +20,7 @@ class InventaireType extends AbstractType
             ->add('pdf_url', FileType::class, [
                 'label' => 'Importer*',
                 'row_attr' => [
-                    'class' => 'row img'
+                    'class' => 'row pdf'
                 ],
                 'attr' => [
                     'accept' => 'application/pdf'

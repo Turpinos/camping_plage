@@ -32,7 +32,7 @@ class TarifsCabaneType extends AbstractType
                 ]
             ])
             ->add('arrhes_jour', IntegerType::class, [
-                'label' => 'Arrhes au jour',
+                'label' => 'Arrhes au jour en %',
                 'attr' => array(
                     'min' => '0'
                 ),
@@ -125,6 +125,46 @@ class TarifsCabaneType extends AbstractType
                 ),
                 'constraints' => [
                     new PositiveOrZero(message: 'Ne peut être négatif')
+                ]
+            ])
+            ->add('tv_jour', IntegerType::class, [
+                'label' => 'Tv au jour',
+                'attr' => array(
+                    'min' => '0'
+                ),
+                'row_attr' => array(
+                    'class' => 'row tv_jour'
+                ),
+                'constraints' => [
+                    new PositiveOrZero(message: 'Ne peut être négatif')
+                ]
+            ])
+            ->add('tv_semaine', IntegerType::class, [
+                'label' => 'Tv à la semaine',
+                'attr' => array(
+                    'min' => '0'
+                ),
+                'row_attr' => array(
+                    'class' => 'row tv_semaine'
+                ),
+                'constraints' => [
+                    new PositiveOrZero(message: 'Ne peut être négatif')
+                ]
+            ])
+            ->add('animaux', NumberType::class, [
+                'label' => 'animaux',
+                'scale' => 2,
+                'attr' => [
+                    'step' => 0.01,
+                    'min' => 0,
+                ],
+                'constraints' => [
+                    new NotBlank(message: 'Doit être renseigné'),
+                    new Type([
+                        'type' => 'float',
+                        'message' => 'Valeur numérique seulement'
+                    ]),
+                    new PositiveOrZero(message: 'Minimum: 0')
                 ]
             ])
             ->add('choice_type', ChoiceType::class, [

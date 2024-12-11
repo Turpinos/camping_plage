@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
@@ -35,7 +34,8 @@ class CoordonneeType extends AbstractType
                 'label' => 'Position',
                 'attr' => [
                     'minLength' => 1,
-                    'maxLength' => 50
+                    'maxLength' => 50,
+                    'disabled' => 'disabled'
                 ],
                 'row_attr' => [
                     'class' => 'row position'

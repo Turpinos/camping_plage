@@ -35,9 +35,8 @@ for(const input of inputContainer){
 mapContainer.addEventListener('mousemove', function(e){
     let y = e.offsetY;
     let x = e.offsetX;
-    let width = mapContainer.clientWidth;
-    let height = mapContainer.clientHeight;
-    console.log('Y:' + Math.round(y*100/height) + '-' + ' X:' + Math.round(x*100/width));
+    let width = e.target.clientWidth;
+    let height = e.target.clientHeight;
 });
 
 }

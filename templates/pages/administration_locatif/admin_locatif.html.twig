@@ -7,33 +7,33 @@
 {% endblock %}
 {% block body %}
     <main id="main-admin-loc" class="main-admin-loc">
-        <section  class="locations">
+        <section class="locations">
             <h2>Location</h2>
             <table>
                 <tbody>
                     <tr>
                         <td>Nom</td>
-                        <td class="table-info">{{ locatif.libelle }}</td>
+                        <td class="table-info name">{{ locatif.libelle }}</td>
                     </tr>
                     <tr>
                         <td>Description</td>
-                        <td class="table-info">{{ locatif.description }}</td>
+                        <td class="table-info desc">{{ locatif.description == null ? 'null' : locatif.description }}</td>
                     </tr>
                     <tr>
                         <td>Capacité</td>
-                        <td class="table-info">{{ locatif.capacite }}</td>
+                        <td class="table-info capa">{{ locatif.capacite == null ? 'null' : locatif.capacite }}</td>
                     </tr>
                     <tr>
                         <td>Superficie</td>
-                        <td class="table-info">{{ locatif.superficie }}</td>
+                        <td class="table-info super">{{ locatif.superficie == null ? 'null' : locatif.superficie }}</td>
                     </tr>
                     <tr>
                         <td>Adapté pmr</td>
-                        <td class="table-info">{{ locatif.pmr ? "Oui" : "Non" }}</td>
+                        <td class="table-info pmr-acces">{{ locatif.pmr ? "Oui" : "Non" }}</td>
                     </tr>
                     <tr>
                         <td>Ouvert l'hiver</td>
-                        <td class="table-info">{{ locatif.ouverturehivernale ? "Oui" : "Non" }}</td>
+                        <td class="table-info ouv-hiver">{{ locatif.ouverturehivernale ? "Oui" : "Non" }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -45,7 +45,7 @@
                 <tbody>
                     {% if locatif.id != 10 and locatif.id != 11 %}
                         <tr>
-                            <td>Semaine hors saison</td>
+                            <td>Semaine haute saison</td>
                             <td class="table-info">{{ tarifs.hssemaine }}</td>
                         </tr>
                         <tr>
@@ -104,14 +104,14 @@
                             <td>Caution</td>
                             <td class="table-info">{{ tarifs.caution }}</td>
                         </tr>
-                        <tr>
-                            <td>Tv par jour</td>
-                            <td class="table-info">{{ tarifs.tvjour == null ? 'null' : tarifs.tvjour }}</td>
-                        </tr>
-                        <tr>
-                            <td>Tv par semaine</td>
-                            <td class="table-info">{{ tarifs.tvsemaine == null ? 'null' : tarifs.tvsemaine }}</td>
-                        </tr>
+                            <tr>
+                                <td>Tv par jour</td>
+                                <td class="table-info">{{ tarifs.tvjour == null ? 'null' : tarifs.tvjour }}</td>
+                            </tr>
+                            <tr>
+                                <td>Tv par semaine</td>
+                                <td class="table-info">{{ tarifs.tvsemaine == null ? 'null' : tarifs.tvsemaine }}</td>
+                            </tr>
                     {% endif %}
                     <tr>
                         <td>Animaux</td>
@@ -119,7 +119,7 @@
                     </tr>
                     <tr>
                         <td>Petit-déjeuner inclu</td>
-                        <td class="table-info">{{ tarifs.dejinclu ? "Oui" : "Non"}}</td>
+                        <td class="table-info dej">{{ tarifs.dejinclu ? "Oui" : "Non"}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -171,9 +171,9 @@
                 </tbody>
             </table>
             {% if existVignette == false %}
-                <p class="add-update add-img" data-id="0">Ajouter une image</p>
+                <p class="add-update add-vignette" data-id="0">Ajouter une vignette</p>
             {% else %}
-                <p class="add-update add-img" data-id="{{ existVignette }}">Remplacer l'image</p>
+                <p class="add-update add-vignette" data-id="{{ existVignette }}">Remplacer la vignette</p>
             {% endif %}
         </section>
         <section class="pdf">
@@ -197,22 +197,157 @@
             </table>
             <p class="add-update add-pdf" data-id="0">Ajouter un inventaire</p>
         </section>
-        <section class="emplacement">
-            <h2>Emplacement</h2>
-            <table>
-                <tbody>
-                    <tr>
-                        <td colspan="2" class="tr-map">{{ component('Map', {'coordonnee' : coordonnees, 'isPmr' : isPmr}) }}</td>
-                    </tr>
-                    {% for coord in coordonnees %}
+        {% if coordonnees is not empty %}
+            <section class="emplacement">
+                <h2>Emplacement</h2>
+                <table>
+                    <tbody>
                         <tr>
-                            <td class="num-emplacement" data-position="{{ coord.position }}">{{ coord.emplacement == null ? 'Non défini' : coord.emplacement }}</td>
-                            <td class="update-ping add-pdf">Modifier</td>
-                        </tr>  
-                    {% endfor %}
-                </tbody>
-            </table>
-        </section>
+                            <td colspan="2" class="tr-map">{{ component('Map', {'coordonnee' : coordonnees, 'isPmr' : isPmr}) }}</td>
+                        </tr>
+                        {% for coord in coordonnees %}
+                            <tr>
+                                <td class="num-emplacement" data-position="{{ coord.position }}">{{ coord.emplacement == null ? 'Non défini' : coord.emplacement }}</td>
+                                <td data-id="{{ coord.id }}" class="update-ping">Modifier</td>
+                            </tr>  
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        {% endif %}
+        <div class="background-form hidden-form">
+            <div class="div div-form-locatifs hidden-form">
+                {{ form_start(formLocatifs) }}
+                    {{ form_row(formLocatifs.libelle) }}
+                    {{ form_row(formLocatifs.description) }}
+                    {{ form_row(formLocatifs.capacite) }}
+                    {{ form_row(formLocatifs.superficie) }}
+                    {{ form_row(formLocatifs.pmr_type) }}
+                    {{ form_row(formLocatifs.hiver_type) }}
+                    <div class="button">
+                        {{ form_row(formLocatifs.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formLocatifs) }}
+            </div>
+            <div class="div div-form-tarifs hidden-form">
+                {% if locatif.id == 10 %}
+                    {{ form_start(formTarifs) }}
+                        {{ form_row(formTarifs.bs_nuitee_2) }}
+                        {{ form_row(formTarifs.bs_nuitee_3) }}
+                        {{ form_row(formTarifs.bs_nuitee_4) }}
+                        {{ form_row(formTarifs.hs_nuitee_2) }}
+                        {{ form_row(formTarifs.hs_nuitee_3) }}
+                        {{ form_row(formTarifs.hs_nuitee_4) }}
+                        {{ form_row(formTarifs.arrhes_jour) }}
+                        {{ form_row(formTarifs.arrhes_semaine) }}
+                        {{ form_row(formTarifs.caution) }}
+                        {{ form_row(formTarifs.tv_jour) }}
+                        {{ form_row(formTarifs.tv_semaine) }}
+                        {{ form_row(formTarifs.animaux) }}
+                        {{ form_row(formTarifs.choice_type) }}
+                        <div class="button">
+                            {{ form_row(formTarifs.save) }}
+                            <div class="annuler"><button type="button">Annuler</button></div>
+                        </div>
+                    {{ form_end(formTarifs) }}
+                {% elseif locatif.id == 11 %}
+                    {{ form_start(formTarifs) }}
+                        {{ form_row(formTarifs.arrhes_jour) }}
+                        {{ form_row(formTarifs.arrhes_semaine) }}
+                        {{ form_row(formTarifs.animaux) }}
+                        {{ form_row(formTarifs.choice_type) }}
+                        <div class="button">
+                            {{ form_row(formTarifs.save) }}
+                            <div class="annuler"><button type="button">Annuler</button></div>
+                        </div>
+                    {{ form_end(formTarifs) }}
+                {% else %}
+                    {{ form_start(formTarifs) }}
+                        {{ form_row(formTarifs.hs_semaine) }}
+                        {{ form_row(formTarifs.bs_nuitee) }}
+                        {{ form_row(formTarifs.bs_semaine) }}
+                        {{ form_row(formTarifs.hv_nuitee) }}
+                        {{ form_row(formTarifs.hv_semaine) }}
+                        {{ form_row(formTarifs.arrhes_jour) }}
+                        {{ form_row(formTarifs.arrhes_semaine) }}
+                        {{ form_row(formTarifs.caution) }}
+                        {{ form_row(formTarifs.tv_jour) }}
+                        {{ form_row(formTarifs.tv_semaine) }}
+                        {{ form_row(formTarifs.animaux) }}
+                        {{ form_row(formTarifs.choice_type) }}
+                        <div class="button">
+                            {{ form_row(formTarifs.save) }}
+                            <div class="annuler"><button type="button">Annuler</button></div>
+                        </div>
+                    {{ form_end(formTarifs) }}
+                {% endif %}
+            </div>
+            <div class="div div-form-images hidden-form">
+                {{ form_start(formImages) }}
+                    {{ form_row(formImages.img_url) }}
+                    <div class="preview-img-form"></div>
+                    <div class="button">
+                        {{ form_row(formImages.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formImages) }}
+            </div>
+            <div class="div div-form-vignettes hidden-form">
+                {{ form_start(formVignettes) }}
+                    {{ form_row(formVignettes.img_url) }}
+                    <div class="preview-img-form"></div>
+                    <div class="button">
+                        {{ form_row(formVignettes.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formVignettes) }}
+            </div>
+            <div class="div div-form-inventaires hidden-form">
+                {{ form_start(formInventaire) }}
+                    {{ form_row(formInventaire.pdf_url) }}
+                    <div class="button">
+                        {{ form_row(formInventaire.save) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formInventaire) }}
+            </div>
+            {% if coordonnees is not empty %}
+                <div class="div div-form-coordonnees hidden-form">
+                    {{ form_start(formCoordonnees) }}
+                        <div class="map-set">
+                            <img src="{{ asset('/images/mise-en-page/plan_camping_2020.png') }}" alt="carte du camping"/>
+                            <svg class="ping" style="top:0%; left:0%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#c70000" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
+                        </div>
+                        {{ form_row(formCoordonnees.emplacement) }}
+                        {{ form_row(formCoordonnees.position) }}
+                        <div class="button">
+                            {{ form_row(formCoordonnees.save) }}
+                            <div class="annuler"><button type="button">Annuler</button></div>
+                        </div>
+                    {{ form_end(formCoordonnees) }}
+                </div>
+            {% endif %}
+            <div class="div div-form-delImages hidden-form">
+                {{ form_start(formDelImages) }}
+                    <p class="del-libelle"></p>
+                    <div class="preview-img-form"></div>
+                    <div class="button">
+                        {{ form_row(formDelImages.delete) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formDelImages) }}
+            </div>
+            <div class="div div-form-delInventaires hidden-form">
+                {{ form_start(formDelInventaire) }}
+                    <p class="del-libelle"></p>
+                    <div class="button">
+                        {{ form_row(formDelInventaire.delete) }}
+                        <div class="annuler"><button type="button">Annuler</button></div>
+                    </div>
+                {{ form_end(formDelInventaire) }}
+            </div>
+        </div>
     </main>
 {% endblock %}
 {% block footer %}

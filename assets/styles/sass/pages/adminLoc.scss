@@ -109,6 +109,41 @@
         height: 100vh;
         backdrop-filter: blur(5px);
         background-color: rgba(0, 0, 0, 0.5);
+        overflow-y: scroll;
+
+        .div-form-locatifs{
+            align-self: flex-start;
+            max-width: 600px !important;
+        }
+
+        .div-form-tarifs{
+            align-self: flex-start;
+        }
+
+        .div-form-coordonnees{
+            max-width: 600px !important;
+
+            form{
+                .map-set{
+                    position: relative;
+
+                    img{
+                        width: 100%;
+                        height: auto;
+                        max-height: 80vh;
+                    }
+                
+                    .ping{
+                        position: absolute;
+                        transform: translate(-50%, -100%) scale(0.7);
+                        margin: 0px;
+                        width: 1rem;
+                        padding-block: auto;
+                        text-align: center;
+                    }
+                }
+            }
+        }
 
         .div{
             background-color: white;
@@ -118,6 +153,7 @@
             padding: 1rem;
             width: 90%;
             max-width: 400px;
+            margin-block: 2rem;
 
             .del-libelle{
                 text-align: center;
@@ -181,11 +217,15 @@
                     width: 90%;
                 }
 
+                input[type='number']{
+                    width: 90%;
+                }
+
                 textarea{
                     width: 90%;
                     padding: 0.3rem 0.2rem;
                     margin: 0.4rem 0 0.5rem 0.5rem;
-                    height: 5rem;
+                    height: 15rem;
                     resize: none;
                 }
 
