@@ -19,6 +19,7 @@ class CoordonneeType extends AbstractType
     {
         $builder
             ->add('emplacement', IntegerType::class, [
+                'required' => false,
                 'label' => 'Emplacement',
                 'attr' => array(
                     'min' => '0'
@@ -35,7 +36,6 @@ class CoordonneeType extends AbstractType
                 'attr' => [
                     'minLength' => 1,
                     'maxLength' => 50,
-                    'disabled' => 'disabled'
                 ],
                 'row_attr' => [
                     'class' => 'row position'

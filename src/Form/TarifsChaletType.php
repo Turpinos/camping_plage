@@ -57,6 +57,7 @@ class TarifsChaletType extends AbstractType
             ])
             ->add('hv_nuitee', IntegerType::class, [
                 'label' => 'Nuitée hiver',
+                'required' => false,
                 'attr' => array(
                     'min' => '0'
                 ),
@@ -69,8 +70,9 @@ class TarifsChaletType extends AbstractType
             ])
             ->add('hv_semaine', IntegerType::class, [
                 'label' => 'Semaine hiver',
+                'required' => false,
                 'attr' => array(
-                    'min' => '0'
+                    'min' => '0',
                 ),
                 'row_attr' => array(
                     'class' => 'row hv_semaine'

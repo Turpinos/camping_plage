@@ -51,9 +51,23 @@ class Locatifs
     #[ORM\OneToMany(targetEntity: Inventaire::class, mappedBy: 'locatif', orphanRemoval: true)]
     private Collection $inventaires;
 
+    /**
+     * @var Collection<int, Images>
+     */
+    #[ORM\OneToMany(targetEntity: Images::class, mappedBy: 'locatifs', orphanRemoval: true)]
+    private Collection $images;
+
+    /**
+     * @var Collection<int, CoordonneesMap>
+     */
+    #[ORM\OneToMany(targetEntity: CoordonneesMap::class, mappedBy: 'locatifs', orphanRemoval: true)]
+    private Collection $coordonneesMaps;
+
     public function __construct()
     {
         $this->inventaires = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->coordonneesMaps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,6 +207,66 @@ class Locatifs
             // set the owning side to null (unless already changed)
             if ($inventaire->getLocatif() === $this) {
                 $inventaire->setLocatif(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Images>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setLocatifs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getLocatifs() === $this) {
+                $image->setLocatifs(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CoordonneesMap>
+     */
+    public function getCoordonneesMaps(): Collection
+    {
+        return $this->coordonneesMaps;
+    }
+
+    public function addCoordonneesMap(CoordonneesMap $coordonneesMap): static
+    {
+        if (!$this->coordonneesMaps->contains($coordonneesMap)) {
+            $this->coordonneesMaps->add($coordonneesMap);
+            $coordonneesMap->setLocatifs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCoordonneesMap(CoordonneesMap $coordonneesMap): static
+    {
+        if ($this->coordonneesMaps->removeElement($coordonneesMap)) {
+            // set the owning side to null (unless already changed)
+            if ($coordonneesMap->getLocatifs() === $this) {
+                $coordonneesMap->setLocatifs(null);
             }
         }
 

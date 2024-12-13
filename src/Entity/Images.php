@@ -13,31 +13,19 @@ class Images
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Locatifs $id_locatifs = null;
-
     #[ORM\Column(length: 100)]
     private ?string $img_url = null;
 
     #[ORM\Column]
     private ?bool $isPicture = null;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Locatifs $locatifs = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdLocatifs(): ?Locatifs
-    {
-        return $this->id_locatifs;
-    }
-
-    public function setIdLocatifs(?Locatifs $id_locatifs): static
-    {
-        $this->id_locatifs = $id_locatifs;
-
-        return $this;
     }
 
     public function getImgUrl(): ?string
@@ -60,6 +48,18 @@ class Images
     public function setIsPicture(bool $isPicture): static
     {
         $this->isPicture = $isPicture;
+
+        return $this;
+    }
+
+    public function getLocatifs(): ?Locatifs
+    {
+        return $this->locatifs;
+    }
+
+    public function setLocatifs(?Locatifs $locatifs): static
+    {
+        $this->locatifs = $locatifs;
 
         return $this;
     }

@@ -38,7 +38,7 @@
                             
                             {% set nbrImages = 0 %}
                             {% for img in images %}
-                                {% if img.getIdLocatifs().getId() == loc.id %}
+                                {% if img.getLocatifs().getId() == loc.id %}
                                     {% set nbrImages = nbrImages + 1 %}
                                 {% endif %}
                             {% endfor %}

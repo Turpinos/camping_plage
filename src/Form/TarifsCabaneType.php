@@ -128,6 +128,7 @@ class TarifsCabaneType extends AbstractType
                 ]
             ])
             ->add('tv_jour', IntegerType::class, [
+                'required' => false,
                 'label' => 'Tv au jour',
                 'attr' => array(
                     'min' => '0'
@@ -140,6 +141,7 @@ class TarifsCabaneType extends AbstractType
                 ]
             ])
             ->add('tv_semaine', IntegerType::class, [
+                'required' => false,
                 'label' => 'Tv à la semaine',
                 'attr' => array(
                     'min' => '0'
@@ -152,6 +154,7 @@ class TarifsCabaneType extends AbstractType
                 ]
             ])
             ->add('animaux', NumberType::class, [
+                'required' => false,
                 'label' => 'animaux',
                 'scale' => 2,
                 'attr' => [
@@ -159,7 +162,6 @@ class TarifsCabaneType extends AbstractType
                     'min' => 0,
                 ],
                 'constraints' => [
-                    new NotBlank(message: 'Doit être renseigné'),
                     new Type([
                         'type' => 'float',
                         'message' => 'Valeur numérique seulement'

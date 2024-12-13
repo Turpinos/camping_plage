@@ -38,7 +38,7 @@
                     <article data-cate="{{ locatif.getIdTypeLocatifs().getId() }}" data-capacite="{{ locatif.capacite }}" data-slug="{{ locatif.slug }}">
                         <figure>
                             {% for image in images %}
-                                {% if image.getIdLocatifs().getId() == locatif.id %}
+                                {% if image.getLocatifs().getId() == locatif.id %}
                                     {% if image.ispicture == true %}
                                         <img src="{{ asset('/images/locations/' ~ image.imgurl) }}" alt="{{ locatif.libelle }}"/>
                                     {% endif %}

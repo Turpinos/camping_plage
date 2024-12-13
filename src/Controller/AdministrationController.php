@@ -11,9 +11,7 @@ use App\Entity\Saisons;
 use App\Entity\TarifsGlobaux;
 use App\Form\AccesPmrType;
 use App\Form\AlertMessagesType;
-use App\Form\DeleteAccesPmrType;
-use App\Form\DeleteAlertMessagesType;
-use App\Form\DeleteGalleryType;
+use App\Form\DeleteType;
 use App\Form\GalleryType;
 use App\Form\InformationsType;
 use App\Form\OuverturesType;
@@ -65,9 +63,9 @@ class AdministrationController extends AbstractController
         $formAccesPmr = $formFactory->createNamed('form_AccesPmr', AccesPmrType::class);
         $formAlertMessages = $formFactory->createNamed('form_alertMessages', AlertMessagesType::class);
         //form de suppression..
-        $formDelGallery = $formFactory->createNamed('form_DelGallery', DeleteGalleryType::class);
-        $formDelAccesPmr = $formFactory->createNamed('form_DelAccesPmr', DeleteAccesPmrType::class);
-        $formDelAlertMessages = $formFactory->createNamed('form_DelAlertMessages', DeleteAlertMessagesType::class);
+        $formDelGallery = $formFactory->createNamed('form_DelGallery', DeleteType::class);
+        $formDelAccesPmr = $formFactory->createNamed('form_DelAccesPmr', DeleteType::class);
+        $formDelAlertMessages = $formFactory->createNamed('form_DelAlertMessages', DeleteType::class);
 
 
 

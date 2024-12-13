@@ -50,6 +50,7 @@ for (const ping of pings ) {
 }
 
 //Afficher les formulaires par def si erreurs est détectée..
+//tester si besoins de undefined ou non et le retirer de la page admin.js
 if(document.querySelector('.div-form-locatifs form ul')){
 
     backgroundForm.classList.remove('hidden-form');
@@ -167,6 +168,10 @@ inputImg.addEventListener('change', function(e){
 
     const divImg = document.querySelector('.div-form-images form .preview-img-form');
 
+    if(document.querySelector('.div-form-images form .preview-img-form img')){
+        divImg.removeChild(document.querySelector('.div-form-images form .preview-img-form img'));
+    }
+
     const img = document.createElement('img');
     img.setAttribute('src', '');
     img.setAttribute('alt', 'Prévisualisation');
@@ -203,20 +208,38 @@ updateButtonVignette.addEventListener('click', function(e){
 
 inputVignette.addEventListener('change', function(e){
 
+
     const divImg = document.querySelector('.div-form-vignettes form .preview-img-form');
+
+    const overlay = document.querySelector('.div-form-vignettes form .preview-img-form .overlay');
+
+    if(document.querySelector('.div-form-vignettes form .preview-img-form img')){
+        divImg.removeChild(document.querySelector('.div-form-vignettes form .preview-img-form img'));
+    }
 
     const img = document.createElement('img');
     img.setAttribute('src', '');
     img.setAttribute('alt', 'Prévisualisation');
 
     const file = e.target.files[0]
+    
 
     const reader = new FileReader();
     reader.onloadend = function() {
 
         img.src = reader.result;
-        divImg.appendChild(img);
+        divImg.insertBefore(img, overlay);
 
+        //Configuration clippath pour simuler le rendu final..
+        const playImg = document.querySelector('.div-form-vignettes form .preview-img-form img');
+        const imgWidth = playImg.clientWidth;
+        const imgHeigth = playImg.clientHeight;
+        const imgX = (imgWidth - imgHeigth) / 2;
+
+        overlay.style.width = `${imgWidth}px`;
+        overlay.style.height = `${imgHeigth}px`;
+        overlay.style.clipPath = `polygon(0px 0px, 0px ${imgHeigth}px, ${imgX}px ${imgHeigth}px, ${imgX}px 0px, ${imgX + imgHeigth}px 0px, ${imgX + imgHeigth}px ${imgHeigth}px, 0px ${imgHeigth}px, 0px ${imgHeigth}px, ${imgWidth}px ${imgHeigth}px, ${imgWidth}px 0px)`;
+        
     }
 
     if(file){
@@ -263,6 +286,13 @@ if(updateButtonPings.length != 0){
 
             const inputEmplacement = formCoordonnes.children[0].children[1].children[1];
             const inputPosition = formCoordonnes.children[0].children[2].children[1];
+            inputPosition.addEventListener('click', function(e){
+                e.preventDefault();
+            });
+
+            inputPosition.addEventListener('keydown', function(e){
+                e.preventDefault();
+            });
             
             inputEmplacement.value = rowEmplacement.children[0].innerText;
             inputPosition.value = rowEmplacement.children[0].dataset.position;
@@ -298,7 +328,7 @@ for (const suppr of delButtonImg) {
         document.querySelector('.div-form-delImages form .del-libelle').innerText = rowImg.children[0].innerText;
         document.querySelector('.div-form-delImages form .preview-img-form').innerHtml = rowImg.children[1].innerHTML;
 
-        document.querySelector('.div-form-delImages form #form_delImage_id').value = e.target.dataset.id;
+        document.querySelector('.div-form-delImages form #form_delImages_id').value = e.target.dataset.id;
     });
 }
 
@@ -350,7 +380,9 @@ annulFormVignettes.addEventListener('click', function(){
     formVignettes.classList.add('hidden-form');
 
     inputVignette.value = '';
-    document.querySelector('.div-form-vignettes form .preview-img-form').innerHTML = '';
+    document.querySelector('.div-form-vignettes form .preview-img-form').removeChild(document.querySelector('.div-form-vignettes form .preview-img-form img'));
+
+    document.querySelector('.div-form-vignettes form .preview-img-form div').style.height = '0px';
 
 });
 

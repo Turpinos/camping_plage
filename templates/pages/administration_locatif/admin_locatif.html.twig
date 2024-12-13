@@ -286,6 +286,7 @@
             <div class="div div-form-images hidden-form">
                 {{ form_start(formImages) }}
                     {{ form_row(formImages.img_url) }}
+                    <p class="aide">*pas de portrait, max 2Mo au format JPEG</p>
                     <div class="preview-img-form"></div>
                     <div class="button">
                         {{ form_row(formImages.save) }}
@@ -296,7 +297,10 @@
             <div class="div div-form-vignettes hidden-form">
                 {{ form_start(formVignettes) }}
                     {{ form_row(formVignettes.img_url) }}
-                    <div class="preview-img-form"></div>
+                    <p class="aide">*format carré, max 2Mo au format JPEG</p>
+                    <div class="preview-img-form">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="button">
                         {{ form_row(formVignettes.save) }}
                         <div class="annuler"><button type="button">Annuler</button></div>

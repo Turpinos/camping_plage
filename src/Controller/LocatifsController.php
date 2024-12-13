@@ -101,11 +101,11 @@ class LocatifsController extends AbstractController{
         $locatif = $locatifsRepository->findOneBy(['slug' => $slug]);
         $descrition = (preg_split('/[.]+[[:space:]]/mi', $locatif->getDescription()));
         $tarifs = $tarifsRepository->findOneBy(['id' => $locatif->getIdTarifs()->getId()]);
-        $images = $imagesRepository->findBy(['id_locatifs' => $locatif->getId()]);
-        $coordonneesMap = $coordonneesMapRepository->findBy(['locatifs' => $locatif->getId()]);
+        $images = $locatif->getImages();
+        $coordonneesMap = $locatif->getCoordonneesMaps();
         $tarifsGlobaux = $tarifsGlobauxRepository->findAll();
         $tel = $informationsRepository->findOneBy(['id' => '1']);
-        $inventaire = $inventaireRepository->findBy(['locatif' => $locatif->getId()]);
+        $inventaire = $locatif->getInventaires();
 
         $isPmr = [];
         if($locatif->isPmr() == "1"){

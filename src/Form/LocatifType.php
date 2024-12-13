@@ -43,7 +43,7 @@ class LocatifType extends AbstractType
                 'label' => 'Description',
                 'attr' => [
                     'minLength' => 1,
-                    'maxLength' => 200
+                    'maxLength' => 2000
                 ],
                 'row_attr' => [
                     'class' => 'row description'
@@ -52,7 +52,7 @@ class LocatifType extends AbstractType
                     new NotBlank(message: 'Doit être renseigné'),
                     new Length(
                         min: 1,
-                        max: 200,
+                        max: 2000,
                         minMessage: 'Au moins {{ limit }} caractère',
                         maxMessage: 'Pas plus de {{ limit }} caractères'
                     )
@@ -79,6 +79,7 @@ class LocatifType extends AbstractType
             ])
             ->add('superficie', IntegerType::class, [
                 'label' => 'Superficie',
+                'required' => false,
                 'attr' => array(
                     'min' => '0'
                 ),

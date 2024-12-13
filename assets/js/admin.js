@@ -48,52 +48,52 @@ const addButtonAlert = document.querySelector('.add-alerte');
 const inputFile = document.querySelector('#form_gallery_img_url');
 
 //Ouvrir auto. si une erreur est détectée dans un form après tentative de sa transmission..  
-if(document.querySelector('.div-form-saisons form ul') != undefined){
+if(document.querySelector('.div-form-saisons form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormSaisons.classList.remove('hidden');
 
-}else if(document.querySelector('.div-form-ouvertures form ul') != undefined){
+}else if(document.querySelector('.div-form-ouvertures form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormOuvertures.classList.remove('hidden');
 
-}else if(document.querySelector('.div-form-gallery form ul') != undefined){
+}else if(document.querySelector('.div-form-gallery form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormGallery.classList.remove('hidden');
 
-}else if(document.querySelector('.div-form-info form ul') != undefined){
+}else if(document.querySelector('.div-form-info form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormInfo.classList.remove('hidden');
 
-}else if(document.querySelector('.div-form-tarifs form ul') != undefined){
+}else if(document.querySelector('.div-form-tarifs form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormTarifs.classList.remove('hidden');
 
-}else if(document.querySelector('.div-form-accesPmr form ul') != undefined){
+}else if(document.querySelector('.div-form-accesPmr form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormAccesPmr.classList.remove('hidden');
 
-}else if(document.querySelector('.div-form-delGallery form ul') != undefined){
+}else if(document.querySelector('.div-form-delGallery form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormDelGallery.classList.remove('hidden');
 
-}else if(document.querySelector('.div-form-delAccesPmr form ul') != undefined){
+}else if(document.querySelector('.div-form-delAccesPmr form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormDelAccesPmr.classList.remove('hidden');
 
-}else if(document.querySelector('.div-form-alertMessages form ul') != undefined){
+}else if(document.querySelector('.div-form-alertMessages form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormAlertMessages.classList.remove('hidden');
 
-}else if(document.querySelector('.div-form-delAlertMessages form ul') != undefined){
+}else if(document.querySelector('.div-form-delAlertMessages form ul')){
 
     backgroundForm.classList.remove('hidden');
     divFormDelAlertMessages.classList.remove('hidden');
@@ -336,6 +336,9 @@ inputFile.addEventListener('change', function(e){
 
     const divImg = document.querySelector('.div-form-gallery form .preview-img-form');
 
+    if(document.querySelector('.div-form-gallery form .preview-img-form img')){
+        divImg.removeChild(document.querySelector('.div-form-gallery form .preview-img-form img'));
+    }
     const img = document.createElement('img');
     img.setAttribute('src', '');
     img.setAttribute('alt', 'Prévisualisation');

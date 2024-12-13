@@ -14,31 +14,19 @@ class CoordonneesMap
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Locatifs $locatifs = null;
-
     #[ORM\Column(nullable: true)]
     private ?int $emplacement = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $position = null;
 
+    #[ORM\ManyToOne(inversedBy: 'coordonneesMaps')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Locatifs $locatifs = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdLocatifs(): ?Locatifs
-    {
-        return $this->locatifs;
-    }
-
-    public function setIdLocatifs(?Locatifs $locatifs): static
-    {
-        $this->locatifs = $locatifs;
-
-        return $this;
     }
 
     public function getEmplacement(): ?int
@@ -61,6 +49,18 @@ class CoordonneesMap
     public function setPosition(?string $position): static
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function getLocatifs(): ?Locatifs
+    {
+        return $this->locatifs;
+    }
+
+    public function setLocatifs(?Locatifs $locatifs): static
+    {
+        $this->locatifs = $locatifs;
 
         return $this;
     }
