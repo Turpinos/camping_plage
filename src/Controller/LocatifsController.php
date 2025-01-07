@@ -5,13 +5,14 @@ namespace App\Controller;
 use App\Repository\CoordonneesMapRepository;
 use App\Repository\ImagesRepository;
 use App\Repository\InformationsRepository;
-use App\Repository\InventaireRepository;
 use App\Repository\LocatifsRepository;
 use App\Repository\TarifsGlobauxRepository;
 use App\Repository\TarifsRepository;
 use App\Repository\TypeLocatifsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+
+use function Amp\Iterator\toArray;
 
 class LocatifsController extends AbstractController{
 
@@ -82,7 +83,7 @@ class LocatifsController extends AbstractController{
     }
 
     #[Route('/locatifs_details/{slug}', name:'locatifs_details')]
-    public function locatifs_details(LocatifsRepository $locatifsRepository, TarifsRepository $tarifsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, ImagesRepository $imagesRepository, CoordonneesMapRepository $coordonneesMapRepository, InformationsRepository $informationsRepository, InventaireRepository $inventaireRepository, string $slug){
+    public function locatifs_details(LocatifsRepository $locatifsRepository, TarifsRepository $tarifsRepository, TarifsGlobauxRepository $tarifsGlobauxRepository, InformationsRepository $informationsRepository, string $slug){
 
         //Vérification de la validité du slug;
         $compSlug = $locatifsRepository->findAll();
@@ -117,7 +118,7 @@ class LocatifsController extends AbstractController{
             'tarifs' => $tarifs,
             'images' => $images,
             'tarifsGlobaux' => $tarifsGlobaux,
-            'coordonnees' => $coordonneesMap,
+            'coordonnees' => $coordonneesMap->toArray(),
             'description' => $descrition,
             'telephone' => $tel,
             'isPmr' => $isPmr,

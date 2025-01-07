@@ -49,7 +49,7 @@ class IndexController extends AbstractController{
         $countChalets = 0;
         for($i = 0; $i<count($listCoordonnee); $i++){
             foreach($chalets as $chalet){
-                if($listCoordonnee[$i]->getIdLocatifs()->getId() == $chalet->getId()){
+                if($listCoordonnee[$i]->getLocatifs()->getId() == $chalet->getId()){
                     $countChalets++;
                 }
             }
@@ -59,7 +59,7 @@ class IndexController extends AbstractController{
         $countCabanes = 0;
         for($i = 0; $i<count($listCoordonnee); $i++){
             foreach($cabanes as $cabane){
-                if($listCoordonnee[$i]->getIdLocatifs()->getId() == $cabane->getId()){
+                if($listCoordonnee[$i]->getLocatifs()->getId() == $cabane->getId()){
                     $countCabanes++;
                 }
             }
@@ -69,7 +69,7 @@ class IndexController extends AbstractController{
         $countRoulottes = 0;
         for($i = 0; $i<count($listCoordonnee); $i++){
             foreach($roulottes as $roulotte){
-                if($listCoordonnee[$i]->getIdLocatifs()->getId() == $roulotte->getId()){
+                if($listCoordonnee[$i]->getLocatifs()->getId() == $roulotte->getId()){
                     $countRoulottes++;
                 }
             }

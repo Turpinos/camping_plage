@@ -54,7 +54,7 @@
                             <div class="contenu-emplacement">
                             {% if locatif.id != "11" %}
                                 {% for coordonnee in coordonneesMap %}
-                                    {% if coordonnee.getIdLocatifs.getId() == locatif.id %}
+                                    {% if coordonnee.getLocatifs.getId() == locatif.id %}
                                         <div class="pastille">
                                         <p>{{coordonnee.emplacement != null ? coordonnee.emplacement : "N" }}</p>
                                         </div>

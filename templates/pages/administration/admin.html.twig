@@ -48,7 +48,7 @@
                             <td class="table-info">
                                 {% set firstEmpl = false %}
                                 {% for emplacement in emplacements %}
-                                    {% if emplacement.getIdLocatifs().getId() == loc.id %}
+                                    {% if emplacement.getLocatifs().getId() == loc.id %}
                                         {% if emplacement.emplacement == null %}
                                             {{ not firstEmpl ? "N" : ", N" }}
                                         {% else %}
