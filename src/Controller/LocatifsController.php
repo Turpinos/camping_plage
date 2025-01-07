@@ -12,8 +12,6 @@ use App\Repository\TypeLocatifsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-use function Amp\Iterator\toArray;
-
 class LocatifsController extends AbstractController{
 
     #[Route('/locatifs/{slug}', name:'locatifs')]

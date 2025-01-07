@@ -372,7 +372,7 @@ class AdministrationLocatifController extends AbstractController
 
         return $this->render('/pages/administration_locatif/admin_locatif.html.twig', [
             'locatif' => $locatif,
-            'coordonnees' => $coordonneesMap,
+            'coordonnees' => $coordonneesMap->toArray(),
             'images' => $images,
             'inventaire' => $inventaire,
             'tarifs' => $tarifs,
